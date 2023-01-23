@@ -1,0 +1,81 @@
+{% extends 'manager/mindex.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block head%}
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{%endblock%}
+
+{% block content %}
+<!--breadcrumb-->
+<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-5">
+    <div class="breadcrumb-title pe-3">News</div>
+    <div class="ps-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 p-0">
+                <li class="breadcrumb-item"><a href="{% url 'manager-home' %}"><i class="bx bx-home-alt"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Overview</li>
+            </ol>
+        </nav>
+    </div>
+    
+</div>
+<!--end breadcrumb-->
+
+{% if allNews %}
+<table class="table table-bordered mb-0">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">News title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Created</th>            
+        </tr>
+    </thead>
+    <tbody>
+        {% for als in allNews %}
+            <tr>
+                <th scope="row">{{als.id}}</th>
+                <td>{{als.news_title}}</td>
+                <td>{{als.news_description|safe}}</td>                
+                <td>    
+                    <form action="{%url 'manager-newsEdit' %}" method="post">
+                        {%csrf_token%}
+                        <input type="text" value="{{als.id}}" name="newsid" id="newsid" hidden readonly>
+                        <button type="submit" class="btn btn-sm btn-primary">Edit</button>
+                    </form>
+                    
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        <input type="text" value="{{als.id}}" name="newsid" id="newsid" hidden readonly>
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this service?');">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        {%endfor%}
+        
+    </tbody>
+</table>
+<hr class="hr">
+<div class="pagination mt-3">
+    <span class="step-links">
+        {% if allNews.has_previous %}
+            <a class="btn btn-sm btn-primary" href="?page=1">&laquo; first</a>
+            <a class="btn btn-sm btn-primary" href="?page={{ allNews.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ allNews.number }} of {{ allNews.paginator.num_pages }}.
+        </span>
+
+        {% if allNews.has_next %}
+            <a class="btn btn-sm btn-primary" href="?page={{ allNews.next_page_number }}">next</a>
+            <a class="btn btn-sm btn-primary" href="?page={{ allNews.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{%endif%}
+
+{%endblock%}

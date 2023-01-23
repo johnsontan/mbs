@@ -1,0 +1,309 @@
+{% extends 'manager/mindex.html' %}
+{% load static %}
+
+{% block content %}
+<!--breadcrumb-->
+<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-5">
+    <div class="breadcrumb-title pe-3">Appointment</div>
+    <div class="ps-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 p-0">
+                <li class="breadcrumb-item"><a href="{% url 'manager-home' %}"><i class="bx bx-home-alt"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Overview</li>
+            </ol>
+        </nav>
+    </div>
+    
+</div>
+<!--end breadcrumb-->
+
+
+<!--Info display-->
+<div class="row">
+    <div class="col">
+        <div class="card radius-10">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <p class="mb-0 text-secondary">Upcoming appointments</p>
+                        <h4 class="my-1">
+                            {% if countList %}                                
+                                {{countList.0}}
+                            {% else %}
+                                0
+                            {%endif%}
+                        </h4>
+                    </div>
+                    <div class="text-primary ms-auto font-35"><i class='bx bx-calendar-plus'></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card radius-10">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <p class="mb-0 text-secondary">Cancel appointments</p>
+                        <h4 class="my-1">
+                            {% if countList %}
+                                {{countList.1}}
+                            {% else %}
+                                0
+                            {%endif%}
+                        </h4>
+                    </div>
+                    <div class="text-primary ms-auto font-35"><i class='bx bx-sad'></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card radius-10">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <p class="mb-0 text-secondary">Missed appointments</p>
+                        <h4 class="my-1">
+                            {% if countList %}
+                                {{countList.2}}
+                            {% else %}
+                                0
+                            {%endif%}
+                        </h4>
+                    </div>
+                    <div class="text-primary ms-auto font-35"><i class='bx bx-error-circle'></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card radius-10">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <p class="mb-0 text-secondary">Completed appointments</p>
+                        <h4 class="my-1">
+                            {% if countList %}
+                                {{countList.3}}
+                            {% else %}
+                                0
+                            {%endif%}
+                        </h4>
+                    </div>
+                    <div class="text-primary ms-auto font-35"><i class='bx bx-happy-beaming'></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Info display-->
+
+<!--Appointment base-->
+<div class="card radius-10">
+    <div class="card-header border-bottom-0 bg-transparent">
+        <div class="d-flex align-items-center">
+            <div>
+                <h5 class="font-weight-bold mb-0">Appointments</h5>
+            </div>
+            <div class="ms-auto">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="aupcoming-tab" data-bs-toggle="pill" data-bs-target="#aupcoming" type="button" role="tab" aria-controls="aupcoming" aria-selected="true">Upcoming</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="acancel-tab" data-bs-toggle="pill" data-bs-target="#acancel" type="button" role="tab" aria-controls="acancel" aria-selected="false">Cancel</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="amissed-tab" data-bs-toggle="pill" data-bs-target="#amissed" type="button" role="tab" aria-controls="amissed" aria-selected="false">Missed</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="acompleted-tab" data-bs-toggle="pill" data-bs-target="#acompleted" type="button" role="tab" aria-controls="acompleted" aria-selected="false">Completed</button>
+                      </li>
+                  </ul>
+            </div>
+            <div class="ms-auto">                
+                <a class="btn btn-white radius-10" href="{% url 'appointment-calendar' %}">Calendar view</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="aupcoming" role="tabpanel" aria-labelledby="aupcoming-tab">
+                <!--table start-->
+                <div class="table-responsive">
+                    <table class="table mb-0 align-middle">
+                        <thead>
+                            <tr>
+                                <th>Appointment id</th>
+                                <th>Customer</th>
+                                <th>Employee</th>
+                                <th>Services</th>
+                                <th>Date/Time</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>   
+                            {% if upcomingTable %}     
+                                {% for ua in upcomingTable %}         
+                                    <tr>
+                                        <td>
+                                            {{ua.0}}
+                                        </td>
+                                        <td>{{ua.1}}</td>
+                                        <td>{{ua.2}}</td>
+                                        <td>{{ua.3}}</td>
+                                        <td>{{ua.4}}</td>
+                                        <td>
+                                            <a href="javaScript:;" class="btn btn-sm btn-success radius-30">{{ua.5}}</a>
+                                        </td>
+                                        <td>
+                                            <form action="{% url 'appointment-changeAppStatus' %}" method="post">
+                                                {%csrf_token%}
+                                                <input type="text" name="appid" id="appid" value="{{ua.0}}" readonly hidden>
+                                                <label for="status">Update status</label>
+                                                <select name="statusupdate" id="statusupdate">
+                                                    <option value="3">Cancel</option>
+                                                    <option value="5">Missed</option>
+                                                    <option value="4">Completed</option>
+                                                </select>
+                                                <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {%endfor%}
+                            {%endif%}
+
+                        </tbody>
+                    </table>
+                </div>
+        
+                <!--end table-->
+            </div>
+            <div class="tab-pane fade" id="acancel" role="tabpanel" aria-labelledby="acancel-tab">
+                <!--table start-->
+                <div class="table-responsive">
+                    <table class="table mb-0 align-middle">
+                        <thead>
+                            <tr>
+                                <th>Appointment id</th>
+                                <th>Customer</th>
+                                <th>Employee</th>
+                                <th>Services</th>
+                                <th>Date/Time</th>
+                                <th>Status</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>                 
+                            {% if cancelTable %}     
+                                {% for ua in cancelTable %}         
+                                    <tr>
+                                        <td>
+                                            {{ua.0}}
+                                        </td>
+                                        <td>{{ua.1}}</td>
+                                        <td>{{ua.2}}</td>
+                                        <td>{{ua.3}}</td>
+                                        <td>{{ua.4}}</td>
+                                        <td>
+                                            <a href="javaScript:;" class="btn btn-sm btn-success radius-30">{{ua.5}}</a>
+                                        </td>                                        
+                                    </tr>
+                                {%endfor%}
+                            {%endif%}
+                        </tbody>
+                    </table>
+                </div>
+        
+                <!--end table-->
+            </div>
+            <div class="tab-pane fade" id="amissed" role="tabpanel" aria-labelledby="amissed-tab">
+                <!--table start-->
+                <div class="table-responsive">
+                    <table class="table mb-0 align-middle">
+                        <thead>
+                            <tr>
+                                <th>Appointment id</th>
+                                <th>Customer</th>
+                                <th>Employee</th>
+                                <th>Services</th>
+                                <th>Date/Time</th>
+                                <th>Status</th>                                
+                            </tr>
+                        </thead>
+                        <tbody>                 
+                            {% if missedTable %}     
+                                {% for ua in missedTable %}         
+                                    <tr>
+                                        <td>
+                                            {{ua.0}}
+                                        </td>
+                                        <td>{{ua.1}}</td>
+                                        <td>{{ua.2}}</td>
+                                        <td>{{ua.3}}</td>
+                                        <td>{{ua.4}}</td>
+                                        <td>
+                                            <a href="javaScript:;" class="btn btn-sm btn-success radius-30">{{ua.5}}</a>
+                                        </td>                                        
+                                    </tr>
+                                {%endfor%}
+                            {%endif%}
+                        </tbody>
+                    </table>
+                </div>
+        
+                <!--end table-->
+            </div>
+            <div class="tab-pane fade" id="acompleted" role="tabpanel" aria-labelledby="acompleted-tab">
+                <!--table start-->
+                <div class="table-responsive">
+                    <table class="table mb-0 align-middle">
+                        <thead>
+                            <tr>
+                                <th>Appointment id</th>
+                                <th>Customer</th>
+                                <th>Employee</th>
+                                <th>Services</th>
+                                <th>Date/Time</th>
+                                <th>Status</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>                 
+                            {% if completedTable %}     
+                                {% for ua in completedTable %}         
+                                    <tr>
+                                        <td>
+                                            {{ua.0}}
+                                        </td>
+                                        <td>{{ua.1}}</td>
+                                        <td>{{ua.2}}</td>
+                                        <td>{{ua.3}}</td>
+                                        <td>{{ua.4}}</td>
+                                        <td>
+                                            <a href="javaScript:;" class="btn btn-sm btn-success radius-30">{{ua.5}}</a>
+                                        </td>                                        
+                                    </tr>
+                                {%endfor%}
+                            {%endif%}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        
+                <!--end table-->
+            </div>
+          </div>
+        
+    </div>
+</div>
+<!--Appointment end-->
+{% endblock%}

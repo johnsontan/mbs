@@ -1,0 +1,142 @@
+{% load static %}
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--favicon-->
+	<link rel="icon" href="{% static 'manager/assets/images/favicon-32x32.png' %}" type="image/png" />
+	<!--plugins-->
+	<link href="{% static 'manager/assets/plugins/simplebar/css/simplebar.css' %}" rel="stylesheet" />
+	<link href="{% static 'manager/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css' %}" rel="stylesheet" />
+	<link href="{% static 'manager/assets/plugins/metismenu/css/metisMenu.min.css' %}" rel="stylesheet" />
+
+	<!-- loader-->
+	<link href="{% static 'manager/assets/css/pace.min.css' %}" rel="stylesheet" />
+	<script src="{% static 'manager/assets/js/pace.min.js' %}"></script>
+	<!-- Bootstrap CSS -->
+	<link href="{% static 'manager/assets/css/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static 'manager/assets/css/bootstrap-extended.css' %}" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+	<link href="{% static 'manager/assets/css/app.css' %}" rel="stylesheet">
+	<link href="{% static 'manager/assets/css/icons.css' %}" rel="stylesheet">
+	
+	<!-- Theme Style CSS -->
+	<link rel="stylesheet" href="{% static 'manager/assets/css/dark-theme.css' %}" />
+	<link rel="stylesheet" href="{% static 'manager/assets/css/semi-dark.css' %}" />
+	<link rel="stylesheet" href="{% static 'manager/assets/css/header-colors.css' %}" />
+	
+	<!--calendar-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
+
+    {% if subtitle %}
+        <title>MBS admin - {{subtitle}}</title>
+    {% else %}
+	    <title>MBS admin</title>
+    {% endif %}
+
+	{% block head %}{% endblock %}
+</head>
+
+
+<body>
+    <a href="{%url 'pos-earnings'%}" class="m-3 btn btn-info btn-primary btn-sm">Back</a>
+    <div class="card">
+        <div class="card-body">
+            <div id="invoice">
+                <div class="toolbar hidden-print">
+                    <div class="text-end">
+                        <button type="button" onclick="window.print()" class="btn btn-dark"><i class="fa fa-print"></i> Print</button>
+                        <a href="{% url 'pos-receipt' %}"></a>
+                    </div>
+                    <hr/>
+                </div>
+                <div class="invoice overflow-auto">
+                    <div style="min-width: 600px">
+                        <header>
+                            <div class="row">
+                                <div class="col">
+                                    <a href="javascript:;">
+                                        <img src="{% static 'manager/assets/images/logo-large-icon.png' %}" width="200" alt="" />
+                                    </a>
+                                </div>
+                                <div class="col company-details">
+                                    <h2 class="name">Melon Beauty Salon</h2>
+                                    <div>988 Upper Serangoon Rd</div>
+                                    <div>#01-24 Star of Kovan</div>
+                                    <div>Singapore 534733</div>
+                                </div>
+                            </div>
+                        </header>
+                        <main class="w-100">
+                            <div class="row mb-2">
+                                <div class="col-6">
+                                    <div class="text-gray-light">RECEIPT TO:</div>
+                                    <h2>{{stall.customer.first_name}} {{stall.customer.last_name}}</h2>                                   
+                                    
+                                </div>
+                                <div class="col-6 text-end">
+                                    <h1 class="text-dark">RECEIPT ID: {{stall.id}}</h1>
+                                    <div class="date">Date of Invoice: {{stall.created_at|date:"d-m-Y"}}</div>                                    
+                                </div>
+                            </div>
+                            <table class="" >
+                                <thead>
+                                    <tr>
+                                        <th>Service ID#</th>
+                                        <th class="text-left">DESCRIPTION</th>
+                                        <th class="text-right">PRICE</th>                                        
+                                        <th class="text-right">TOTAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {%for ss in ssall %}
+                                        <tr>
+                                            <td class="bg-black text-light fs-2">{{ss.id}}</td>
+                                            <td class="text-left">
+                                                <h3>{{ss.service_name}}</h3>department: {{ss.service_department}}</td>
+                                            <td class="unit">${{ss.service_price}}</td>
+                                            
+                                            <td class="bg-black text-light">${{ss.service_price}}</td>
+                                        </tr>  
+                                    {% endfor %}                                 
+                                </tbody>
+                                <tfoot >
+                                    <tr>                                        
+                                        <td colspan="2">SUBTOTAL</td>
+                                        <td colspan="2">${{subtotal}}</td>
+                                    </tr>
+                                    <tr>                                        
+                                        <td colspan="2">TAX 8%</td>
+                                        <td colspan="2">${{gst}}</td>
+                                    </tr>
+                                    <tr>                                        
+                                        <td colspan="2">GRAND TOTAL</td>
+                                        <td colspan="2">${{stall.grand_total}}</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <div class="thanks">Thank you!</div>
+                            
+                        </main>
+                        <footer>Invoice was created on a computer and is valid without the signature and seal.</footer>
+                    </div>
+                    <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS -->
+	<script src="{% static 'manager/assets/js/bootstrap.bundle.min.js'%}"></script>
+	<!--plugins-->
+	<script src="{% static 'manager/assets/js/jquery.min.js'%}"></script>
+	<script src="{% static 'manager/assets/plugins/simplebar/js/simplebar.min.js'%}"></script>
+	<script src="{% static 'manager/assets/plugins/metismenu/js/metisMenu.min.js'%}"></script>
+	<script src="{% static 'manager/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js'%}"></script>
+	<!--app JS-->
+	<script src="{% static 'manager/assets/js/app.js'%}"></script>
+</body>

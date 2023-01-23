@@ -1,0 +1,434 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}
+{% load jsignature_filters %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-md-12">
+            <div class="card">
+                <img src="{{user.profile_pic.image.url}}" class="card-img-top" alt="{{user.first_name}}'s profile image">
+                <div class="card-body">
+                <p class="card-text fw-bolder fs-4">Hello, {{user.first_name}} {{user.last_name}}</p>
+                {% if user.role == 2 %}
+                    <p>Role: <span>Employee</span></p>
+                {%endif%}
+                </div>
+                {% if user.role == 1 %}
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"> <span class="fw-bold">Credits: </span>
+                            {% if user.credits.balance %}
+                                {{ user.credits.balance }}
+                            {% else %}
+                                0
+                            {% endif %}
+                        </li>
+                        <li class="list-group-item"><span class="fw-bold">Upcoming appointments: </span> 
+                            {% if appcount %}
+                                {{ appcount }}
+                            {% else %}
+                                0
+                            {% endif %}
+                        </li>
+                        <li class="list-group-item"><span class="fw-bold">Vouchers: </span> 
+                            {% if userVouchers %}
+                                {{ userVouchers|length }}
+                            {% else %}
+                                0
+                            {% endif %}
+                        </li>
+                    </ul>
+                {% endif %}
+                {% if user.role == 2 %}
+                <ul class="list-group list-group-flush">
+                    
+                    <li class="list-group-item"><span class="fw-bold">Upcoming appointments: </span> 
+                        {% if appcount %}
+                            {{ appcount }}
+                        {% else %}
+                            0
+                        {% endif %}
+                    </li>
+                    
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-12 ">
+
+            <!--Tabs-->
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="account-tab" data-bs-toggle="tab" data-bs-target="#account" type="button" role="tab" aria-controls="account" aria-selected="true">Account settings</button>
+                </li>
+                {% if user.role != 2 %}
+                    <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="credits-tab" data-bs-toggle="tab" data-bs-target="#credits" type="button" role="tab" aria-controls="credits" aria-selected="false">Credits</button>
+                    </li>
+                {% endif %}
+
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="appointments-tab" data-bs-toggle="tab" data-bs-target="#appointments" type="button" role="tab" aria-controls="appointments" aria-selected="false">Appointments</button>
+                </li>
+
+                {% if user.role != 2 %}
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="vouchers-tab" data-bs-toggle="tab" data-bs-target="#vouchers" type="button" role="tab" aria-controls="vouchers" aria-selected="false">Vouchers</button>
+                    </li>
+                {% endif %}
+
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="inbox-tab" data-bs-toggle="tab" data-bs-target="#inbox" type="button" role="tab" aria-controls="inbox" aria-selected="false">Notifications</button>
+                </li>
+            </ul>
+
+            <!--Detail tabs-->
+            <div class="tab-content" id="myTabContent">
+                <!--Account detail tab-->
+                <div class="tab-pane fade show active p-3" id="account" role="tabpanel" aria-labelledby="account-tab">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-info col-12 p-3" data-bs-toggle="modal" data-bs-target="#exampleModal22">
+                        Update account information
+                    </button>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal22" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel22" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Update account information</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            {{UpdateAccountInfoForm.errors}}
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="modal-body">
+                                    <fieldset>
+                                        {{UpdateAccountInfoForm|crispy}}
+                                        {{UpdateProfilePicForm|crispy}}
+                                    </fieldset>                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-info col-12 p-3 mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal23">
+                        Update password
+                    </button>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal23" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModal23" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Update password</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <div class="modal-body">
+                                    <fieldset>
+                                        {{UpdateUserPasswordForm|crispy}}
+                                    </fieldset>                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Update password</button>
+                                </div>
+                            </form>
+                           
+                        </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <!--credits detail tab-->
+                <div class="tab-pane fade p-3" id="credits" role="tabpanel" aria-labelledby="credits-tab">
+                    <h4>Credits balance: 
+                        {% if user.credits.balance %}
+                            {{ user.credits.balance }}
+                        {% else %}
+                            0
+                        {% endif %}
+                    </h4>
+                    <hr class="hr">
+                    <h6>History</h6>
+                    {% if userCreditHistory %}
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Credit/Debit</th>
+                                <th scope="col">Remarks</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for ch in userCreditHistory %}
+                                    <tr>
+                                        <th scope="row">{{ch.created_at|date:"F d, Y"}}</th>
+                                        <td>{{ch.amount}}</td>
+                                        <td>{{ch.type}}</td>
+                                        <td>{{ch.remarks}}</td>
+                                    </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </div>
+
+                <!--appointments detail tab-->
+                <div class="tab-pane fade p-3" id="appointments" role="tabpanel" aria-labelledby="appointments-tab">
+                    {% if user.role == 2 %}
+                        <a href="{% url 'appointment-setDate' %}" class="btn btn-info col-12 p-3">Schedule dates</a>
+                    {% elif user.role == 1 %}
+                        <a href="{% url 'appointment-userNewAppointment' %}" class="btn btn-info col-12 p-3">New appointment</a>
+                    {% else %}
+
+                    {% endif %}
+                    <hr class="hr">
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item col-6" role="presentation">
+                          <button class="nav-link active col-12" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Upcoming</button>
+                        </li>
+                        <li class="nav-item col-6" role="presentation">
+                          <button class="nav-link col-12" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">History</button>
+                        </li>
+                        
+                      </ul>
+                      <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active p-3" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                            {% if upcomingapps %}
+                                {% for a in upcomingapps %}
+                                <div class="row">
+                                    <div class="col-9">
+                                        <p>{{a.appt_date|date:"F d, Y | H:00"}} HRS</p>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary m-2" onclick="moreAppInfo({{a.id}})" data-bs-toggle="modal" data-bs-target="#exampleModal{{a.id}}">
+                                            More information
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal{{a.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Appointment information</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p id="rr{{a.id}}" name="rr{{a.id}}">
+                                                    
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                                                     
+                                {% endfor %}
+                            {%endif%}
+                        </div>
+                        <div class="tab-pane fade p-3" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            {% if apps %}
+                                {% for a in apps %}
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <p>{{a.appt_date|date:"F d, Y | H:00 "}} HRS</p>
+                                        </div>
+
+                                        <div class="col-3">
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary m-2" onclick="moreAppInfo({{a.id}})" data-bs-toggle="modal" data-bs-target="#exampleModal{{a.id}}">
+                                                More information
+                                            </button>
+                                        </div>
+                                        
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal{{a.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Appointment information</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p id="rr{{a.id}}" name="rr{{a.id}}">
+                                                        
+                                                    </p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                                    
+                                {% endfor %}
+                            {%endif%}
+                        </div>
+                    </div>
+                     
+
+                </div>
+
+                <!--vouchers detail tab-->
+                <div class="tab-pane fade p-3" id="vouchers" role="tabpanel" aria-labelledby="vouchers-tab">
+                    <div class="row row-cols-1 row-cols-md-3 g-4">                       
+
+                        {% if userVouchers %}
+                            {% for uv in userVouchers %}
+                                <div class="col">
+                                    <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{uv.voucher_name}}</h5>
+                                        <p class="card-text">Grand total: {{uv.grand_total}}</p>
+                                        <p class="card-text">Each: {{uv.eachtime}}</p>
+                                    </div>
+                                    <div class="card-footer d-flex">
+                                            <small class="text-muted flex-fill">Balance: {{uv.qty}}/{{uv.tqty}}</small>
+                                            <div class="flex-fill">
+
+                                            <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#voucher{{uv.id}}">
+                                                    History
+                                                </button>
+                                                
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="voucher{{uv.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                        <h5 class="modal-title" id="d">{{uv.voucher_name}} history</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            {%if userVouchersHistory %}
+                                                                {%for uvh in userVouchersHistory%}
+                                                                    {% if uvh.voucher == uv %}
+                                                                        <div class="border m-2">
+                                                                        <p>{{uvh.type}}: {{uvh.voucher_amount}}</p> 
+                                                                        <p>Date: {{uvh.created_at|date:"F d, Y"}}</p> 
+                                                                        <img src="{{ uvh.signature|signature_base64 }}" width="200" alt="NIL">
+                                                                        </div>
+                                                                    {%endif%}
+                                                                {%endfor%}
+                                                            {%endif%}
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+        
+                                            </div>                                
+                                        </div>
+                                    </div>
+                                </div>
+                            {%endfor%}
+                        {%endif%}
+
+                    </div>
+
+                </div>
+
+                <!--inbox detail tab-->
+                <div class="tab-pane fade p-3" id="inbox" role="tabpanel" aria-labelledby="inbox-tab">
+                    <h3 class="m-3 text-decoration-underline">Inbox</h3>
+                    <div class="container">
+
+                        {% if userNotifications %}
+                            {% for un in userNotifications %}
+                                <!--each msg-->
+                                <div class="row">
+                                    <div class="col-md-9">Subject: {{un.sent_notification.notification_title}}</div>
+                                    <div class="col-md-3">
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#msg{{un.pk}}">
+                                            Read more
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <hr class="hr">
+                                <!--end msg-->
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="msg{{un.pk}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">{{un.sent_notification.notification_title}}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form action="{% url 'base-ackNotification' %}" method="POST">
+                                            {% csrf_token %}
+                                            <div class="modal-body">   
+                                                <input type="text" name="notificationID" id="notificationID" value="{{un.pk}}" readonly hidden>                                       
+                                                {{un.sent_notification.notification_description}}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-danger">Remove</button>                                            
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <p class="fs-3 fw-bold">None</p>
+                        {% endif %}
+
+
+                    </div>
+                    
+                      
+
+                </div>
+                <!--end inbox-->
+
+
+
+            </div>
+              
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    function moreAppInfo(aid){
+        $.ajax({
+            type: 'POST',
+            url: '/profile/moreappinfo',
+            data:{
+                aid: aid,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function(data){
+                $("#rr" + aid).html(data);
+            }
+        })
+    }
+</script>
+
+{% endblock %}

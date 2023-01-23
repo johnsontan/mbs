@@ -1,0 +1,90 @@
+{% extends 'manager/mindex.html' %}
+{% load static %}
+{% load jsignature_filters %}
+
+{% block content %}
+<!--breadcrumb-->
+<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-5">
+    <div class="breadcrumb-title pe-3">Credit</div>
+    <div class="ps-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 p-0">
+                <li class="breadcrumb-item"><a href="{% url 'manager-home' %}"><i class="bx bx-home-alt"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Search</li>
+            </ol>
+        </nav>
+    </div>
+    
+</div>
+<!--end breadcrumb-->
+<form action="" method="POST">
+    <div class="input-group my-5">
+
+        {%csrf_token%}
+        <input type="search" class="form-control rounded" placeholder="Search by voucher title" aria-label="Search" name="searchTitle" id="searchTitle" aria-describedby="search-addon" />
+        <button type="submit" class="btn btn-outline-primary">search</button>
+
+    </div>
+</form>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 row-cols-xl-4">
+
+    {% if returnVList %}
+        {% for rvl in returnVList %}
+            <div class="col">
+                <div class="card">
+                    <img src="{% static 'manager/assets/images/gallery/01.png' %}" class="card-img-top img-thumbnail" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{rvl.0}}</h5>
+                        <p class="card-text">
+                            <p><strong>Customer: </strong> <span>{{rvl.1}}</span></p>
+                            <p><strong>Phone no: </strong> <span>{{rvl.2}}</span></p>
+                            <p><strong>Balance: </strong> <span>{{rvl.3}}/{{rvl.4}}</span></p>
+                            <p><strong>Total: </strong> <span>{{rvl.5}}</span></p>
+                            <p><strong>Created at: </strong> <span>{{rvl.6}}</span></p>
+                        </p>	
+                        {% if rvl.7 %}
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{rvl.2}}">
+                                History
+                            </button>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="staticBackdrop{{rvl.2}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">{{rvl.0}} history</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {%for rr in rvl.7 %}
+                                            {% if uvh.voucher == uv %}
+                                                <div class="border m-2">
+                                                <p>{{rr.type}}: {{rr.voucher_amount}}</p> 
+                                                <p>Date: {{rr.created_at|date:"F d, Y"}}</p> 
+                                                <img src="{{ rr.signature|signature_base64 }}" width="200" alt="NIL">
+                                                </div>
+                                            {%endif%}
+                                        {%endfor%}
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                        {%endif%}
+  
+                    </div>
+                </div>
+            </div>
+        {%endfor%}
+    {%endif%}
+
+
+</div>
+
+{% endblock %}

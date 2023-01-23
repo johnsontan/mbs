@@ -1,0 +1,155 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{%block header %}
+    <link rel="stylesheet" href="{% static 'appointment/userNewAppointment.css' %}" type="text/css">
+{%endblock%}
+
+{% block content %}
+<form id="regForm" action="{% url 'appointment-ebook'%}" method="POST">
+    {% csrf_token %}
+    <!--INPUT current user id-->
+    <input type="text" name="currentUserId" id="currentUserId" value="{{user.id}}" readonly hidden>
+    <!-- One "tab" for each step in the form: -->
+    <div class="tab">
+        <p class="fs-4 text-center">Stylist:</p>
+
+        <div class="row text-center selector-img">
+            {% for e in employees %}
+                <label class="col">
+                    <input type="radio" name="stylist" id="stylist" class="stylist" value="{{e.id}}" onclick="edate({{e.id}})"/>
+                    <img src="{{e.profile_pic.image.url}}" alt="" class="img-responsive img-circle" width="150">
+                    <span class="spacer-half"></span>
+                    {{e.first_name}} {{e.last_name}}
+                </label>
+            {%endfor%}            
+            
+        </div>
+    </div>
+    
+    <div class="tab">
+        <p class="fs-4 text-center">Date/Time:</p>
+        <div class="row">
+            <div class="col-md-6">
+                <select name="edater" id="edater" class="form-control">
+                    
+                </select>
+            </div>
+            <div class="col-md-6">
+                <select name="etimer" id="etimer" class="form-control">
+                    
+                </select>
+            </div>
+        </div>
+    </div>
+    
+    <div class="tab">
+        <p class="fs-4 text-center">Services:</p>
+        <div class="row">
+            <select name="eservicer" id="eservicer" class="form-control">
+                
+            </select>
+        </div>
+    </div>
+    
+    <div class="tab">
+        <p class="fs-4 text-center">Booking confirmation</p>
+        <div class="card d-flex 25rem justify-content-center">
+            <ul class="list-group list-group-flush" id="econfirmr" name="econfirmr">
+                
+            </ul>
+        </div>
+    </div>
+    
+    <div style="overflow:auto;" class="mt-4">
+      <div style="float:right;">
+        <button type="button" class="btn btn-info btn-sm" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+        <button type="button" class="btn btn-primary btn-sm" id="nextBtn" onclick="nextPrev(1)">Next</button>
+      </div>
+    </div>
+    
+    <!-- Circles which indicates the steps of the form: -->
+    <div style="text-align:center;margin-top:40px;">
+      <span class="step"></span>
+      <span class="step"></span>
+      <span class="step"></span>
+      <span class="step"></span>
+    </div>
+    
+    </form> 
+
+<script type="text/javascript" src="{% static 'appointment/userNewAppointment.js' %}"></script>
+<script type="text/javascript">
+    function edate(eid){
+        $.ajax({
+            type: 'POST',
+            url: '/mmanager/appointment/new/appointment/edate',
+            data:{
+                eid: eid,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function(data){
+                $('#edater').html(data);
+            }
+        })
+    }
+
+    function etime(){
+        //Get date and employee id
+        var edate = $('#edater').val();
+        var eid = document.querySelector('input[name="stylist"]:checked').value;
+        $.ajax({
+            type: 'POST',
+            url: '/mmanager/appointment/new/appointment/etime',
+            data:{
+                eid: eid,
+                edater: edate,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function(data){
+                $('#etimer').html(data);
+            }
+        }) 
+    }
+
+    function eservice(){
+        //Get date and employee id
+        var eid = document.querySelector('input[name="stylist"]:checked').value;
+        $.ajax({
+            type: 'POST',
+            url: '/mmanager/appointment/new/appointment/eservice',
+            data:{
+                eid: eid,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function(data){
+                $('#eservicer').html(data);
+            }
+        })
+
+    }
+
+    function econfirm(){
+        //Get time/date and employee id and service id
+        var eid = document.querySelector('input[name="stylist"]:checked').value;
+        var edate = $('#edater').val();
+        var etime = $('#etimer').val();
+        var eservice = $('#eservicer').val();
+        $.ajax({
+            type: 'POST',
+            url: '/mmanager/appointment/new/appointment/econfirm',
+            data:{
+                eid: eid,
+                edate : edate,
+                etime : etime,
+                eservice : eservice,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function(data){
+                $('#econfirmr').html(data);
+                console.log(data);
+            }
+        })
+    }
+</script>
+{% endblock %}

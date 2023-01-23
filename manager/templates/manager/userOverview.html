@@ -1,0 +1,204 @@
+{% extends 'manager/mindex.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<!--breadcrumb-->
+<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-5">
+    <div class="breadcrumb-title pe-3">User</div>
+    <div class="ps-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 p-0">
+                <li class="breadcrumb-item"><a href="{% url 'manager-home' %}"><i class="bx bx-home-alt"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Overview</li>
+            </ol>
+        </nav>
+    </div>
+    
+</div>
+<!--end breadcrumb-->
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
+    <div class="col">
+        <div class="card radius-10 bg-primary bg-gradient">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <p class="mb-0 text-white">Active users</p>
+                        {% if activeUsers %}
+                            <h4 class="my-1 text-white">{{activeUsers}}</h4>
+                        {% else %}
+                            <h4 class="my-1 text-white">0</h4>
+                        {% endif %}
+                    </div>
+                    <div class="text-white ms-auto font-35"><i class='bx bx-user-pin'></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card radius-10 bg-danger bg-gradient">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <p class="mb-0 text-white">Suspended users</p>
+                        {% if suspendedUsers %}
+                            <h4 class="my-1 text-white">{{suspendedUsers}}</h4>
+                        {% else %}
+                            <h4 class="my-1 text-white">0</h4>
+                        {% endif %}
+                    </div>
+                    <div class="text-white ms-auto font-35"><i class='bx bx-user-pin'></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card radius-10 bg-warning bg-gradient">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <p class="mb-0 text-dark">Email unverified users</p>
+                        {% if unverifiedEmailUsers %}
+                            <h4 class="my-1 text-white">{{unverifiedEmailUsers}}</h4>
+                        {% else %}
+                            <h4 class="my-1 text-white">0</h4>
+                        {% endif %}
+                    </div>
+                    <div class="text-dark ms-auto font-35"><i class='bx bx-user-pin'></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card radius-10 bg-success bg-gradient">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <p class="mb-0 text-white">Total users</p>
+                        {% if totalUsers %}
+                            <h4 class="my-1 text-white">{{totalUsers}}</h4>
+                        {% else %}
+                            <h4 class="my-1 text-white">0</h4>
+                        {% endif %}
+                    </div>
+                    <div class="text-white ms-auto font-35"><i class='bx bx-user-pin'></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="card radius-10">
+    <div class="card-header bg-transparent">
+        <h6 class="mb-0 font-weight-bold">New users</h6>
+    </div>
+    <div class="table-responsive p-3">
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Name</th>
+                    <th>Credit</th>
+                    <th>Email verification</th>
+                    <th>Status</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if users %}
+                    {% for user in users%}
+                        <tr>
+                            <td>{{user.email}}</td>
+                            <td>{{user.first_name}} {{user.last_name}}</td>
+                            <td>                               
+                                {{user.credits.balance}}                               
+                            </td>
+                            <td>{{user.is_active}}</td>
+                            <td>
+                                {% if not user.is_suspend %}
+                                    Active
+                                {% else %}
+                                    Suspended
+                                {% endif %}
+                            </td>
+                            <td>{{user.get_role_display}}</td>
+                            <td>
+                                {% if not user.is_suspend %}
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#suspend{{user.id}}">
+                                        Suspend
+                                    </button>
+                                {% else %}
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#suspend{{user.id}}">
+                                        Activate
+                                    </button>
+                                {% endif %}
+                                    
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="suspend{{user.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="suspend" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h5 class="modal-title" id="suspend">Suspend user</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <form action="" method="POST">
+                                                    {% csrf_token %}
+                                                    <div class="modal-body">                                                         
+                                                            <input type="email" id="id_email" name="{{userSuspendForm.email.label}}" value="{{user.email}}" readonly hidden> 
+                                                            {% if not user.is_suspend %}                                                                   
+                                                                <p>Confirm suspend {{user.email}}?</p>
+                                                            {% else %}                                                                
+                                                                <p>Confirm un-suspend {{user.email}}?</p>
+                                                            {% endif %}
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>                                                              
+                                
+                            </td>
+                        </tr>
+                    {%endfor%}
+                {% endif %}
+
+                
+            </tbody>
+        </table>
+        <div class="pagination mt-3">
+            <span class="step-links">
+                {% if users.has_previous %}
+                    <a class="btn btn-sm btn-primary" href="?page=1">&laquo; first</a>
+                    <a class="btn btn-sm btn-primary" href="?page={{ users.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                    Page {{ users.number }} of {{ users.paginator.num_pages }}.
+                </span>
+        
+                {% if users.has_next %}
+                    <a class="btn btn-sm btn-primary" href="?page={{ users.next_page_number }}">next</a>
+                    <a class="btn btn-sm btn-primary" href="?page={{ users.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+
+
+    </div>
+</div>
+
+
+{% endblock %}

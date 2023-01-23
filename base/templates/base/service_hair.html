@@ -1,0 +1,333 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}  
+{% load static %}
+
+{% block content %}
+
+<section>
+    <div class="container">
+        <div class="row masonry">
+
+
+            <div class="col-md-6 item">
+                <div class="box-border padding30">
+                    <div class="text-center">
+                        <img src="{% static 'base/images/services/service_haircut_1.png' %}" alt="" class="img-circle img-service-thumbnail" />
+                        <div class="spacer-single"></div>
+                        <h1>Hair</h1>
+                        <div class="spacer-double"></div>
+                    </div>
+
+
+                    <div class="sub-item-service">
+                        <div class="c1">Junior haircut</div>
+                        <div class="c2"></div>
+                        <div class="c3">$10</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Senior haircut</div>
+                        <div class="c2"></div>
+                        <div class="c3">$12-$30</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Wash & Blow (men)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$15</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Wash & Blow (lady)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$18-$25</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 item">
+                <div class="box-border padding30">
+                    <div class="text-center">
+                        <img src="{% static 'base/images/services/service_hairColor_1.png' %}" alt="" class="img-circle img-service-thumbnail" />
+                        <div class="spacer-single"></div>
+                        <h1>Color</h1>
+                        <div class="spacer-double"></div>
+                    </div>
+
+
+                    <div class="sub-item-service">
+                        <div class="c1">Basic color (S)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$39.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Basic color (M)</div>
+                        <div class="c2"></div>
+                        <div class="c3">#49.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Basic color (L)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$79.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Basic color (XL)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$89.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Organic low NH3 color (S)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$49.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Organic low NH3 color (M)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$59.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Organic low NH3 color (L)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$99.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Organic low NH3 color (XL)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$109.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Organic NO NH3 color (S)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$69.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Organic NO NH3 color (M)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$79.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Organic NO NH3 color (L)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$119.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Organic NO NH3 color (XL)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$129.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Bleach (S)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$39.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Bleach (M)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$49.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Bleach (L)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$79.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Bleach (XL)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$99.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Highlight</div>
+                        <div class="c2"></div>
+                        <div class="c3">$49.9-$109.9</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 item">
+                <div class="box-border padding30">
+                    <div class="text-center">
+                        <img src="{% static 'base/images/services/service_haiperm_1.png' %}" alt="" class="img-circle img-service-thumbnail" />
+                        <div class="spacer-single"></div>
+                        <h1>Perm</h1>
+                        <div class="spacer-double"></div>
+                    </div>
+
+
+                    <div class="sub-item-service">
+                        <div class="c1">Cold perm</div>
+                        <div class="c2"></div>
+                        <div class="c3">$59.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Hydrating cold perm</div>
+                        <div class="c2"></div>
+                        <div class="c3">$89.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Digital perm</div>
+                        <div class="c2"></div>
+                        <div class="c3">$169.9</div>
+                    </div>                    
+
+                </div>
+            </div>
+
+            <div class="col-md-6 item">
+                <div class="box-border padding30">
+                    <div class="text-center">
+                        <img src="{% static 'base/images/services/service_hairRebond_1.png' %}" alt="" class="img-circle img-service-thumbnail" />
+                        <div class="spacer-single"></div>
+                        <h1>Rebonding</h1>
+                        <div class="spacer-double"></div>
+                    </div>
+
+
+                    <div class="sub-item-service">
+                        <div class="c1">Basic rebonding</div>
+                        <div class="c2"></div>
+                        <div class="c3">$99.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Mucota (Japan) rebonding</div>
+                        <div class="c2"></div>
+                        <div class="c3">$129.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Botox straight</div>
+                        <div class="c2"></div>
+                        <div class="c3">$280</div>
+                    </div>                    
+
+                </div>
+            </div>
+
+            <div class="col-md-6 item">
+                <div class="box-border padding30">
+                    <div class="text-center">
+                        <img src="{% static 'base/images/services/service_hairTreatment_1.png' %}" alt="" class="img-circle img-service-thumbnail" />
+                        <div class="spacer-single"></div>
+                        <h1>Treatment</h1>
+                        <div class="spacer-double"></div>
+                    </div>
+
+
+                    <div class="sub-item-service">
+                        <div class="c1">Keratin (S)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$129.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Keratin (M)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$149.9</div>
+                    </div>
+
+                    <div class="sub-item-service">
+                        <div class="c1">Keratin (L)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$169.9</div>
+                    </div>    
+                    
+                    <div class="sub-item-service">
+                        <div class="c1">Keratin (XL)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$189.9</div>
+                    </div> 
+
+                    <div class="sub-item-service">
+                        <div class="c1">QOD GOLD Keratin (S)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$169.9</div>
+                    </div> 
+
+                    <div class="sub-item-service">
+                        <div class="c1">QOD GOLD Keratin (M)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$189.9</div>
+                    </div> 
+
+                    <div class="sub-item-service">
+                        <div class="c1">QOD GOLD Keratin (L)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$219.9</div>
+                    </div> 
+
+                    <div class="sub-item-service">
+                        <div class="c1">QOD GOLD Keratin (XL)</div>
+                        <div class="c2"></div>
+                        <div class="c3">$239.9</div>
+                    </div> 
+
+                    <div class="sub-item-service">
+                        <div class="c1">Essentials scalp treatment</div>
+                        <div class="c2"></div>
+                        <div class="c3">$49.9</div>
+                    </div> 
+
+                    <div class="sub-item-service">
+                        <div class="c1">Detoxify scalp treatment</div>
+                        <div class="c2"></div>
+                        <div class="c3">$79.9</div>
+                    </div> 
+
+                    <div class="sub-item-service">
+                        <div class="c1">TCM scalp treatment</div>
+                        <div class="c2"></div>
+                        <div class="c3">$99.9</div>
+                    </div> 
+
+                    <div class="sub-item-service">
+                        <div class="c1">Essentials hair treatment</div>
+                        <div class="c2"></div>
+                        <div class="c3">$39.9</div>
+                    </div> 
+
+                    <div class="sub-item-service">
+                        <div class="c1">Protien hair treatment</div>
+                        <div class="c2"></div>
+                        <div class="c3">$69.9</div>
+                    </div> 
+
+                    <div class="sub-item-service">
+                        <div class="c1">Revivify hair treatment</div>
+                        <div class="c2"></div>
+                        <div class="c3">$129.9</div>
+                    </div> 
+
+                    <div class="sub-item-service">
+                        <div class="c1">Botox repair</div>
+                        <div class="c2"></div>
+                        <div class="c3">$199.9</div>
+                    </div> 
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

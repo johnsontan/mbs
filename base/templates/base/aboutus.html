@@ -1,0 +1,85 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}  
+
+{% block content %}
+<div class="container mb-5">
+    <!-- section begin -->
+    <section class="">
+        <div class="row">
+            
+            <div class="col-md-6">
+                <h2>Melon Beauty Salon history
+            <span class="small-border"></span>
+                </h2>
+                Melon Beauty salon was founded in 1989, and it started at a small store in 682 Hougang Ave 8 and expanded to Hougang Central Block 811, #01-192. The outlet has temporarily moved to 1187 Upper Serangoon Rd, #01-52, while waiting for the Star of Kovan outlet to be built. As of the year 2021, we have shifted to Star of Kovan. Over the years, the company's primary goal has been still the same. It provides a one-stop service with a welcoming and comfortable environment for all our customer's pampering needs, a place where they are much-taken care of. The products used in Melon Beauty Salon are all-natural products.
+            </div>
+            <div class="col-md-3">
+                <img src="{% static 'base/images/background/ourStoryBG_1.png' %}" alt="OurStory.png">
+            </div>
+
+
+        </div>
+
+    </section>
+    <!-- section close -->
+
+</div>
+<div class="container">
+    <hr class="hr">
+</div>
+<h2 class="text-center mt-5">Short interview with Karen,  founder of Melon Beauty salon. </h2>
+<div class="ratio ratio-16x9 container">
+    <h2 class="text-center">Short interview with Karen,  founder of Melon Beauty salon. </h2>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/xKQeqiW0278" title="Short interview with Karen" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<!-- content begin -->
+<div id="content" class="no-bottom no-top">
+		
+    <!-- section begin -->
+    <section id="section-stylist">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-md-offset-3 text-center">
+                    <h1>Our Cosmetologist</h1>
+                    <div class="small-border wow zoomIn" data-wow-delay=".3s" data-wow-duration=".3s"></div>
+                    <div class="spacer-single"></div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                {% if employees %}
+                    {% for em in employees %}
+                        <div class="col wow fadeInLeft" data-wow-delay=".8s">
+                            <div class="team-member">
+                                <img src="{{em.profile_pic.image.url}}" style="width: 250px; height: 250px;" class="rounded" alt="" />
+                                <h3>{{em.first_name}} {{em.last_name}}</h3>
+                                {% if em.employee_info.inner_role == "both" %}
+                                    <p>Specialization: HAIR/BEAUTY</p>
+                                {%else%}
+                                    <p>Specialization: {{em.employee_info.inner_role}}</p>
+                                {%endif%}
+                                <div class="social">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    {%endfor%}
+                {%endif%}
+
+
+
+               
+            </div>
+        </div>
+    </section>
+    <!-- section close -->
+
+</div>
+
+<div class="container">
+    <hr class="hr">
+
+</div>
+{% endblock %}

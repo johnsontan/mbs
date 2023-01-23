@@ -1,0 +1,940 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Melon Beauty Salon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Responsive Minimal Salon Website Template">
+    <meta name="keywords" content="barber,beauty,clean,gallery,healthcare,make-up,mashup,massage,menucard,portfolio,products,salon,sauna,skin,spa">
+    <meta name="author" content="">
+
+
+    <!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<![endif]-->
+
+
+    <!-- CSS Files
+    ================================================== -->
+    <link rel="stylesheet" href="{% static 'base/css/bootstrap.css' %}" type="text/css">
+
+    <link rel="stylesheet" href="{% static 'base/css/jpreloader.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'base/css/animate.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'base/css/plugin.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'base/css/owl.carousel.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'base/css/owl.theme.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'base/css/owl.transitions.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'base/css/magnific-popup.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'base/css/style.css'%}" type="text/css">
+
+    <!-- custom background -->
+    <link rel="stylesheet" href="{% static 'base/css/bg.css'%}" type="text/css">
+
+    <!-- color scheme -->
+    <link rel="stylesheet" href="{% static 'base/css/color.css'%}" type="text/css" id="colors">
+
+    <!-- load fonts -->
+    <link rel="stylesheet" href="{% static 'base/fonts/font-awesome/css/font-awesome.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'base/fonts/elegant_font/HTML_CSS/style.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'base/fonts/et-line-font/style.css'%}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <!-- revolution slider -->
+    <link rel="stylesheet" href="{% static 'base/rs-plugin/css/settings.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'base/css/rev-settings.css'%}" type="text/css">
+</head>
+
+<body id="homepage">
+
+    <div id="wrapper">
+
+        <!-- header begin -->
+        <header class="header_center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- logo begin -->
+                        <div id="logo">
+                            <a href="index.html">
+                                <img class="logo logo_dark_bg" src="{% static 'base/images/logo.png' %}" alt="">
+                                <img class="logo logo_light_bg" src="{% static 'base/images/logo.png' %}" alt="">
+                            </a>
+                        </div>
+                        <!-- logo close -->
+
+                        <!-- small button begin -->
+                        <span id="menu-btn"></span>
+                        <!-- small button close -->
+
+                        <!-- mainmenu begin -->
+                        <nav>
+                            <ul id="mainmenu">
+                                <li class="text-muted"><a href="{% url 'base-home' %}" >Home</a>                                    
+                                </li>
+                                <li><a href="services.html">Services</a>
+                                    <ul>                                        
+                                        <li><a href="{% url 'base-service-hair' %}">Hair</a></li>
+                                        <li><a href="{% url 'base-service-beauty' %}">Beauty</a></li>                                        
+                                    </ul>
+                                </li>
+                                <li><a href="{%url 'appointment-userNewAppointment'%}">Book</a></li>      
+                                <li><a href="{% url 'base-aboutus' %}">About us</a></li>                                
+                                <li><a href="#">Shop</a></li>
+                                <li><a href="{% url 'base-newsOverview' %}">News</a></li>
+                                <li><a href="{% url 'base-contact' %}">Contact</a></li>
+                                {% if user.is_authenticated %}
+                                    <li><a href="#">Account</a>
+                                        <ul>                                        
+                                            <li><a href="{% url 'base-profile' %}">Profile</a></li>
+                                            {% if user.role == 4 %}
+                                            <li><a href="{% url 'manager-home' %}">Admin panel</a></li>
+                                            {% endif %}
+                                            <li><a href="{% url 'logout' %}">Logout</a></li>                                                                                                        
+                                        </ul>
+                                    </li>
+                                {% else %}
+                                    <li><a href="#">Login/Register</a>
+                                        <ul>                                        
+                                            <li><a href="{% url 'login' %}">Login</a></li>
+                                            <li><a href="{% url 'base-register' %}">Register</a></li>                                        
+                                        </ul>
+                                    </li>
+                                {% endif %}
+                                
+                            </ul>                            
+                        </nav>
+                        <div class="clearfix"></div>                        
+                    </div>
+                    <!-- mainmenu close -->
+
+                </div>
+            </div>
+        </header>
+        <!-- header close -->
+
+
+
+
+
+        <!-- content begin -->
+        <div id="content" class="no-bottom no-top">
+
+            <!-- revolution slider begin -->
+            <section id="section-slider" aria-label="section-slider" class="fullwidthbanner-container">
+                <div id="revolution-slider">
+                    <ul>
+                        <li data-transition="boxfade" data-slotamount="10" data-masterspeed="800" data-thumb="">
+                            <!--  BACKGROUND IMAGE -->
+                            <img src="{% static 'base/images-slider/wide1.png' %}" alt="" />
+
+                            
+                        </li>
+
+                        <li data-transition="boxfade" data-slotamount="10" data-masterspeed="800" data-thumb="">
+                            <!--  BACKGROUND IMAGE -->
+                            <img src="{% static 'base/images-slider/wide2.png' %}" alt="" />
+
+                            
+                            <div class="tp-caption ultra-big-white sfb"
+                                data-x="center"
+                                data-y="190"
+                                data-speed="1200"
+                                data-start="600"
+                                data-easing="easeInOutExpo"
+                                data-endspeed="400">
+                                HAIR / BEAUTY SERVICES
+                            </div>
+
+                            <div class="tp-caption sfb"
+                                data-x="center"
+                                data-y="320"
+                                data-speed="1000"
+                                data-start="1100"
+                                data-easing="easeInOutExpo">
+                                <a href="{% url 'appointment-userNewAppointment'%}" class="btn-slider">Book now</a>
+                            </div>
+                        </li>
+
+                        <li data-transition="boxfade" data-slotamount="10" data-masterspeed="800" data-thumb="">
+                            <!--  BACKGROUND IMAGE -->
+                            <img src="{% static 'base/images-slider/wide3.png' %}" alt="" />
+
+                        
+                            <div class="tp-caption big-white sfb"
+                                data-x="center"
+                                data-y="260"
+                                data-speed="1000"
+                                data-start="800"
+                                data-easing="easeInOutExpo"
+                                data-endspeed="450">
+                                Ammonia-free hair color 
+                            </div>
+
+                            <div class="tp-caption ultra-big-white sfb"
+                                data-x="center"
+                                data-y="190"
+                                data-speed="1200"
+                                data-start="600"
+                                data-easing="easeInOutExpo"
+                                data-endspeed="400">
+                                Fashion color service
+                            </div>
+
+                            <div class="tp-caption sfb"
+                                data-x="center"
+                                data-y="320"
+                                data-speed="1000"
+                                data-start="1100"
+                                data-easing="easeInOutExpo">
+                                <a href="{% url 'appointment-userNewAppointment'%}" class="btn-slider">Book now</a>
+                            </div>
+                        </li>
+
+                        <li data-transition="boxfade" data-slotamount="10" data-masterspeed="800" data-thumb="">
+                            <!--  BACKGROUND IMAGE -->
+                            <img src="{% static 'base/images-slider/wide4.png' %}" alt="" />
+
+                            <div class="tp-caption big-white sfb"
+                                data-x="center"
+                                data-y="260"
+                                data-speed="1000"
+                                data-start="800"
+                                data-easing="easeInOutExpo"
+                                data-endspeed="450">
+                                Exfoliation | Relaxation | Rejuvenate 
+                            </div>
+
+                            <div class="tp-caption ultra-big-white sfb"
+                                data-x="center"
+                                data-y="190"
+                                data-speed="1200"
+                                data-start="600"
+                                data-easing="easeInOutExpo"
+                                data-endspeed="400">
+                                Refreshing facial 
+                            </div>
+
+                            <div class="tp-caption sfb"
+                                data-x="center"
+                                data-y="320"
+                                data-speed="1000"
+                                data-start="1100"
+                                data-easing="easeInOutExpo">
+                                <a href="{% url 'appointment-userNewAppointment'%}" class="btn-slider">Book now</a>
+                            </div>
+                        </li>
+
+                        
+                    </ul>
+                </div>
+            </section>
+            <!-- revolution slider close -->
+
+
+            <div class="no-padding mt-130 height90px mobile-hide absolute z-index500 width100 text-light">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="overlay10">
+
+                                <div class="row-fluid">
+                                    <div class="col-md-4">
+                                        <div class="info-box padding20">
+                                            <i class="icon_clock_alt bg-light"></i>
+                                            <div class="info-box_text">
+                                                <div class="info-box_title">Opening Times</div>
+                                                <div class="info-box_subtite">Monday - Friday: 10:00 - 21:00</div>
+                                                <div class="info-box_subtite">Saturday - Sunday: 09:00 - 21:00</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="info-box padding20">
+                                            <i class="icon_house_alt bg-light"></i>
+                                            <div class="info-box_text">
+                                                <div class="info-box_title">Our Location</div>
+                                                <div class="info-box_subtite">988 Upper Serangoon Rd, #01-24 Star of Kovan, Singapore 534733</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="info-box padding20">
+                                            <i class="icon_calendar bg-light"></i>
+                                            <div class="info-box_text">
+                                                <div class="info-box_title">Book now via Whatsapp</div>
+                                                <div class="info-box_subtite">9660 6383</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- section begin -->
+            <section id="section-top-reason" class="no-top no-bottom">
+                <div class="container-fluid">
+                    <div class="row-fluid display-table">
+
+                        <div class="col-md-4 text-middle" data-bgcolor="#e2e2e2">
+                            <div class="padding40">
+                                <div class="box-icon">
+                                    <i class="fa fa-bookmark wow zoomIn" data-wow-delay=".25s"></i>
+                                    <div class="text">
+                                        <h4>Over 30 years of experience</h4>
+                                        <p>Melon Beauty Salon has over 30 years of experience in hairdressing and beauty. Our commitment is to provide quality service and ensure our clients are happy. </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 text-middle text-light" data-bgimage="url(images/background/bg-div-1.jpg)">
+                            <div class="padding40 hoverdark30">
+                                <div class="box-icon">
+                                    <i class="fa fa-bookmark wow zoomIn" data-wow-delay=".25s"></i>
+                                    <div class="text">
+                                        <h4>Organic products</h4>
+                                        <p>OWe use organic products for our clients to reduce the chemicals entering your body and have a higher level of vital antioxidant vitamins.  </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 text-middle text-center" data-bgcolor="#50094d">
+                            <div class="padding40">
+                                <a href="{% url 'appointment-userNewAppointment'%}" class="btn btn-line-white btn-big wow fadeInUp" data-wow-delay=".3s">Make Appointment Now</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <!-- section close -->
+
+            <!-- section begin -->
+            <section id="section-services-tab" aria-label="section-services-tab">
+                <div class="container">
+
+                    <div class="col-md-12 wow fadeInUp">
+                        <h2 class="text-center">Our services</h2>
+                        <div class="de_tab tab_style_2 scrollTo">
+                            <ul class="de_nav">
+                                <li class="active" data-link="#section-services-tab">
+                                    <img src="#" alt=""><span>Hair</span><div class="v-border"></div>
+                                </li>
+                                <li data-link="#section-services-tab">
+                                    <img src="images/services/service_2.jpg" alt=""><span>Beauty</span><div class="v-border"></div>
+                                </li>
+                                
+                            </ul>
+
+                            <div class="de_tab_content">
+
+                                <div id="tab1" class="tab_single_content">
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <div class="sub-item-service">
+                                                <div class="c1"><h5>Haircut/Wash/Blow</h5></div>                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Junior haircut</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$10</div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Senior Cut</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$12 - $30</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Wash & Blow (men)</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$15</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Wash & Blow (lady)</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$19 - $23</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="sub-item-service">
+                                                <div class="c1"><h5>Color</h5></div>                                                
+                                            </div>
+                                        </div>                                       
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Basic color</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$39.9 - $89.9</div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Organic low NH3 color</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$49.9 - $59.9</div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Organic NO NH3</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$69.9 - $129.9</div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Bleach</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$39.9 - $89.9</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="sub-item-service">
+                                                <div class="c1"><h5>Perm</h5></div>                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Cold perm</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$59.9</div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Hydrating cold perm</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$89.9</div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Digital perm</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$169.9</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="sub-item-service">
+                                                <div class="c1"><h5>Rebonding</h5></div>                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Basic rebonding</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$99.9</div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Mucota Rebonding (Japan)</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$129.9</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Botox straight</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$280</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="sub-item-service">
+                                                <div class="c1"><h5>Treatment</h5></div>                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Keratin treatment</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$129.9 - $189.9</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">QOD Gold Keratin</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$169.9 - $239.9</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Essentials scalp treatment</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$49.9</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Detoxify scalp treatment</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$79.9</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">TCM scalp treatment</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$129.9</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Essentials hair treatment</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$39.9</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Protien hair treatment</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$69.9</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Revivify hair treatment</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$129.9</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="sub-item-service">
+                                                <div class="c1">Botox repair</div>
+                                                <div class="c2"></div>
+                                                <div class="c3">$199.9</div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+
+                                <div id="tab2" class="tab_single_content">
+
+                                    <div class="col-md-12">
+                                        <div class="sub-item-service">
+                                            <div class="c1"><h5>Facial</h5></div>                                                
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="sub-item-service">
+                                            <div class="c1">Organic refreshing facial</div>
+                                            <div class="c2"></div>
+                                            <div class="c3">$68</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="sub-item-service">
+                                            <div class="c1">Purifying facial</div>
+                                            <div class="c2"></div>
+                                            <div class="c3">$88</div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-6">
+                                        <div class="sub-item-service">
+                                            <div class="c1">Intensive hydrating facial</div>
+                                            <div class="c2"></div>
+                                            <div class="c3">$108</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="sub-item-service">
+                                            <div class="c1">Aromatic age reverse facial</div>
+                                            <div class="c2"></div>
+                                            <div class="c3">$168</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="sub-item-service">
+                                            <div class="c1">Organic stem cell facial</div>
+                                            <div class="c2"></div>
+                                            <div class="c3">$298</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="sub-item-service">
+                                            <div class="c1">Co2 peel & oxyglow facial</div>
+                                            <div class="c2"></div>
+                                            <div class="c3">$380</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="sub-item-service">
+                                            <div class="c1"><h5>Eye care</h5></div>                                                
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="sub-item-service">
+                                            <div class="c1">Rejuvenate eye treatment</div>
+                                            <div class="c2"></div>
+                                            <div class="c3">$88</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="sub-item-service">
+                                            <div class="c1">Intensive eye treatment</div>
+                                            <div class="c2"></div>
+                                            <div class="c3">$128</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="sub-item-service">
+                                            <div class="c1"><h5>Eyebrow & Eyelash</h5></div>                                                
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="sub-item-service">
+                                            <div class="c1">Eyebrow trim</div>
+                                            <div class="c2"></div>
+                                            <div class="c3">$18</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="sub-item-service">
+                                            <div class="c1">Eye lashes perm</div>
+                                            <div class="c2"></div>
+                                            <div class="c3">$88</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="sub-item-service">
+                                            <div class="c1">Misty eyebrow embroidery</div>
+                                            <div class="c2"></div>
+                                            <div class="c3">$399</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="sub-item-service">
+                                            <div class="c1"><h5>Others</h5></div>                                                
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="sub-item-service">
+                                            <div class="c1">Ear candling</div>
+                                            <div class="c2"></div>
+                                            <div class="c3">$18</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="sub-item-service">
+                                            <div class="c1">Face guasha</div>
+                                            <div class="c2"></div>
+                                            <div class="c3">$38</div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- section close -->
+
+
+
+
+
+            <!-- section begin -->
+            <section id="section-gallery" aria-label="section-gallery" class="no-top no-bottom">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div id="gallery" class="gallery zoom-gallery gallery-3-cols wow fadeInUp mb-60" data-wow-delay=".3s">
+                                <div id="instafeed">
+
+                                </div>
+                                {% if latestTest %}
+                                    {% for lt in latestTest %}
+                                        <!-- gallery item -->
+                                        <div class="item haircut">
+                                            <div class="picframe">
+                                                <a href="{{lt.image.url}}" title="{{lt.name}}">
+                                                    <span class="overlay">
+                                                        <span class="pf_text">
+                                                            <span class="project-name">{{lt.name}}</span>
+                                                        </span>
+                                                    </span>
+                                                    <img src="{{lt.image.url}}" alt="" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!-- close gallery item -->
+                                    {%endfor%}
+                                {%endif%}                              
+                
+                              
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+            <!-- section close -->
+
+
+            <!-- section begin -->
+            <section id="section-hero-2" aria-label="section-hero-2" data-stellar-background-ratio=".2" data-bgcolor="#333" class="text-light">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 mt60 mb100 text-center">
+                            <h4 class="mb30">Discover Our Services.</h4>
+                            <div class="small-border"></div>
+                            <div class="type-wrap font40 text-center">
+                                We do
+                            <div class="typed-strings">
+                                <p>Hair Care</p>
+                                <p>Facial</p>
+                                <p>Hair Color</p>
+                                <p>Hair Rebonding</p>
+                                <p>Eye Care</p>
+                                <p>Hair perm</p>
+                            </div>
+                                <span class="typed"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- section close -->
+
+            <!-- section begin -->
+            <section id="cta" aria-label="cta" class="call-to-action bg-color-2 wow fadeInLeftBig text-light">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9 mt10">
+                            <h3><a href="https://wa.link/afgd0j"><img src="{% static 'base/images/ui/whatsapp.png'%}" width="30" alt=""></a>&nbsp;&nbsp;&nbsp;&nbsp;Contact us now on Whatsapp and get special offers!</h3>
+                        </div>
+
+                        <div class="col-md-3 text-right">
+                            <a href="https://wa.link/afgd0j" class="btn btn-line-white btn-big">Whatsapp</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- section close -->
+
+        </div>
+
+        <!-- footer begin -->
+        <footer>
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="widget widget_recent_post">
+                            <h3>Latest News</h3>
+                            <ul>
+                                {%if lastestNews%}
+                                    {%for ln in lastestNews%}
+                                        <li>
+                                            <form action="{%url 'base-innerNews' %}" method="post" id="news{{ln.id}}">
+                                                {%csrf_token%}
+                                                <input type="text" value="{{ln.id}}" name="newsid" id="newsid" hidden readonly>
+                                                <a href='' onclick='document.forms["news{{ln.id}}"].submit(); return false;'>{{ln.news_title}}</a>
+
+                                            </form>
+                                        </li>
+                                    {%endfor%}
+                                {%endif%}
+                                
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="widget">
+                            <h3>We're Open</h3>
+                            <div class="box-border double">
+                                <ul class="list-border-bottom">
+                                    <li>
+                                        <span class="pull-left">Monday - Friday</span>
+                                        <span class="pull-right text-light">10 am to 9 pm</span>
+                                        <div class="clearfix"></div>
+                                    </li>
+                                    <li>
+                                        <span class="pull-left">Saturday &amp; Sunday</span>
+                                        <span class="pull-right text-light">9 am to 9 pm</span>
+                                        <div class="clearfix"></div>
+                                    </li>
+                                    <li>
+                                        <span class="pull-left">Public Holiday</span>
+                                        <span class="pull-right text-light">10 am to 9 pm</span>
+                                        <div class="clearfix"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="widget widget-address">
+                            <h3>Contact Us</h3>
+
+                            <address>
+                                <span>988 Upper Serangoon Rd, #01-24 Star of Kovan, Singapore 534733</span>
+                                <span><strong>Whatsapp:</strong>9660 6383</span>                                
+                                <span><strong>Email:</strong><a href="mailto:melonbeauty.hair@gmail.com">contact@melonbeauty.hair@gmail.com</a></span>
+                                <span><strong>Web:</strong><a href="#">http://melonbeautysalonsg.com</a></span>
+                            </address>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="subfooter">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            &copy; Copyright 2022 - Melon Beauty Salon                  
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <div class="social-icons">
+                                <a href="https://www.facebook.com/melonbeautysalonoffical/"><i class="fab fa-facebook fa-lg"></i></a>
+                                <a href="https://www.youtube.com/@melonbeautysalon6522"><i class="fab fa-youtube fa-lg"></i></a>
+                                <a href="https://www.instagram.com/melonbeautysalon/"><i class="fab fa-instagram fa-lg"></i></a>
+                                <a href="#"><i class="fab fa-tiktok fa-lg"></i></a>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+        <!-- footer close -->
+    </div>
+
+    
+
+    <!-- Javascript Files
+    ================================================== -->
+    <script src="{% static 'base/js/jquery.min.js' %}"></script>
+    <script src="{% static 'base/js/jpreLoader.js' %}"></script>
+    <script src="{% static 'base/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'base/js/jquery.isotope.min.js' %}"></script>
+    <script src="{% static 'base/js/easing.js' %}"></script>
+    <script src="{% static 'base/js/jquery.flexslider-min.js' %}"></script>
+    <script src="{% static 'base/js/jquery.scrollto.js' %}"></script>
+    <script src="{% static 'base/js/owl.carousel.js' %}"></script>
+    <script src="{% static 'base/js/jquery.countTo.js' %}"></script>
+    <script src="{% static 'base/js/classie.js' %}"></script>
+    <script src="{% static 'base/js/video.resize.js' %}"></script>
+    <script src="{% static 'base/js/validation.js' %}"></script>
+    <script src="{% static 'base/js/wow.min.js' %}"></script>
+    <script src="{% static 'base/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'base/js/enquire.min.js' %}"></script>
+    <script src="{% static 'base/js/jquery.stellar.min.js' %}"></script>
+    <script>
+        var logo_dir_1 = "{% static 'base/images/logo.png' %}"
+        var logo_dir_2 = "{% static 'base/images/logo_light.png' %}"
+    </script>
+    
+    <script src="{% static 'base/js/designesia.js' %}"></script>
+
+    <!-- SLIDER REVOLUTION SCRIPTS  -->
+    <script type="text/javascript" src="{% static 'base/rs-plugin/js/jquery.themepunch.plugins.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'base/rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script>
+
+    <!-- current page only scripts -->
+    <script src="{% static 'base/js/typed.js' %}"></script>
+    <script src="{% static 'base/js/typed-custom.js' %}"></script>
+
+
+    
+
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+{% extends 'manager/mindex.html' %}
+{% load static %}
+
+{% block content %}
+<!--breadcrumb-->
+<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-5">
+    <div class="breadcrumb-title pe-3">Appointment</div>
+    <div class="ps-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 p-0">
+                <li class="breadcrumb-item"><a href="{% url 'manager-home' %}"><i class="bx bx-home-alt"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Search</li>
+            </ol>
+        </nav>
+    </div>
+    
+</div>
+<!--end breadcrumb-->
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="input-group my-5">
+        <input type="search" class="form-control rounded" placeholder="Search by customer phone number" name="searchcphone" id="searchcphone" aria-label="Search" aria-describedby="search-addon" />
+        <button type="submit" class="btn btn-outline-primary">search</button>
+    </div>
+    
+</form>
+
+{% if completedTable %}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+            <th scope="col">Appointment id</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Employee</th>
+            <th scope="col">Services</th>
+            <th scope="col">Date/Time</th>
+            <th scope="col">Status</th>
+            <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ct in completedTable %}
+                <tr>
+                    <th>{{ct.0}}</th>
+                    <td>{{ct.1}}</td>
+                    <td>{{ct.2}}</td>
+                    <td>{{ct.3}}</td>
+                    <td>{{ct.4}}</td>
+                    <td>{{ct.5}}</td>
+                    {% if ct.5 == "Upcoming" %}
+                        <td>
+                            <form action="{% url 'appointment-changeAppStatus' %}" method="post">
+                                {%csrf_token%}
+                                <input type="text" name="appid" id="appid" value="{{ua.0}}" readonly hidden>
+                                <label for="status">Update status</label>
+                                <select name="statusupdate" id="statusupdate">
+                                    <option value="3">Cancel</option>
+                                    <option value="5">Missed</option>
+                                    <option value="4">Completed</option>
+                                </select>
+                                <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                            </form>
+                        </td>
+                    {%endif%}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+{% endif%}
+
+{% endblock %}

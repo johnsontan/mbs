@@ -1,0 +1,74 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="d-flex justify-content-center">
+    <h5>Tick the un-available dates for {{request.user.first_name}} {{request.user.last_name}}</h5>
+</div>
+<div class="d-flex justify-content-center">
+    <h6 id="outputResult"></h6>
+</div>
+
+<div class="d-flex justify-content-center">    
+    <input type="text" value="{{request.user.id}}" name="userid" id="userid" hidden readonly>
+    <div class="card p-5">
+        <ul class="list-group list-group-flush">
+            {% if resultAvailDates|length %}
+                {% for day in list_dates %}  
+                    {% if day in resultAvailDates %}
+                        <li class="list-group-item bg-light">                                
+                            <div class="form-check form-switch">                                    
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="{{day}}" onclick="toogleDates(value)" checked>
+                                <label class="form-check-label" for="flexSwitchCheckDefault">{{day}} *Check to disable the date</label>
+                            </div>
+                        </li>
+                                                        
+                    {% else %}
+                        <li class="list-group-item bg-light">                                
+                            <div class="form-check form-switch">                                    
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="{{day}}" onclick="toogleDates(value)">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">{{day}} *Check to disable the date</label>
+                            </div>
+                        </li>
+                    {% endif %}
+                    
+                    
+                {%endfor%}
+            {% else %}
+                {% for day in list_dates %}
+                    <li class="list-group-item bg-light">                                
+                        <div class="form-check form-switch">                                    
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" value="{{day}}" onclick="toogleDates(value)">
+                            <label class="form-check-label" for="flexSwitchCheckDefault">{{day}} *Check to disable the date</label>
+                        </div>
+                    </li>
+                {% endfor %}
+            {%endif%}
+
+        </ul>
+        <div class="card-footer">
+            <h6 class="text-muted">Date listed two weeks in advance </h6>
+        </div>
+    </div>    
+</div>
+<div class="d-flex justify-content-center mt-4">
+    <a href="{% url 'base-profile' %}" class="btn btn-sm btn-info">Back</a>
+</div>
+
+<script type="text/javascript">
+    function toogleDates(inputDates){
+        $.ajax({
+            type: 'POST',
+            url: '/mmanager/appointment/set/toogleDates',
+            data:{
+                date: inputDates,
+                employee: $('#userid').val(),
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function(data){
+                $('#outputResult').html(data)
+            }
+        })
+    }
+</script>
+{% endblock %}

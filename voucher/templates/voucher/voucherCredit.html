@@ -1,0 +1,104 @@
+{% extends 'manager/mindex.html' %}
+{% load static %}
+
+{% block head %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#cphone").keyup(function(){
+            $.ajax({
+                type: 'POST',
+                url: '/mmanager/appointment/new/appointment/checkphone',
+                data:{
+                    customerphone: $("#cphone").val(),                    
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function(data){
+                    $('#outputuser').html(data);
+                }
+            })
+        });
+    });
+
+</script>
+
+{% endblock %}
+
+
+{% block content %}
+<!--breadcrumb-->
+<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-5">
+    <div class="breadcrumb-title pe-3">Voucher</div>
+    <div class="ps-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 p-0">
+                <li class="breadcrumb-item"><a href="{% url 'manager-home' %}"><i class="bx bx-home-alt"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Credit</li>
+            </ol>
+        </nav>
+    </div>
+    
+</div>
+<!--end breadcrumb-->
+
+<div>
+    <div class="col">
+        <h6 class="mb-0 text-uppercase">Issue voucher</h6>
+        <hr/>
+        <div class="card border-top border-0 border-4 border-primary">
+            <div class="card-body p-5">
+                <div class="card-title d-flex align-items-center">
+                    <div><i class="bx bxs-user me-1 font-22 text-primary"></i>
+                    </div>
+                    <h5 class="mb-0 text-primary">Customer issue voucher</h5>
+                </div>
+                <hr>
+                <form class="row g-3" method="POST" action="">
+                    {% csrf_token %}
+                    <div class="col-md-12">
+                        <label for="cphone" class="form-label">Phone number</label> <span id="outputuser" name="outputuser"></span>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class='bx bxs-user'></i></span>
+                            <input type="text" class="form-control border-start-0" id="cphone" name="cphone" placeholder="Search customer by phone" />
+                        </div>
+                    </div>
+                    
+                    <div class="col-6">
+                        <label for="vouchername" class="form-label">Voucher name</label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class='bx bx-message-square-add' ></i></span>
+                            <input type="text" class="form-control border-start-0" name="vouchername" id="vouchername" placeholder="Voucher name" />
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <label for="voucherqty" class="form-label">Quantity</label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class='bx bx-add-to-queue' ></i></span>
+                            <input type="number" class="form-control border-start-0" id="voucherqty" name="voucherqty" placeholder="Voucher quantity" />
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <label for="grandtotal" class="form-label">Grand total</label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class='bx bx-dollar' ></i></span>
+                            <input type="number" step="0.01" class="form-control border-start-0" id="grandtotal" name="grandtotal" placeholder="Grand total" />
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <label for="eachtime" class="form-label">Each time</label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class='bx bx-coin' ></i></span>
+                            <input type="number" step="0.01" class="form-control border-start-0" id="eachtime" name="eachtime" placeholder="Amount for each time" />
+                        </div>
+                    </div>
+                    
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary px-5">Issue voucher</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

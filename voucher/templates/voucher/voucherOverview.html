@@ -1,0 +1,102 @@
+{% extends 'manager/mindex.html' %}
+{% load static %}
+
+{% block content %}
+<!--breadcrumb-->
+<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-5">
+    <div class="breadcrumb-title pe-3">Voucher</div>
+    <div class="ps-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 p-0">
+                <li class="breadcrumb-item"><a href="{% url 'manager-home' %}"><i class="bx bx-home-alt"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Overview</li>
+            </ol>
+        </nav>
+    </div>
+    
+</div>
+<!--end breadcrumb-->
+
+
+<div class="col-12">
+    <div class="card radius-10">
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                <h4 class="mb-0 font-weight-bold">Lastest voucher transaction</h4>     
+                <p class="ms-auto text-end"></p>Credit from customer account.<br> Debit from customer account.</p>     
+            </div>
+            <div class="d-flex my-4">
+                <h1 class="mb-0 font-weight-bold">
+                    {% if voucherHistory %}
+                        {{voucherHistory|length}}
+                    {% else %}
+                        0
+                    {% endif %}
+                </h1>
+                <p class="mb-0 ml-3 font-14 align-self-end text-secondary">&nbsp; today transactions</p>
+                <div class="ms-auto">
+                    <i class='bx bxs-checkbox me-2 font-24 text-primary'></i><span>Credit</span>
+                    <i class='bx bxs-checkbox me-2 font-24 text-danger'></i><span>Debit</span>
+                </div>
+            </div>
+            
+            <hr class="hr">
+
+            {% if voucherHistory %}
+                <div class="table-responsive mt-4">
+                    <table class="table mb-0">
+                        <tbody>
+                        
+                            {% for vh in voucherHistory %}
+                                <tr>
+                                    <td class="px-0">
+                                        <div class="d-flex align-items-center">
+                                            <div>
+                                                {% if vh.type == "CREDIT" %}
+                                                    <i class='bx bxs-checkbox me-2 font-24 text-info'></i>
+                                                {% else %}
+                                                    <i class='bx bxs-checkbox me-2 font-24 text-danger'></i>
+                                                {%endif%}
+                                            </div>
+                                            <div>{{vh.voucher.voucher_name}} | {{vh.voucher.user.first_name}} {{vh.voucher.user.last_name}} | Qty: {{vh.voucher_amount}}</div>
+                                        </div>
+                                    </td>
+                                    <td>Type: {{vh.type}} | Each time: {{ vh.voucher.eachtime}}</td>
+                                    <td>Date: {{vh.created_at|date:"Y d, m"}}</td>
+                                </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+
+            <hr class="hr">
+
+            <div class="pagination mt-3">
+                <span class="step-links">
+                    {% if voucherHistory.has_previous %}
+                        <a class="btn btn-sm btn-primary" href="?page=1">&laquo; first</a>
+                        <a class="btn btn-sm btn-primary" href="?page={{ voucherHistory.previous_page_number }}">previous</a>
+                    {% endif %}
+            
+                    <span class="current">
+                        Page {{ voucherHistory.number }} of {{ voucherHistory.paginator.num_pages }}.
+                    </span>
+            
+                    {% if voucherHistory.has_next %}
+                        <a class="btn btn-sm btn-primary" href="?page={{ voucherHistory.next_page_number }}">next</a>
+                        <a class="btn btn-sm btn-primary" href="?page={{ voucherHistory.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+
+        </div>
+    </div>
+</div>    
+<!--end row-->
+
+{% endblock %}
+
+

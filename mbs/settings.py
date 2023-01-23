@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,12 +32,27 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "verify_email.apps.VerifyEmailConfig",
+    'base.apps.BaseConfig',
+    'appointment.apps.AppointmentConfig',
+    'crispy_forms',
+    'crispy_bootstrap5',
+    'manager.apps.ManagerConfig',
+    'notification.apps.NotificationConfig',
+    'credit.apps.CreditConfig',
+    'pos.apps.PosConfig',
+    'feedback.apps.FeedbackConfig',
+    'voucher.apps.VoucherConfig',
+    'employee.apps.EmployeeConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'jsignature',
+    "bootstrap_datepicker_plus",
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -75,8 +91,12 @@ WSGI_APPLICATION = 'mbs.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mbs',
+        'USER': 'root',
+        'PASSWORD': 'password',
+        'HOST':'localhost',
+        'PORT':'3306',
     }
 }
 
@@ -121,3 +141,48 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#AUTHENTICATE USER
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+AUTHENTICATION_BACKENDS = ['base.backends.EmailBackend']
+AUTH_USER_MODEL = 'base.userInfo'
+
+#SMTP EMAIL SETTINGS
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 25
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'melonbeautysalonsg@gmail.com'
+EMAIL_HOST_PASSWORD = 'mposzztuucnytzlw'
+
+DEFAULT_FROM_EMAIL = 'melonbeautysalonsg@gmail.com'
+
+MAX_RETRIES = 5
+EXPIRE_AFTER = '1d'
+HTML_MESSAGE_TEMPLATE = "base/emailverification.html"
+VERIFICATION_SUCCESS_TEMPLATE = None
+LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'login'
+LOGIN_REDIRECT_URL = 'base-profile'
+
+#CRISPY FORMS SETTINGS
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+
+#silenced system check
+SILENCED_SYSTEM_CHECKS = ["auth.W004"]
+
+#MEDIA
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+
+#Jsignature
+JSIGNATURE_WIDTH = 900
+JSIGNATURE_HEIGHT = 400
+JSIGNATURE_JQUERY = 'admin'

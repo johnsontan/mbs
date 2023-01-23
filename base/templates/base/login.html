@@ -1,0 +1,22 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container pb-4">
+    <form action="" method="POST">
+        {% csrf_token%}
+        
+        {{form|crispy}}
+        
+        <div class="row col-lg-6 col-md-12 mx-auto">
+            <button type="submit" class="btn btn-dark mt-1">login</button>
+        </div>
+        <div class="row col-lg-6 col-md-12 mx-auto">
+            <a href="{% url 'password_reset' %}" class="btn btn-mute btn-sm">Forget password</a>
+            <a href="{% url 'request-new-link-from-email' %}" class="btn btn-mute btn-sm">Resend email verification</a>
+
+        </div>
+    </form>
+</div>
+{% endblock %}

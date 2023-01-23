@@ -1,0 +1,367 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Melon Beauty Salon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Responsive Minimal Salon Website Template">
+    <meta name="keywords" content="barber,beauty,clean,gallery,healthcare,make-up,mashup,massage,menucard,portfolio,products,salon,sauna,skin,spa">
+    <meta name="author" content="">
+
+
+    <!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<![endif]-->
+
+
+    <!-- CSS Files
+    ================================================== -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="{% static 'base/css/jpreloader.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'base/css/animate.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'base/css/plugin.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'base/css/owl.carousel.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'base/css/owl.theme.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'base/css/owl.transitions.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'base/css/magnific-popup.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'base/css/style.css'%}" type="text/css">
+
+    <!-- custom background -->
+    <link rel="stylesheet" href="{% static 'base/css/bg.css'%}" type="text/css">
+
+    <!-- color scheme -->
+    <link rel="stylesheet" href="{% static 'base/css/color.css'%}" type="text/css" id="colors">
+
+    <!-- load fonts -->
+    <link rel="stylesheet" href="{% static 'base/fonts/font-awesome/css/font-awesome.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'base/fonts/elegant_font/HTML_CSS/style.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'base/fonts/et-line-font/style.css'%}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <!-- revolution slider -->
+    <link rel="stylesheet" href="{% static 'base/rs-plugin/css/settings.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'base/css/rev-settings.css'%}" type="text/css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                type: 'POST',
+                url: '/getnews/',
+                data:{                   
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                },
+                success: function(data){  
+                    var ids = data[0]
+                    var titles = data[1]                  
+                    $.each(ids, function(idx, item){
+                        var form = document.createElement("form");
+                        form.setAttribute("method", "POST");
+                        form.setAttribute("action", "{% url 'base-innerNews' %}")
+                        form.setAttribute("class", "mt-2")
+
+                        var csrftoken = document.createElement("input");
+                        csrftoken.setAttribute("type", "hidden");
+                        csrftoken.setAttribute("name", 'csrfmiddlewaretoken');
+                        csrftoken.setAttribute("value", '{{ csrf_token }}');
+
+                        var newsid = document.createElement("input")
+                        newsid.setAttribute("type", "text")
+                        newsid.setAttribute("value", item)
+                        newsid.setAttribute("id", "newsid")
+                        newsid.setAttribute("name", "newsid")
+                        newsid.setAttribute("hidden", "true")
+                        newsid.setAttribute("readonly", "true")
+
+                        var sbutton = document.createElement("button")
+                        sbutton.setAttribute("type", "submit")
+                        sbutton.setAttribute("class", "btn btn-sm btn-outline-info")
+                        sbutton.textContent = titles[idx]
+
+                        form.appendChild(csrftoken)
+                        form.appendChild(newsid)
+                        form.appendChild(sbutton)
+                        $('#newsl').append(form)
+                    });
+                },
+            })
+        });
+    
+    </script>
+    {% block header %} {% endblock %}
+</head>
+
+<body id="homepage">
+
+    <div id="wrapper">
+
+        <!-- header begin -->
+        <header class="header_center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- logo begin -->
+                        <div id="logo">
+                            <a href="index.html">
+                                <img class="logo logo_dark_bg" src="{% static 'base/images/logo.png' %}" alt="">
+                                <img class="logo logo_light_bg" src="{% static 'base/images/logo.png' %}" alt="">
+                            </a>
+                        </div>
+                        <!-- logo close -->
+
+                        <!-- small button begin -->
+                        <span id="menu-btn"></span>
+                        <!-- small button close -->
+
+                        <!-- mainmenu begin -->
+                        <nav>
+                            <ul id="mainmenu">
+                                <li class="text-muted"><a href="{% url 'base-home' %}" >Home</a>                                    
+                                </li>
+                                <li><a href="#">Services</a>
+                                    <ul>                                        
+                                        <li><a href="{% url 'base-service-hair' %}">Hair</a></li>
+                                        <li><a href="{% url 'base-service-beauty' %}">Beauty</a></li>                                        
+                                    </ul>
+                                </li>
+                                <li><a href="{%url 'appointment-userNewAppointment'%}">Book</a></li>      
+                                <li><a href="{% url 'base-aboutus' %}">About us</a></li>                                
+                                <li><a href="#">Shop</a></li>
+                                <li><a href="{%url 'base-newsOverview'%}">News</a></li>
+                                <li><a href="{% url 'base-contact' %}">Contact</a></li>
+                                {% if user.is_authenticated %}
+                                    <li><a href="#">Account</a>
+                                        <ul>                                        
+                                            <li><a href="{% url 'base-profile' %}">Profile</a></li>
+                                            {% if user.role == 4 %}
+                                            <li><a href="{% url 'manager-home' %}">Admin panel</a></li>
+                                            {% endif %}
+                                            <li><a href="{% url 'logout' %}">Logout</a></li>                                        
+                                        </ul>
+                                    </li>
+                                {% else %}
+                                    <li><a href="#">Login/Register</a>
+                                        <ul>                                        
+                                            <li><a href="{% url 'login' %}">Login</a></li>
+                                            <li><a href="{% url 'base-register' %}">Register</a></li>                                        
+                                        </ul>
+                                    </li>
+                                {% endif %}                                
+                                
+                            </ul>                            
+                        </nav>
+                        <div class="clearfix"></div>                        
+                    </div>
+                    <!-- mainmenu close -->
+
+                </div>
+            </div>
+        </header>
+        <!-- header close -->
+
+        <!-- subheader -->
+        <section id="subheader" class="subh-center" data-stellar-background-ratio=".2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        {% if subtitle %}
+                            <h1>{{subtitle}}</h1>
+                        {% else %}
+                            <h1>...</h1>  
+                        {% endif %}
+                       
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- subheader close -->
+
+
+
+
+
+        <!-- content begin -->
+        <div id="content" class="no-bottom">            
+            
+            <div class="container">                
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            {{message}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="container-fluid mb-5">
+                {% block content %}{% endblock %}
+            </div>
+
+            <!-- section begin -->
+            <section id="section-hero-2" aria-label="section-hero-2" data-stellar-background-ratio=".2" data-bgcolor="#333" class="text-light">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 mt60 mb100 text-center">
+                            <h4 class="mb30">Discover Our Services.</h4>
+                            <div class="small-border"></div>
+                            <div class="type-wrap font40 text-center">
+                                We do
+                            <div class="typed-strings">
+                                <p>Hair Care</p>
+                                <p>Facial</p>
+                                <p>Hair Color</p>
+                                <p>Hair Rebonding</p>
+                                <p>Eye Care</p>
+                                <p>Hair perm</p>
+                            </div>
+                                <span class="typed"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- section close -->
+
+            <!-- section begin -->
+            <section id="cta" aria-label="cta" class="call-to-action bg-color-2 wow fadeInLeftBig text-light">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9 mt10">
+                            <h3><a href="https://wa.link/afgd0j"><img src="{% static 'base/images/ui/whatsapp.png'%}" width="30" alt=""></a>&nbsp;&nbsp;&nbsp;&nbsp;Contact us now on Whatsapp and get special offers!</h3>
+                        </div>
+
+                        <div class="col-md-3 text-right">
+                            <a href="https://wa.link/afgd0j" class="btn btn-line-white btn-big">Whatsapp</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- section close -->
+
+        </div>
+
+        <!-- footer begin -->
+        <footer>
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="widget widget_recent_post">
+                            <h3>Latest News</h3>
+                            <ul id="newsl">
+                                
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="widget">
+                            <h3>We're Open</h3>
+                            <div class="box-border double">
+                                <ul class="list-border-bottom">
+                                    <li>
+                                        <span class="pull-left">Monday - Friday</span>
+                                        <span class="pull-right text-light">10 am to 9 pm</span>
+                                        <div class="clearfix"></div>
+                                    </li>
+                                    <li>
+                                        <span class="pull-left">Saturday &amp; Sunday</span>
+                                        <span class="pull-right text-light">9 am to 9 pm</span>
+                                        <div class="clearfix"></div>
+                                    </li>
+                                    <li>
+                                        <span class="pull-left">Public Holiday</span>
+                                        <span class="pull-right text-light">10 am to 9 pm</span>
+                                        <div class="clearfix"></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="widget widget-address">
+                            <h3>Contact Us</h3>
+
+                            <address>
+                                <span>988 Upper Serangoon Rd, #01-24 Star of Kovan, Singapore 534733</span>
+                                <span><strong>Whatsapp:</strong>9660 6383</span>                                
+                                <span><strong>Email:</strong><a href="mailto:melonbeauty.hair@gmail.com">melonbeauty.hair@gmail.com</a></span>
+                                <span><strong>Web:</strong><a href="#">http://melonbeautysalonsg.com</a></span>
+                            </address>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="subfooter">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            &copy; Copyright 2022 - Melon Beauty Salon                  
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <div class="social-icons">
+                                <a href="https://www.facebook.com/melonbeautysalonoffical/"><i class="fab fa-facebook fa-lg"></i></a>
+                                <a href="https://www.youtube.com/@melonbeautysalon6522"><i class="fab fa-youtube fa-lg"></i></a>
+                                <a href="https://www.instagram.com/melonbeautysalon/"><i class="fab fa-instagram fa-lg"></i></a>
+                                <a href="#"><i class="fab fa-tiktok fa-lg"></i></a>                             
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+        <!-- footer close -->
+    </div>
+
+    
+
+    <!-- Javascript Files
+    ================================================== -->
+    <script src="{% static 'base/js/jquery.min.js' %}"></script>
+    <script src="{% static 'base/js/jpreLoader.js' %}"></script>
+    <script src="{% static 'base/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'base/js/jquery.isotope.min.js' %}"></script>
+    <script src="{% static 'base/js/easing.js' %}"></script>
+    <script src="{% static 'base/js/jquery.flexslider-min.js' %}"></script>
+    <script src="{% static 'base/js/jquery.scrollto.js' %}"></script>
+    <script src="{% static 'base/js/owl.carousel.js' %}"></script>
+    <script src="{% static 'base/js/jquery.countTo.js' %}"></script>
+    <script src="{% static 'base/js/classie.js' %}"></script>
+    <script src="{% static 'base/js/video.resize.js' %}"></script>
+    <script src="{% static 'base/js/validation.js' %}"></script>
+    <script src="{% static 'base/js/wow.min.js' %}"></script>
+    <script src="{% static 'base/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'base/js/enquire.min.js' %}"></script>
+    <script src="{% static 'base/js/jquery.stellar.min.js' %}"></script>
+    <script>
+        var logo_dir_1 = "{% static 'base/images/logo.png' %}"
+        var logo_dir_2 = "{% static 'base/images/logo_light.png' %}"
+    </script>
+    
+    <script src="{% static 'base/js/designesia.js' %}"></script>
+
+    <!-- SLIDER REVOLUTION SCRIPTS  -->
+    <script type="text/javascript" src="{% static 'base/rs-plugin/js/jquery.themepunch.plugins.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'base/rs-plugin/js/jquery.themepunch.revolution.min.js' %}"></script>
+
+    <!-- current page only scripts -->
+    <script src="{% static 'base/js/typed.js' %}"></script>
+    <script src="{% static 'base/js/typed-custom.js' %}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+    
+
+
+</body>
+</html>

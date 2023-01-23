@@ -1,0 +1,84 @@
+{% extends 'manager/mindex.html' %} {% load static %} {% block content %}
+<!--breadcrumb-->
+<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-5">
+  <div class="breadcrumb-title pe-3">Notification</div>
+  <div class="ps-3">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0 p-0">
+        <li class="breadcrumb-item">
+          <a href="{% url 'manager-home' %}"><i class="bx bx-home-alt"></i></a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Overview</li>
+      </ol>
+    </nav>
+  </div>
+</div>
+<!--end breadcrumb-->
+<div class="row">
+    <div class="col-3">
+        <a href="{% url 'notification-send' %}" class="btn btn-primary">Send new notification</a>
+    </div>
+    <div class="col">
+        <div class="card radius-10 overflow-hidden">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <p class="mb-0">Overall notification sent</p>
+                        <h5 class="mb-0">
+                          {% if notificationCount %}
+                            {{notificationCount}}
+                          {% else %}
+                            NIL
+                          {% endif %}
+                        </h5>
+                    </div>
+                    <div class="ms-auto">	<i class='bx bx-chat font-30'></i>
+                    </div>
+                </div>
+            </div>
+            <div class="" id="w-chart8"></div>
+        </div>
+    </div>
+</div>
+
+<div class="accordion" id="accordionExample">
+
+  <div class="mb-3"><p class="fw-bold">Latest notification sent</p></div>
+  {% for ee in allNotification %}
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne{{ee.id}}">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{ee.id}}" aria-expanded="false" aria-controls="collapseOne{{ee.id}}">
+          Subject: {{ee.subject}}
+        </button>
+      </h2>
+      <div id="collapseOne{{ee.id}}" class="accordion-collapse collapse show" aria-labelledby="headingOne{{ee.id}}" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <p>{{ee.desc}}</p>
+          <span>Sent to:</span>
+          <p>{{ee.users}}</p>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+   
+</div>
+
+<div class="pagination mt-3">
+  <span class="step-links">
+      {% if allNotification.has_previous %}
+          <a class="btn btn-sm btn-primary" href="?page=1">&laquo; first</a>
+          <a class="btn btn-sm btn-primary" href="?page={{ allNotification.previous_page_number }}">previous</a>
+      {% endif %}
+
+      <span class="current">
+          Page {{ allNotification.number }} of {{ allNotification.paginator.num_pages }}.
+      </span>
+
+      {% if allNotification.has_next %}
+          <a class="btn btn-sm btn-primary" href="?page={{ allNotification.next_page_number }}">next</a>
+          <a class="btn btn-sm btn-primary" href="?page={{ allNotification.paginator.num_pages }}">last &raquo;</a>
+      {% endif %}
+  </span>
+</div>
+
+{% endblock %}

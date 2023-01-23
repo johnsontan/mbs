@@ -1,0 +1,161 @@
+{% extends "manager/mbase.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row">
+
+                    
+    <div class="col-12 col-lg-8">
+        <div class="card radius-10">
+            <div class="card-header border-bottom-0 bg-transparent">
+                <div class="d-lg-flex align-items-center">
+                    <div>
+                        <h6 class="font-weight-bold mb-2 mb-lg-0">Last sales transaction</h6>
+                    </div>
+                    <!--intput-->
+                </div>
+            </div>
+            <div class="card-body">
+                <!--input-->
+                {% if latestSales %}
+                    <table class="table align-middle mb-0 bg-white">
+                        <thead class="bg-light">
+                            <tr>
+                            <th>Customer</th>
+                            <th>Employee</th>
+                            <th>Grand total</th>
+                            <th>Created at</th>
+                            <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            {%for ls in latestSales%}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                        <img
+                                            src="{{ls.customer.profile_pic.image.url}}"
+                                            class="rounded-circle"
+                                            alt=""
+                                            style="width: 45px; height: 45px"
+                                            />
+                                        <div class="ms-3">
+                                            <p class="fw-bold mb-1">{{ls.customer.first_name}} {{ls.customer.last_name}}</p>
+                                            <p class="text-muted mb-0">{{ls.customer.email}}</p>
+                                        </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="fw-normal mb-1">{{ls.employee.first_name}} {{ls.employee.last_name}}</p>
+                                        <p class="text-muted mb-0">{{ls.employee.phone}}</p>
+                                    </td>
+                                    <td>
+                                        <p class="fw-normal mb-1">{{ls.grand_total}}</p>
+                                    </td>                                    
+                                    <td>
+                                        <p class="fw-normal"></p>{{ls.created_at|date:"F d, Y / H:m"}}HRS</p>
+                                    </td>
+                                    <td>{{ls.remarks}}</td>
+                                    
+                                </tr>
+                            {%endfor%}
+                        </tbody>
+                    </table>
+                {%endif%}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-12 col-lg-4">
+        <div class="card radius-10 bg-gradient-burning">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <img src="{% static 'manager/assets/images/icons/appointment-book.png' %}" width="45" alt="" />
+                    <div class="ms-auto text-end">
+                        <p class="mb-0 text-white"><i class='bx bxs-arrow-from-bottom'></i> 0.00%</p>
+                        <p class="mb-0 text-white">Since Last Month [in-complete]</p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mt-3">
+                    <div class="flex-grow-1">
+                        <p class="mb-1 text-white">Upcoming appointments</p>
+                        <h4 class="mb-0 text-white font-weight-bold">
+                            {% if upcomingcount%}
+                                {{upcomingcount|length}}
+                            {%else%}
+                                0
+                            {%endif%}
+                        </h4>
+                    </div>
+                    <div id="chart2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="card radius-10 bg-gradient-blues">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <i class='bx bx-money-withdraw'></i>
+                    <img src="{% static 'manager/assets/images/icons/profits.png' %}" width="45" alt="" />
+                    <div class="ms-auto text-end">
+                        <p class="mb-0 text-white"><i class='bx bxs-arrow-from-bottom'></i> 0.00%</p>
+                        <p class="mb-0 text-white">Since Last Month[in-complete]</p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center mt-3">
+                    <div class="flex-grow-1">
+                        <p class="mb-1 text-white">Today current sales</p>
+                        <h4 class="mb-0 text-white font-weight-bold">$
+                            {% if totalCurrentSales%}
+                                {{totalCurrentSales}}
+                            {%else%}
+                                0.00
+                            {%endif%}
+                        </h4>
+                    </div>
+                    <div id="chart3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end row-->
+
+<div class="card radius-10">
+    <div class="card-header bg-transparent">
+        <h6 class="mb-0 font-weight-bold">Appointments</h6>
+    </div>
+    <div class="table-responsive p-3">
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th>Appointment ID#</th>
+                    <th>Customer</th>
+                    <th>Employee</th>
+                    <th>Services</th>
+                    <th>Date & Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%if upcomingTable %}
+                    {% for ut in upcomingTable%}
+                        <tr>
+                            <td>{{ut.0}}</td>
+                            <td class="text-start">{{ut.1}}</td>
+                            <td>{{ut.2}}</td>
+                            <td>{{ut.3}}</td>
+                            <td>{{ut.4}}</td>
+                            <td><span class="badge badge-pill bg-success">{{ut.5}}</span></td>
+                        </tr>    
+                    {%endfor%}
+                {%endif%}
+                              
+            </tbody>
+        </table>
+    </div>
+</div>
+    
+{% endblock %}

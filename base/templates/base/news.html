@@ -1,0 +1,97 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}  
+
+{% block content %}
+<div id="content">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-8">
+                <ul class="blog-list">
+                    {% if allNews %}
+                        {% for an in allNews %}
+                            <li>
+                                <div class="post-content">
+
+
+                                    <div class="date-box">
+                                        <div class="day">{{an.created_at|date:"d"}}</div>
+                                        <div class="month">{{an.created_at|date:"F"}}</div>
+                                    </div>
+
+                                    <div class="post-text">
+                                        <h2>{{an.news_title}}</h2>
+                                        
+                                        <form action="{% url 'base-innerNews' %}" method="POST">
+                                            {%csrf_token%}
+                                            <input type="text" value="{{an.id}}" name="newsid" id="newsid" readonly hidden> 
+                                            <button type="submit" class="btn-line">Read more..</button>
+                                        </form>
+                                    </div>
+
+
+                                </div>
+                            </li>
+                        {%endfor%}
+                    {%endif%}
+
+
+                </ul>
+
+
+                <!--Pagination-->
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination round-pagination">
+                        {% if allNews.has_previous %}
+                            <li class="page-item"><a class="page-link" href="?page=1">First</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="?page={{ allNews.previous_page_number }}">previous</a>
+                            </li>
+                        {%endif%}
+
+                        <li class="page-item active"><a class="page-link" href="javascript:;">{{ allNews.number }}</a>
+                        </li>
+
+                        {% if allNews.has_next %}
+                            <li class="page-item"><a class="page-link" href="?page={{ allNews.next_page_number }}">next</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="?page={{ allNews.paginator.num_pages }}">Last</a>
+                            </li>
+                        {%endif%}
+                    </ul>
+                </nav>
+
+            </div>
+
+
+
+
+            <div id="sidebar" class="col-md-4">
+                <div class="widget widget-post">
+                    <h4>Recent News</h4>
+                    <ul>
+                        {% if allNews %}
+                            {% for an in allNews %}
+                                <li>
+                                    <form action="{% url 'base-innerNews' %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="text" value="{{an.id}}" name="newsid" id="newsid" readonly hidden> 
+                                        <button type="submit" class="btn btn-sm btn-info">{{an.news_title}}</button>
+                                    </form>
+                                    <span class="date">{{an.created_at|date:"F d, Y"}}</span>
+                                
+                                </li>
+                            {%endfor%}
+                        {%endif%}
+
+                    </ul>
+                </div>
+
+                
+
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

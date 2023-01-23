@@ -1,0 +1,360 @@
+{% extends 'manager/mindex.html' %} 
+{% load static %} 
+
+{% block head %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+    var max_fields = 10;
+    var wrapper = $("#serviceInputName");
+    var wrapper2 = $("#serviceInputPrice");
+    var wrapper3 = $('#serviceInputDepartment');
+    var add_button = $("#addmore");
+
+    var x = 1;
+    $(add_button).click(function(e) {
+        e.preventDefault();
+        if (x < max_fields) {
+            x++;
+            $(wrapper).append('<div><input type="text" class="form-control mt-2" id="serviceName[]" name="serviceName[]"/><a href="#" class="delete">Delete</a></div>'); //add input box
+            $(wrapper2).append('<div><input type="number" step="0.01" class="form-control mt-2" id="servicePrice[]" name="servicePrice[]"/><a href="#" class="delete">Delete</a></div>'); //add input box
+            $(wrapper3).append('<div><select name="serviceDepartment[]" id="serviceDepartment[]" class="form-control"><option value="HAIR">HAIR</option><option value="HAIR PRODUCT">HAIR PRODUCT</option><option value="BEAUTY">BEAUTY</option><option value="BEAUTY PRODUCT">BEAUTY PRODUCT</option></select><a href="#" class="delete">Delete</a></div> ')
+        } else {
+            alert('You Reached the limits')
+        }
+    });
+
+    $(wrapper).on("click", ".delete", function(e) {
+        e.preventDefault();
+        $(this).parent('div').remove();
+        x--;
+    })
+    $(wrapper2).on("click", ".delete", function(e) {
+        e.preventDefault();
+        $(this).parent('div').remove();
+        x--;
+    })
+    $(wrapper3).on("click", ".delete", function(e) {
+        e.preventDefault();
+        $(this).parent('div').remove();
+        x--;
+    })
+
+    $("#customerid").keyup(function(){
+        $.ajax({
+            type: 'POST',
+            url: '/mmanager/appointment/new/appointment/checkphone',
+            data:{
+                customerphone: $("#customerid").val(),                    
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function(data){
+                $('#customerOutput').html(data);
+            }
+        })
+    });
+    
+   
+});
+
+
+
+    
+
+
+</script>
+{% endblock %}
+
+
+{% block content %}
+<!--breadcrumb-->
+<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-5">
+    <div class="breadcrumb-title pe-3">POS</div>
+    <div class="ps-3">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0 p-0">
+          <li class="breadcrumb-item">
+            <a href="{% url 'manager-home' %}"><i class="bx bx-home-alt"></i></a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">SALES</li>
+        </ol>
+      </nav>
+    </div>
+</div>
+  <!--end breadcrumb-->
+
+<div class="row">
+    <div class="col">
+        <div class="card radius-10">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <p class="mb-0 text-secondary">Today revenue</p>
+                        <h4 class="my-1">$
+                            {% if todaytotal %}
+                                {{todaytotal}}
+                            {% else%}
+                                0.0
+                            {%endif%}
+
+                        </h4>
+                        <p class="mb-0 font-13 text-success"><i class="bx bxs-up-arrow align-middle"></i>$0 from last week</p>
+                    </div>
+                    <div class="widgets-icons bg-light-success text-success ms-auto"><i class="bx bxs-wallet"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card radius-10">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div>
+                        <p class="mb-0 text-secondary">Today total Transactions</p>
+                        <h4 class="my-1">
+                            {% if alltransaction %}
+                                {{alltransaction|length}}
+                            {%else%}
+                                0
+                            {%endif%}
+                        </h4>
+                        <p class="mb-0 font-13 text-success"><i class='bx bxs-up-arrow align-middle'></i>$0 from last week</p>
+                    </div>
+                    <div class="widgets-icons bg-light-info text-info ms-auto"><i class='bx bxs-group'></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--START row-->
+<div class="row row-cols-1 row-cols-md-3 row-cols-xl-6">
+    <div class="col">
+        <div class="card radius-10">
+            <div class="card-body">
+                <div class="text-center">
+                    <div class="widgets-icons rounded-circle mx-auto bg-light-primary text-primary mb-3">
+                        <img src="{% static 'pos/icons/cash-icon.png' %}" alt="" class="img-thumbnail">
+                    </div>
+                    <h4 class="my-1">
+                        {% if cash %}
+                            {{cash}}
+                        {% else %}
+                            0
+                        {%endif%}
+                    </h4>
+                    <p class="mb-0 text-secondary">CASH</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card radius-10">
+            <div class="card-body">
+                <div class="text-center">
+                    <div class="widgets-icons rounded-circle mx-auto bg-light-danger text-danger mb-3">
+                        <img src="{% static 'pos/icons/storecredit-icon.png' %}" alt="" class="img-thumbnail">
+                    </div>
+                    <h4 class="my-1">
+                        {% if credit %}
+                            {{credit}}
+                        {% else %}
+                            0
+                        {%endif%}
+                    </h4>
+                    <p class="mb-0 text-secondary">IN-STORE CREDIT</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card radius-10">
+            <div class="card-body">
+                <div class="text-center">
+                    <div class="widgets-icons rounded-circle mx-auto bg-light-info text-info mb-3">
+                        <img src="{% static 'pos/icons/creditcard-icon.png' %}" alt="" class="img-thumbnail">
+                    </div>
+                    <h4 class="my-1">
+                        {% if cards %}
+                            {{cards}}
+                        {% else %}
+                            0
+                        {%endif%}
+                    </h4>
+                    <p class="mb-0 text-secondary">CARDS</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card radius-10">
+            <div class="card-body">
+                <div class="text-center">
+                    <div class="widgets-icons rounded-circle mx-auto bg-light-success text-success mb-3">
+                        <img src="{% static 'pos/icons/nets-icon.png' %}" alt="" class="img-thumbnail">
+                    </div>
+                    <h4 class="my-1">
+                        {% if nets %}
+                            {{nets}}
+                        {% else %}
+                            0
+                        {%endif%}
+                    </h4>
+                    <p class="mb-0 text-secondary">NETS</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card radius-10">
+            <div class="card-body">
+                <div class="text-center">
+                    <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3">
+                        <img src="{% static 'pos/icons/grab-icon.png' %}" alt="" class="img-thumbnail">
+                    </div>
+                    <h4 class="my-1">
+                        {% if grab %}
+                            {{grab}}
+                        {% else %}
+                            0
+                        {%endif%}
+                    </h4>
+                    <p class="mb-0 text-secondary">GRAB</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card radius-10">
+            <div class="card-body">
+                <div class="text-center">
+                    <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3">
+                        <img src="{% static 'pos/icons/others-icon.png' %}" alt="" class="img-thumbnail">
+                    </div>
+                    <h4 class="my-1">
+                        {% if others %}
+                            {{others}}
+                        {% else %}
+                            0
+                        {%endif%}
+                    </h4>
+                    <p class="mb-0 text-secondary">OTHERS</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--end row-->
+
+<div class="row mt-3">
+    <h4 class="text-center mb-2">New transaction</h4>
+    <form action="{% url 'pos-tranasct' %}" method="POST">
+        {% csrf_token %}
+        <!-- 2 column grid layout with text inputs for the first and last names -->
+        <div class="row mb-4">
+            <div class="col">
+                <div class="form-outline">
+                    <input type="text" id="customerid" name="customerid" class="form-control" placeholder="Customer phone number" />
+                    <label class="form-label" for="customerid">Customer&nbsp;&nbsp;</label><span id="customerOutput"></span>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline">
+                    <select id="employeeid" class="form-control" name="employeeid">
+                        {% if employeeAll %}
+                            {% for ea in employeeAll %}
+                                <option value="{{ea.id}}">{{ea.first_name}} {{ea.last_name}}</option>
+                            {%endfor%}
+                        {% endif %}
+                    </select>
+                    <label class="form-label" for="employeeid">Employee&nbsp;&nbsp;</label>
+                </div>
+            </div>
+        </div>
+        
+        <button class="btn btn-sm btn-primary" id="addmore">Add more</button>
+        <button class="btn btn-sm btn-primary" id="calculateTotal" onclick="caltotal()">Calculate total</button>
+        <div class="row mb-4 mt-3" id="serviceInput" name="serviceInput">
+            <div class="col">
+                <div class="form-outline" id="serviceInputName" name="serviceInputName">
+                    <label class="form-label" for="serviceName[]">Service name</label>
+                    <input type="text" id="serviceName[]" name="serviceName[]" class="form-control" required/>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline" id="serviceInputPrice" name="serviceInputPrice">
+                    <label class="form-label" for="servicePrice[]">Service price&nbsp;&nbsp;</label>
+                    <input type="number" step="0.01" id="servicePrice[]" name="servicePrice[]" class="form-control" required />
+
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline" id="serviceInputDepartment" name="serviceInputDepartment">
+                    <label class="form-label" for="serviceDepartment[]">Service department&nbsp;&nbsp;</label>
+                    <select name="serviceDepartment[]" id="serviceDepartment[]" class="form-control">
+                        <option value="HAIR">HAIR</option>
+                        <option value="HAIR PRODUCT">HAIR PRODUCT</option>
+                        <option value="BEAUTY">BEAUTY</option>
+                        <option value="BEAUTY PRODUCT">BEAUTY PRODUCT</option>
+                    </select>                    
+
+                </div>
+            </div>
+        </div>
+
+        <!-- GRAND TOTAL -->
+        <div class="form-outline mb-4">
+            <input type="number" step="0.01" id="grandtotal" name="grandtotal" class="form-control" readonly />
+            <label class="form-label" for="grandtotal">Grand Total</label>
+        </div>
+
+        <!-- TRANSACTION TYPE -->
+        <div class="form-outline mb-4">
+            <label class="form-label" for="ttype">Transaction type</label>
+            <select name="ttype" class="form-control" id="ttype">
+                <option value="CASH">Cash</option>
+                <option value="CREDIT">Credit</option>
+                <option value="CARDS">Cards</option>
+                <option value="NETS">NETS</option>
+                <option value="GRAB">Grab</option>
+                <option value="OTHERS">Others</option>
+            </select>
+        </div>
+        
+        <!-- Message input -->
+        <div class="form-outline mb-4">
+            <textarea class="form-control" id="remarks" name="remarks" rows="4"></textarea>
+            <label class="form-label" for="remarks">Remarks</label>
+        </div>
+        
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Transact</button>
+        </form>
+</div>
+
+<script>
+    function caltotal(){
+        const pricing = document.getElementsByName("servicePrice[]");
+        var outputPrice = 0.00
+        pricing.forEach(p =>{
+            outputPrice += parseFloat(parseFloat(p.value).toFixed(2))
+            
+        })
+        document.getElementById("grandtotal").value = parseFloat(parseFloat(outputPrice).toFixed(2))
+    }
+    document.getElementById("calculateTotal").addEventListener("click", function(event){
+        event.preventDefault()
+    });
+</script>
+
+{% endblock %}

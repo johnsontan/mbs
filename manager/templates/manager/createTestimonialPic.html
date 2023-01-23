@@ -1,0 +1,32 @@
+{% extends 'manager/mindex.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<!--breadcrumb-->
+<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-5">
+    <div class="breadcrumb-title pe-3">Contact</div>
+    <div class="ps-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 p-0">
+                <li class="breadcrumb-item"><a href="{% url 'manager-home' %}"><i class="bx bx-home-alt"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Overview</li>
+            </ol>
+        </nav>
+    </div>
+    
+</div>
+<!--end breadcrumb-->
+
+<div>
+    <form action="" method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+        <label for="">Image resolution: 1200 by 900</label>
+        {{form|crispy}}
+        <button type="submit" class="btn btn-primary col-12">Create testimonal</button>
+    </form>
+
+</div>
+
+{%endblock%}
