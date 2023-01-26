@@ -98,70 +98,78 @@
 <body id="homepage">
 
     <div id="wrapper">
+        <!-- Navbar -->
+        <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="{% url 'base-home' %}"><img class="logo logo_dark_bg" src="{% static 'base/images/logo.png' %}" alt=""></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'base-home' %}">Home</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Services
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                      <li><a class="nav-link" href="{% url 'base-service-hair' %}">Hair</a></li>
+                      <li><a class="nav-link" href="{% url 'base-service-beauty' %}">Beauty</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{%url 'appointment-userNewAppointment'%}">Book</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'base-aboutus' %}">About us</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Shop</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'base-newsOverview' %}">News</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'base-contact' %}">Contact</a>
+                  </li>
 
-        <!-- header begin -->
-        <header class="header_center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- logo begin -->
-                        <div id="logo">
-                            <a href="{% url 'base-home' %}">
-                                <img class="logo logo_dark_bg" src="{% static 'base/images/logo.png' %}" alt="">
-                                <img class="logo logo_light_bg" src="{% static 'base/images/logo.png' %}" alt="">
-                            </a>
-                        </div>
-                        <!-- logo close -->
+                  {% if user.is_authenticated %}
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Account
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="nav-link" href="{% url 'base-profile' %}">Profile</a></li>
+                        {% if user.role == 4 %}
+                            <li><a class="nav-link" href="{% url 'manager-home' %}">Admin panel</a></li>
+                        {%endif%}
+                        <li><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                    </ul>
+                  </li>
+                  {% else %}
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Login/Register
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="nav-link" href="{% url 'login' %}">Login</a></li>                        
+                        <li><a class="nav-link" href="{% url 'base-register' %}">Register</a></li>
+                    </ul>
+                  </li>
 
-                        <!-- small button begin -->                 
-                        <!-- small button close -->
+                  {% endif %}
 
-                        <!-- mainmenu begin -->
-                        <nav>
-                            <ul id="mainmenu">
-                                <li class="text-muted"><a href="{% url 'base-home' %}" >Home</a>                                    
-                                </li>
-                                <li><a href="#">Services</a>
-                                    <ul>                                        
-                                        <li><a href="{% url 'base-service-hair' %}">Hair</a></li>
-                                        <li><a href="{% url 'base-service-beauty' %}">Beauty</a></li>                                        
-                                    </ul>
-                                </li>
-                                <li><a href="{%url 'appointment-userNewAppointment'%}">Book</a></li>      
-                                <li><a href="{% url 'base-aboutus' %}">About us</a></li>                                
-                                <li><a href="#">Shop</a></li>
-                                <li><a href="{% url 'base-newsOverview' %}">News</a></li>
-                                <li><a href="{% url 'base-contact' %}">Contact</a></li>
-                                {% if user.is_authenticated %}
-                                    <li><a href="#">Account</a>
-                                        <ul>                                        
-                                            <li><a href="{% url 'base-profile' %}">Profile</a></li>
-                                            {% if user.role == 4 %}
-                                            <li><a href="{% url 'manager-home' %}">Admin panel</a></li>
-                                            {% endif %}
-                                            <li><a href="{% url 'logout' %}">Logout</a></li>                                                                                                        
-                                        </ul>
-                                    </li>
-                                {% else %}
-                                    <li><a href="#">Login/Register</a>
-                                        <ul>                                        
-                                            <li><a href="{% url 'login' %}">Login</a></li>
-                                            <li><a href="{% url 'base-register' %}">Register</a></li>                                        
-                                        </ul>
-                                    </li>
-                                {% endif %}
-                                
-                            </ul>                            
-                        </nav>
-                        <div class="clearfix"></div>                        
-                    </div>
-                    <!-- mainmenu close -->
-
+                </ul>
+                <div class="pr-4">
+                    <a href="https://wa.link/afgd0j" class="btn btn-info btn-sm text-light">Whatsapp</a>
                 </div>
+              </div>
             </div>
-        </header>
-        <!-- header close -->
-
+          </nav>
+        <!-- Navbar -->
+    
         <!-- subheader -->
         <section id="subheader" class="subh-center" data-stellar-background-ratio=".2">
             <div class="container">
@@ -184,7 +192,7 @@
 
 
         <!-- content begin -->
-        <div id="content" class="no-bottom">            
+        <div class="no-bottom" id="content">            
             
             <div class="container">                
                 {% if messages %}
@@ -359,8 +367,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-
-    
+   <script>
+    $('nav li a').filter(function(){
+        return this.href === location.href;
+    }).addClass('active');
+   </script>
 
 
 </body>

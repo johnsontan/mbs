@@ -146,14 +146,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', e
 	header.header_center #logo{
 	display:none;
 	}
-	header.header_center{
-	}
+	
 	header.header_center .logo_pos img{
 	margin:-15px 40px 0 40px;
 	}
 	header.header_center #mainmenu{
 	padding-top:50px;
 	} 
+	
 	header.smaller img{
 	height:50px !important;
 	margin:10px 20px 0 20px !important;
@@ -5141,3 +5141,182 @@ float:none;
 	.nav-pills .nav-link {
     font-weight: 500;
 	}
+
+/*----------------------------------------*/
+/*  03. Header CSS
+/*----------------------------------------*/
+/*--
+/*  03.1 - Header Main CSS
+/*----------------------------------------*/
+.hea1 {
+	padding: 53px 0;
+	-webkit-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+  }
+  @media only screen and (max-width: 767px) {
+	.header {
+	  padding: 33px 0;
+	}
+  }
+  .hea1.sticky {
+	padding: 25px 0;
+	background-color: #111;
+  }
+  @media only screen and (max-width: 767px) {
+	.hea1.sticky {
+	  padding: 20px 0;
+	}
+  }
+  
+  .hea1-wrapper {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+		-ms-flex-align: center;
+			align-items: center;
+	-webkit-box-pack: justify;
+		-ms-flex-pack: justify;
+			justify-content: space-between;
+  }
+  
+  .hea1-menu-toggler .menu-toggler {
+	position: relative;
+	font-size: 30px;
+	line-height: 1em;
+	color: #fff;
+  }
+  
+  .offcanvas-menu {
+	position: fixed;
+	right: 0px;
+	top: 0;
+	width: 300px;
+	max-width: 100%;
+	height: 100%;
+	background-color: #fff;
+	z-index: 1130;
+	-webkit-transform: translateX(101%);
+			transform: translateX(101%);
+	-webkit-transition: all 0.7s ease;
+	transition: all 0.7s ease;
+  }
+  .offcanvas-menu.open {
+	opacity: 1;
+	visibility: visible;
+	-webkit-transition: all 0.7s ease 500ms;
+	transition: all 0.7s ease 500ms;
+	-webkit-transform: translateX(0%);
+			transform: translateX(0%);
+  }
+  .offcanvas-menu .offcanvas-wrapper {
+	position: relative;
+  }
+  .offcanvas-menu .close-btn {
+	position: absolute;
+	right: 16px;
+	top: 23px;
+	line-height: 30px;
+	width: 30px;
+	text-align: center;
+	font-size: 24px;
+	color: #000000;
+	cursor: pointer;
+	z-index: 10;
+	-webkit-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+  }
+  .offcanvas-menu .logo {
+	position: relative;
+	padding: 20px 20px;
+	text-align: left;
+  }
+  .offcanvas-menu .logo img {
+	max-width: 200px;
+  }
+  .offcanvas-menu .primary-menu {
+	margin-top: 25px;
+  }
+  .offcanvas-menu .primary-menu ul {
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .offcanvas-menu .primary-menu ul li {
+	position: relative;
+	display: block;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .offcanvas-menu .primary-menu ul li a {
+	position: relative;
+	display: block;
+	line-height: 24px;
+	padding: 14px 20px;
+	font-size: 15px;
+	color: #404040;
+	font-weight: 600;
+	text-transform: uppercase;
+	-webkit-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+  }
+  .offcanvas-menu .primary-menu ul li .mobile-menu-expand {
+	display: block;
+	position: absolute;
+	width: 52px;
+	height: 52px;
+	top: 0;
+	right: 0;
+  }
+  .offcanvas-menu .primary-menu ul li .mobile-menu-expand::before {
+	position: absolute;
+	content: "";
+	width: 8px;
+	height: 8px;
+	border-left: 1px solid #404040;
+	border-bottom: 1px solid #404040;
+	display: block;
+	position: absolute;
+	top: 18px;
+	right: 20px;
+	-webkit-transform: rotate(-45deg);
+			transform: rotate(-45deg);
+  }
+  .offcanvas-menu .primary-menu ul li .mobile-menu-expand::after {
+	content: "";
+	position: absolute;
+	left: 0px;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+			transform: translateY(-50%);
+	width: 1px;
+	height: 24px;
+	border-left: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .offcanvas-menu .primary-menu ul li .sub-menu li:last-child {
+	border-bottom: 0;
+  }
+  .offcanvas-menu .primary-menu ul li:hover > a {
+	color: #89715b;
+  }
+  
+  .overlay {
+	position: fixed;
+	right: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1120;
+	background: rgba(0, 0, 0, 0.9);
+	-webkit-transform: translateX(101%);
+			transform: translateX(101%);
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: all 0.7s ease 500ms;
+	transition: all 0.7s ease 500ms;
+  }
+  .overlay.open {
+	opacity: 1;
+	visibility: visible;
+	-webkit-transition: all 0.7s ease;
+	transition: all 0.7s ease;
+	-webkit-transform: translateX(0%);
+			transform: translateX(0%);
+  }
