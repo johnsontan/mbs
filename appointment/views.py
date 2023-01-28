@@ -45,7 +45,7 @@ def appointmentOverview(request):
         for ua in upcominga:
             templist = list()
             templist.append(ua.id)
-            tempUsername = ua.user.first_name + " " + ua.user.last_name
+            tempUsername = ua.user.first_name + " " + ua.user.last_name + "/" + ua.user.phone
             templist.append(tempUsername)
             tempEmployeeName = ua.employee.user.first_name + " " + ua.employee.user.last_name
             templist.append(tempEmployeeName)
@@ -63,7 +63,7 @@ def appointmentOverview(request):
         for ua in cancela:
             templist = list()
             templist.append(ua.id)
-            tempUsername = ua.user.first_name + " " + ua.user.last_name
+            tempUsername = ua.user.first_name + " " + ua.user.last_name + "/" + ua.user.phone
             templist.append(tempUsername)
             tempEmployeeName = ua.employee.user.first_name + " " + ua.employee.user.last_name
             templist.append(tempEmployeeName)
@@ -81,7 +81,7 @@ def appointmentOverview(request):
         for ua in misseda:
             templist = list()
             templist.append(ua.id)
-            tempUsername = ua.user.first_name + " " + ua.user.last_name
+            tempUsername = ua.user.first_name + " " + ua.user.last_name + "/" + ua.user.phone
             templist.append(tempUsername)
             tempEmployeeName = ua.employee.user.first_name + " " + ua.employee.user.last_name
             templist.append(tempEmployeeName)
@@ -99,7 +99,7 @@ def appointmentOverview(request):
         for ua in completeda:
             templist = list()
             templist.append(ua.id)
-            tempUsername = ua.user.first_name + " " + ua.user.last_name
+            tempUsername = ua.user.first_name + " " + ua.user.last_name + "/" + ua.user.phone
             templist.append(tempUsername)
             tempEmployeeName = ua.employee.user.first_name + " " + ua.employee.user.last_name
             templist.append(tempEmployeeName)
