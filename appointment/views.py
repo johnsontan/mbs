@@ -339,7 +339,7 @@ def get_employee_service(request):
             if employee:
                 # get all services in the department
                 service_list = list()
-                if employee.inner_role == "both":
+                if employee.inner_role == "both" or employee.inner_role == "BOTH":
                     service_list = services.objects.all()   
                 else: 
                     service_list = services.objects.filter(department=employee.inner_role).all()                
