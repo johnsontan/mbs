@@ -17,7 +17,7 @@
         <div class="row text-center selector-img">
             {% for e in employees %}
                 <label class="col">
-                    <input type="radio" name="stylist" id="stylist" class="stylist" value="{{e.id}}"/>
+                    <input type="radio" name="stylist" id="stylist" class="stylist" value="{{e.id}}" onclick="{{e.id}}"/>
                     <img src="{{e.profile_pic.image.url}}" alt="" class="img-responsive img-circle" width="150">
                     <span class="spacer-half"></span>
                     {{e.first_name}} {{e.last_name}}
