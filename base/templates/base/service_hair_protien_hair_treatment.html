@@ -1,0 +1,43 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}  
+{% load static %}
+
+{% block header %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+{% endblock%}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <img src="https://i.ibb.co/ZzmYz6w/protien-Hair-Treatment.jpg" class="img-thumbnail img-fluid" alt="Protien hair treatment" width="500">
+    </div>
+    
+    <h2 class="text-center">Benefits</h2>
+    <div class="d-flex justify-content-center">
+        <ul class="list-unstyled text-center">
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Anti-irritant</li>
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Repair protein at the follicle rows</li>
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Hair hydration & elasticity</li>
+            
+        </ul>
+    </div>
+    <hr class="my-5">
+    <h2 class="text-center">Description</h2>
+    <div class="d-flex justify-content-center text-center">
+        <p>This treatment contains milk protein that carries restructuring and healing properties due to its complete amino acid content unmatched by any other proteins.</p>
+    </div>
+    <hr class="my-5">
+    <h2 class="text-center">Processes</h2>
+    <div class="d-flex justify-content-center">
+        <ul class="list-unstyled text-center">
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Wash & rinse</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Protien treatment mask application</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Steam with red UV light (blood circulation)</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Wash & rinse</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Blue UV light (eradicate bacterial)</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Blowdry hair </li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

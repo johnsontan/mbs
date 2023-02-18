@@ -1,0 +1,47 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}  
+{% load static %}
+
+{% block header %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+{% endblock%}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <img src="https://i.ibb.co/sbcjXLj/tcm-Scalp-Treatment.jpg" class="img-thumbnail img-fluid" alt="TCM scalp treatment" width="500">
+    </div>
+    
+    <h2 class="text-center">Benefits</h2>
+    <div class="d-flex justify-content-center">
+        <ul class="list-unstyled text-center">
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Stimulate hair follicles & blood vessels</li>
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Herbal extracts</li>
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Fight dandruff and oily scalp</li>
+            
+        </ul>
+    </div>
+    <hr class="my-5">
+    <h2 class="text-center">Description</h2>
+    <div class="d-flex justify-content-center text-center">
+        <p>TCM scalp treatment uses herbal extracts to fight hair loss by stimulating hair follicles, nerves and blood vessels to increase blood flow to the head and scalp region. </p>
+    </div>
+    <hr class="my-5">
+    <h2 class="text-center">Processes</h2>
+    <div class="d-flex justify-content-center">
+        <ul class="list-unstyled text-center">
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Sea-salt deep wash & rinse</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Apply soothing lotion</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Apply TCM herbal scalp mask</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Lymphatic massage</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Blue UV light with misty steam (eradicate bacterial)</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Wash & rinse</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Blue light steam</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Ultima heat with red UV light (Promote blood circulation)</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Guasha & apply ampoule</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Blowdry hair</li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

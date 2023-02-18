@@ -80,6 +80,10 @@
 
 <script type="text/javascript" src="{% static 'appointment/userNewAppointment.js' %}"></script>
 <script type="text/javascript">
+    eStylistBtn = document.getElementById("stylist");
+
+
+    eStylistBtn.addEventListener('click', edate(eStylistBtn.value));
     function edate(eid){
         $.ajax({
             type: 'POST',

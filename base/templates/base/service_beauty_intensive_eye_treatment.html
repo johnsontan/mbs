@@ -1,0 +1,47 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}  
+{% load static %}
+
+{% block header %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+{% endblock%}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <img src="https://i.ibb.co/KNM00Hy/intensive-Eye-Treatment.jpg" class="img-thumbnail img-fluid" alt="Intensive eye treatment" width="500">
+    </div>
+    
+    <h2 class="text-center">Benefits</h2>
+    <div class="d-flex justify-content-center">
+        <ul class="list-unstyled text-center">
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Reduce fine lines & wrinkles</li>
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Stimulate production of collagen & elastin</li>
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Restore vitality to eye contours</li>
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Reduce puffiness & dark circles</li>
+            
+        </ul>
+    </div>
+    <hr class="my-5">
+    <h2 class="text-center">Description</h2>
+    <div class="d-flex justify-content-center text-center">
+        <p>This treatment hydrate and moisturize the eye by supplying vital nutrients and cooling effect to the delicate eye area. It also helps improve blood circulation and lighten dark eye circles and fine lines.</p>
+    </div>
+    <hr class="my-5">
+    <h2 class="text-center">Processes</h2>
+    <div class="d-flex justify-content-center">
+        <ul class="list-unstyled text-center">
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Double cleansing</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Diamond peel</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Essential oil with detox</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Herbal cream massage and guasha</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Steam</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Lifting eye mask</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Eye serum</li>
+        
+            
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

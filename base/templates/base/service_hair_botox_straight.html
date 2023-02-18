@@ -1,0 +1,45 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}  
+{% load static %}
+
+{% block header %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+{% endblock%}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <img src="https://i.ibb.co/Qbqnnrt/botox-straight.jpg" class="img-thumbnail img-fluid" alt="Botox straight" width="500">
+    </div>
+    
+    <h2 class="text-center">Benefits</h2>
+    <div class="d-flex justify-content-center">
+        <ul class="list-unstyled text-center">
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbspAnti-frizz</li>
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbspSmoothing & silky hair</li>
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbspNatural straight hair</li>
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbspRepair & moisturise damaged tresses</li>
+        </ul>
+    </div>
+    <hr class="my-5">
+    <h2 class="text-center">Description</h2>
+    <div class="d-flex justify-content-center text-center">
+        <p>Botox straight contains several essential oils suitable for damaged hair as it straightens to bring out the natural shine from within and have a long-lasting effect.</p>
+    </div>
+    <hr class="my-5">
+    <h2 class="text-center">Processes</h2>
+    <div class="d-flex justify-content-center">
+        <ul class="list-unstyled text-center">
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Wash with botox shampoo</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Apply botox concentrated cream</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Rinse</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Apply botox lotion</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Iron</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Botox hair mask application</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Rinse</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Apply Botox lotion & blowdry hair</li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

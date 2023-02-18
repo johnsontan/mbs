@@ -331,3 +331,121 @@ def getNews(request):
 			success = "Error"
 			return HttpResponse(success)
 
+#Hair service START
+def serviceHairMucotaRebond(request):
+	context = {
+		'subtitle' : "Mucota Rebonding",
+	}
+	return render(request, 'base/service_hair_mucota_rebond.html', context=context)
+
+def serviceHairBotoxStraight(request):
+	context = {
+		'subtitle' : "Botox Straight",
+	}
+	return render(request, 'base/service_hair_botox_straight.html', context=context)
+
+def serviceHairEssentialHairTreatment(request):
+	context = {
+		'subtitle' : "Essential hair treatment",
+	}
+	return render(request, 'base/service_hair_essential_hair_treatment.html', context=context)
+
+def serviceHairEssentialScalpTreatment(request):
+	context = {
+		'subtitle' : "Essential scalp treatment",
+	}
+	return render(request, 'base/service_hair_essential_scalp_treatment.html', context=context)
+
+def serviceHairProtienHairTreatment(request):
+	context = {
+		'subtitle' : "Protien hair treatment",
+	}
+	return render(request, 'base/service_hair_protien_hair_treatment.html', context=context)
+
+def serviceHairRevivifyHairTreamtent(request):
+	context = {
+		'subtitle' : "Revivify hair treatment",
+	}
+	return render(request, 'base/service_hair_revivify_hair_treatment.html', context=context)
+
+def serviceHairDetoxifyScalpTreatment(request):
+	context = {
+		'subtitle' : "Detoxify scalp treatment",
+	}
+	return render(request, 'base/service_hair_detoxify_scalp_treatment.html', context=context)
+
+def serviceHairTcmScalpTreatment(request):
+	context = {
+		'subtitle' : "TCM scalp treatment",
+	}
+	return render(request, 'base/service_hair_tcm_scalp_treatment.html', context=context)
+
+def serviceHairKeratinTreatment(request):
+	context = {
+		'subtitle' : "Keratin treatment",
+	}
+	return render(request, 'base/service_hair_keratin_treatment.html', context=context)
+
+def serviceHairKeratinQodTreatment(request):
+	context = {
+		'subtitle' : "Keratin QOD(Gold) treatment",
+	}
+	return render(request, 'base/service_hair_keratin_qod_treatment.html', context=context)
+
+def serviceHairBotoxRepair(request):
+	context = {
+		'subtitle' : "Botox repair treatment",
+	}
+	return render(request, 'base/service_hair_botox_repair.html', context=context)
+#hair service END
+
+#Beauty service START
+def serviceBeautyOrganicRefreshingFacial(request):
+	context = {
+		'subtitle' : "Orgnaic refreshing facial",
+	}
+	return render(request, 'base/service_beauty_organic_refreshing_facial.html', context=context)
+
+def serviceBeautyPurifyingFacial(request):
+	context = {
+		'subtitle' : "Purifying facial",
+	}
+	return render(request, 'base/service_beauty_purifying_facial.html', context=context)
+
+def serviceBeautyCO2PeelOxyglowFacial(request):
+	context = {
+		'subtitle' : "Co2 Peel & Oxyglow facial",
+	}
+	return render(request, 'base/service_beauty_CO2Peel_oxyglow_facial.html', context=context)
+
+def serviceBeautyAromaticAgeReverseFacial(request):
+	context = {
+		'subtitle' : "Aromatic Age reverse facial",
+	}
+	return render(request, 'base/service_beauty_aromatic_age_reverse_facial.html', context=context)
+
+def serviceBeautyIntensiveHydratingFacial(request):
+	context = {
+		'subtitle' : "Intensive hydrating facial",
+	}
+	return render(request, 'base/service_beauty_intensive_hydrating_facial.html', context=context)
+
+def serviceBeautyRejuvenateEyeTreatment(request):
+	context = {
+		'subtitle' : "Rejuvenate eye treatment",
+	}
+	return render(request, 'base/service_beauty_rejuvenate_eye_treatment.html', context=context)
+
+def serviceBeautyIntensiveEyeTreatment(request):
+	context = {
+		'subtitle' : "Intensive eye treatment",
+	}
+	return render(request, 'base/service_beauty_intensive_eye_treatment.html', context=context)
+
+def serviceBeautyOrganicStemCellFacial(request):
+	context = {
+		'subtitle' : "Organic stem cell facial",
+	}
+	return render(request, 'base/service_beauty_organic_stem_cell_facial.html', context=context)
+
+#Service beauty END
