@@ -1,0 +1,46 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}  
+{% load static %}
+
+{% block header %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+{% endblock%}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <img src="https://i.ibb.co/cDDYH6J/Organic-Stem-Cell-Facial.jpg" class="img-thumbnail img-fluid" alt="Organic stem cell facial" width="500">
+    </div>
+    
+    <h2 class="text-center">Benefits</h2>
+    <div class="d-flex justify-content-center">
+        <ul class="list-unstyled text-center">
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Prevent ageing</li>
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Boost skin absorption</li>
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Accelerate the cell regeneration</li>
+            
+        </ul>
+    </div>
+    <hr class="my-5">
+    <h2 class="text-center">Description</h2>
+    <div class="d-flex justify-content-center text-center">
+        <p>The facial treatment will penetrate collagen and fruit-derived ingredients into the stem cells to nourish the skin. Removing all the impurities gives you porcelain smooth skin that will help your makeup products blend better with a flawless finish.</p>
+    </div>
+    <hr class="my-5">
+    <h2 class="text-center">Processes</h2>
+    <div class="d-flex justify-content-center">
+        <ul class="list-unstyled text-center">
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Deep cleansing</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Dry cell peeling</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Steam</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Dead skins extrusion</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Face lifting massage & guasha</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Apply stem cell ampoule with ultrasound</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Apply stem cell mask</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Apply sunblock</li>
+            
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

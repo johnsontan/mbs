@@ -28,6 +28,29 @@ urlpatterns = [
     #Services
     path('service/beauty', views.serviceBeauty, name='base-service-beauty'),
     path('service/hair', views.serviceHair, name='base-service-hair'),
+    #detail-services
+    #HIAR
+    path('service/hair/mucota-rebond', views.serviceHairMucotaRebond, name='base-service-hair-mucota-rebond'),
+    path('service/hair/botox-straight', views.serviceHairBotoxStraight, name='base-service-hair-botox-straight'),
+    path('service/hair/botox-repair', views.serviceHairBotoxRepair, name='base-service-hair-botox-repair'),
+    path('service/hair/keratin-treatment', views.serviceHairKeratinTreatment, name='base-service-hair-keratin-treatment'),
+    path('service/hair/keratin-qod-treatment', views.serviceHairKeratinQodTreatment, name='base-service-hair-keratin-qod-treatment'),
+    path('service/hair/essential-hair-treatment', views.serviceHairEssentialHairTreatment, name='base-service-hair-essential-hair-treatment'),
+    path('service/hair/essential-scalp-treatment', views.serviceHairEssentialScalpTreatment, name='base-service-hair-essential-scalp-treatment'),
+    path('service/hair/protien-hair-treatment', views.serviceHairProtienHairTreatment, name='base-service-hair-protien-hair-treatment'),
+    path('service/hair/revivify-hair-treatment', views.serviceHairRevivifyHairTreamtent, name='base-service-hair-revivify-hair-treatment'),
+    path('service/hair/detoxify-scalp-treatment', views.serviceHairDetoxifyScalpTreatment, name='base-service-detoxify-scalp-treatment'),
+    path('service/hair/tcm-scalp-treatment', views.serviceHairTcmScalpTreatment, name='base-service-hair-tcm-scalp-treatment'),
+    #BEAUTY
+    path('service/beauty/organic-refreshing-facial', views.serviceBeautyOrganicRefreshingFacial, name='base-service-beauty-organic-refreshing-facial'),
+    path('service/beauty/organic-stem-cell-facial', views.serviceBeautyOrganicStemCellFacial, name='base-service-beauty-organic-stem-cell-facial'),
+    path('service/beauty/purifying-facial', views.serviceBeautyPurifyingFacial, name='base-service-beauty-purifying-facial'),
+    path('service/beauty/Co2-peel-oxyglow-facial', views.serviceBeautyCO2PeelOxyglowFacial, name='base-service-beauty-Co2-peel-oxyglow-facial'),
+    path('service/beauty/aromatic-age-reverse-facial', views.serviceBeautyAromaticAgeReverseFacial, name='base-service-beauty-aromatic-age-reverse-facial'),
+    path('service/beauty/intensive-hydrating-facial', views.serviceBeautyIntensiveHydratingFacial, name='base-service-beauty-intensive-hydrating-facial'),
+    path('service/beauty/rejuvenate-eye-treatment', views.serviceBeautyRejuvenateEyeTreatment, name='base-service-beauty-rejuvenate-eye-treatment'),
+    path('service/beauty/intensive-eye-treatment', views.serviceBeautyIntensiveEyeTreatment, name='base-service-beauty-intensive-eye-treatment'),
+
 
     #about us
     path('aboutus/', views.aboutus, name="base-aboutus"),

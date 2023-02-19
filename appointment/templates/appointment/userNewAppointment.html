@@ -17,7 +17,7 @@
         <div class="row text-center selector-img">
             {% for e in employees %}
                 <label class="col">
-                    <input type="radio" name="stylist" id="stylist" class="stylist" value="{{e.id}}" onclick="edate({{e.id}})"/>
+                    <input type="radio" name="stylist" id="stylist" class="stylist" value="{{e.id}}" onclick="{{e.id}}"/>
                     <img src="{{e.profile_pic.image.url}}" alt="" class="img-responsive img-circle" width="150">
                     <span class="spacer-half"></span>
                     {{e.first_name}} {{e.last_name}}
@@ -80,6 +80,16 @@
 
 <script type="text/javascript" src="{% static 'appointment/userNewAppointment.js' %}"></script>
 <script type="text/javascript">
+    eStylistBtn = document.getElementById("stylist");
+    eDateBtn = document.getElementById("edater");
+    eTimeBtn = document.getElementById("etimer");
+    eServiceBtn = document.getElementById("eservicer");
+
+
+    eStylistBtn.addEventListener('click', edate(eStylistBtn.value));
+    eDateBtn.addEventListener('click', etime());
+    eTimeBtn.addEventListener('click', eservice());
+    eServiceBtn.addEventListener('click', econfirm());
     function edate(eid){
         $.ajax({
             type: 'POST',

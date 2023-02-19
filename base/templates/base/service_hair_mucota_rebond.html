@@ -1,0 +1,29 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}  
+{% load static %}
+
+{% block header %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+{% endblock%}
+
+{% block content %}
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <img src="https://i.ibb.co/4Ndtprb/mocuta-rebonding.jpg" class="img-thumbnail img-fluid" alt="Mocuta Rebonding" width="500">
+        </div>
+        
+        <h2 class="text-center">Benefits</h2>
+        <div class="d-flex justify-content-center">
+            <ul class="list-unstyled text-center">
+                <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbspControl hair frizziness</li>
+                <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbspSoft rebonding effect</li>
+                <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbspManagable hair</li>
+            </ul>
+        </div>
+        <hr class="my-5">
+        <h2 class="text-center">Description</h2>
+        <div class="d-flex justify-content-center text-center">
+            <p>Hydrating rebonding has a hydrating effect and controls the hair's frizziness, leaving you with a soft rebonding finish. It is suitable for those wanting to achieve manageable hair without sacrificing their natural hair tresses.</p>
+        </div>
+    </div>
+{% endblock %}

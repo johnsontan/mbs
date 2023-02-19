@@ -1,0 +1,45 @@
+{% extends "base/base.html" %}
+{% load crispy_forms_tags %}  
+{% load static %}
+
+{% block header %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+{% endblock%}
+
+{% block content %}
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <img src="https://i.ibb.co/3z42DPq/revivify-Hair-Treamtent.jpg" class="img-thumbnail img-fluid" alt="Revivify hair treatment" width="500">
+    </div>
+    
+    <h2 class="text-center">Benefits</h2>
+    <div class="d-flex justify-content-center">
+        <ul class="list-unstyled text-center">
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Reduce static electricity</li>
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Restore hair natural PH level</li>
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Additional protection for hair</li>
+            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Reduce spilt-ends</li>
+            
+        </ul>
+    </div>
+    <hr class="my-5">
+    <h2 class="text-center">Description</h2>
+    <div class="d-flex justify-content-center text-center">
+        <p>The revivify hair treatment treats damaged hair by giving it a new life. The treatment will rejuvenate the hair cortex and close its hair cuticle using ION technology. Additional protection will be added to your your hair for a long-lasting effect.</p>
+    </div>
+    <hr class="my-5">
+    <h2 class="text-center">Processes</h2>
+    <div class="d-flex justify-content-center">
+        <ul class="list-unstyled text-center">
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Wash & rinse</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Apply keratin</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Apply royal mask & herbal oil</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Wash & rinse</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Apply leave-in lotion</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Ultima heat with blue UV light (eradicate bacterial)</li>
+            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Ionization</li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}
