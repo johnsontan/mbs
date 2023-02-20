@@ -15,5 +15,5 @@ urlpatterns = [
     path('transact/', views.posTransact, name='pos-tranasct'),
     #Get all services per transaction AJAX
     path('transaction/getservices', views.rservice, name='pos-getServices'),
-
+    
 ]

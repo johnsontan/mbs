@@ -19,7 +19,7 @@
             x++;
             $(wrapper).append('<div><input type="text" class="form-control mt-2" id="serviceName[]" name="serviceName[]"/><a href="#" class="delete">Delete</a></div>'); //add input box
             $(wrapper2).append('<div><input type="number" step="0.01" class="form-control mt-2" id="servicePrice[]" name="servicePrice[]"/><a href="#" class="delete">Delete</a></div>'); //add input box
-            $(wrapper3).append('<div><select name="serviceDepartment[]" id="serviceDepartment[]" class="form-control"><option value="HAIR">HAIR</option><option value="HAIR PRODUCT">HAIR PRODUCT</option><option value="BEAUTY">BEAUTY</option><option value="BEAUTY PRODUCT">BEAUTY PRODUCT</option></select><a href="#" class="delete">Delete</a></div> ')
+            $(wrapper3).append('<div><select name="serviceDepartment[]" id="serviceDepartment[]" class="form-control"><option value="HAIR">HAIR</option><option value="HAIR PRODUCT">HAIR PRODUCT</option><option value="BEAUTY">BEAUTY</option><option value="BEAUTY PRODUCT">BEAUTY PRODUCT</option><option value="CREDIT TOP UP">CREDIT TOP UP</option></select><a href="#" class="delete">Delete</a></div> ')
         } else {
             alert('You Reached the limits')
         }
@@ -238,6 +238,26 @@
             <div class="card-body">
                 <div class="text-center">
                     <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3">
+                        <img src="https://i.ibb.co/fMBxMKm/paynow-thumbnail-icon.png" alt="paynow icon" class="img-thumbnail">
+                    </div>
+                    <h4 class="my-1">
+                        {% if paynow %}
+                            {{paynow}}
+                        {% else %}
+                            0
+                        {%endif%}
+                    </h4>
+                    <p class="mb-0 text-secondary">PAYNOW</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="card radius-10">
+            <div class="card-body">
+                <div class="text-center">
+                    <div class="widgets-icons rounded-circle mx-auto bg-light-warning text-warning mb-3">
                         <img src="{% static 'pos/icons/others-icon.png' %}" alt="" class="img-thumbnail">
                     </div>
                     <h4 class="my-1">
@@ -306,6 +326,7 @@
                         <option value="HAIR PRODUCT">HAIR PRODUCT</option>
                         <option value="BEAUTY">BEAUTY</option>
                         <option value="BEAUTY PRODUCT">BEAUTY PRODUCT</option>
+                        <option value="CREDIT TOP UP">CREDIT TOP UP</option>
                     </select>                    
 
                 </div>
@@ -327,6 +348,7 @@
                 <option value="CARDS">Cards</option>
                 <option value="NETS">NETS</option>
                 <option value="GRAB">Grab</option>
+                <option value="PAYNOW">Paynow</option>
                 <option value="OTHERS">Others</option>
             </select>
         </div>

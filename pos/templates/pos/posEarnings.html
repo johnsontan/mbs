@@ -111,14 +111,31 @@
                         <span class="step-links">
                             {% if salesT.has_previous %}
                                 {%if start_date and end_date%}
-                                    <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&end_date={{end_date}}&page=1">&laquo; first</a>
-                                    <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&end_date={{end_date}}&page={{ salesT.previous_page_number }}">previous</a>
+                                    {%if employees%}
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&end_date={{end_date}}&employees={{employees.id}}&page=1">&laquo; first</a>
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&end_date={{end_date}}&employees={{employees.id}}&page={{ salesT.previous_page_number }}">previous</a>
+                                    {%else%}
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&end_date={{end_date}}&page=1">&laquo; first</a>
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&end_date={{end_date}}&page={{ salesT.previous_page_number }}">previous</a>
+                                    {%endif%}
                                 {% elif start_date %}
-                                    <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&page=1">&laquo; first</a>
-                                    <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&page={{ salesT.previous_page_number }}">previous</a>
+                                    {%if employees%}
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&employees={{employees.id}}&page=1">&laquo; first</a>
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&employees={{employees.id}}&page={{ salesT.previous_page_number }}">previous</a>
+                                    {%else%}
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&page=1">&laquo; first</a>
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&page={{ salesT.previous_page_number }}">previous</a>
+                                    {%endif%}
+                                    
                                 {%else%}
-                                    <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&page=1">&laquo; first</a>
-                                    <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&page={{ salesT.previous_page_number }}">previous</a>
+                                    {%if employees%}
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&employees={{employees.id}}&page=1">&laquo; first</a>
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&employees={{employees.id}}&page={{ salesT.previous_page_number }}">previous</a>
+                                    {%else%}
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&page=1">&laquo; first</a>
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&page={{ salesT.previous_page_number }}">previous</a>
+                                    {%endif%}
+                                    
                                 {%endif%}
                             {% endif %}
                     
@@ -128,14 +145,31 @@
                     
                             {% if salesT.has_next %}
                                 {%if start_date and end_date%}
-                                    <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&end_date={{end_date}}&page={{ salesT.next_page_number }}">next</a>
-                                    <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&end_date={{end_date}}&page={{ salesT.paginator.num_pages }}">last &raquo;</a>
+                                    {%if employees%}
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&end_date={{end_date}}&employees={{employees.id}}&page={{ salesT.next_page_number }}">next</a>
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&end_date={{end_date}}&employees={{employees.id}}&page={{ salesT.paginator.num_pages }}">last &raquo;</a>
+                                    {%else%}
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&end_date={{end_date}}&page={{ salesT.next_page_number }}">next</a>
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&end_date={{end_date}}&page={{ salesT.paginator.num_pages }}">last &raquo;</a>
+                                    {%endif%}
+                                    
                                 {% elif start_date %}
-                                    <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&page={{ salesT.next_page_number }}">next</a>
-                                    <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&page={{ salesT.paginator.num_pages }}">last &raquo;</a>
+                                    {%if employees%}
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&employees={{employees.id}}&page={{ salesT.next_page_number }}">next</a>
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&employees={{employees.id}}&page={{ salesT.paginator.num_pages }}">last &raquo;</a>
+                                    {%else%}
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&page={{ salesT.next_page_number }}">next</a>
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&start_date={{start_date}}&page={{ salesT.paginator.num_pages }}">last &raquo;</a>
+                                    {%endif%}                                    
                                 {%else%}
-                                    <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&page={{ salesT.next_page_number }}">next</a>
-                                    <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&page={{ salesT.paginator.num_pages }}">last &raquo;</a>
+                                    {%if employees%}
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&employees={{employees.id}}&page={{ salesT.next_page_number }}">next</a>
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&employees={{employees.id}}&page={{ salesT.paginator.num_pages }}">last &raquo;</a>
+                                    {%else%}
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&page={{ salesT.next_page_number }}">next</a>
+                                        <a class="btn btn-sm btn-primary" href="?csrfmiddlewaretoken={{csrfToken}}&page={{ salesT.paginator.num_pages }}">last &raquo;</a>
+                                    {%endif%}
+                                    
                                 {%endif%}
                             {% endif %}
                         </span>
@@ -261,6 +295,25 @@
                     </div>
                 </div>
             {%endif%}
+            
+            <div class="card radius-10 border shadow-none">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">Credit top up total</p>
+                            <h4 class="mb-0">
+                                {% if creditTopupT %}
+                                    {{creditTopupT}}
+                                {%else%}
+                                    0
+                                {%endif%}
+                            </h4>
+                        </div>
+                        <div class="widgets-icons bg-light-info text-info ms-auto"><i class='bx bx-glasses-alt' ></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="card radius-10 border shadow-none mb-0">
                 <div class="card-body">
@@ -283,7 +336,7 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <div>
-                            <p class="mb-0 text-secondary">IN-STORE CREDIT</p>
+                            <p class="mb-0 text-secondary">Service CREDIT</p>
                             <h4 class="mb-0">
                                 {% if paymentBreakdown %}
                                     {{paymentBreakdown.credit}}
@@ -343,6 +396,23 @@
                         </div>
                         <div class="widgets-icons bg-light-warning text-warning ms-auto">
                             <img src="{% static 'pos/icons/grab-icon.png' %}" alt="" class="img-thumbnail">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card radius-10 border shadow-none mb-0">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <p class="mb-0 text-secondary">PAYNOW</p>
+                            <h4 class="mb-0">$
+                                {% if paymentBreakdown %}
+                                    {{paymentBreakdown.paynow}}
+                                {%endif%}
+                            </h4>
+                        </div>
+                        <div class="widgets-icons bg-light-warning text-warning ms-auto">
+                            <img src="https://i.ibb.co/fMBxMKm/paynow-thumbnail-icon.png" alt="Paynow icon" class="img-thumbnail">
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 from django.db import models
-from base.models import userInfo as User
 from django.utils import timezone
+from base.models import userInfo as User
 
 # Create your models here.
 
@@ -11,6 +11,7 @@ class sales_transaction(models.Model):
         ("CARDS", "CARDS"),
         ("NETS", "NETS"),
         ("GRAB","GRAB"),
+        ("PAYNOW", "PAYNOW"),
         ("OTHERS", "OTHERS")
     )
     payment_type = models.CharField(max_length=25, choices=PAYMENT_TYPE, blank=False, null=False)
@@ -26,7 +27,8 @@ class sales_services(models.Model):
         ("HAIR", "HAIR"),
         ("BEAUTY", "BEAUTY"),
         ("HAIR PRODUCT", "HAIR PRODUCT"),
-        ("BEAUTY PRODUCT", "BEAUTY PRODUCT")
+        ("BEAUTY PRODUCT", "BEAUTY PRODUCT"),
+        ("CREDIT TOP UP", "CREDIT TOP UP"),
 
     )
 

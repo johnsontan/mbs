@@ -29,6 +29,7 @@ def posStart(request):
     cards = sales_transaction.objects.filter(payment_type="CARDS", created_at__contains=datetime.now().date()).all()
     nets = sales_transaction.objects.filter(payment_type="NETS", created_at__contains=datetime.now().date()).all()
     grab = sales_transaction.objects.filter(payment_type="GRAB", created_at__contains=datetime.now().date()).all()
+    paynow = sales_transaction.objects.filter(payment_type="PAYNOW", created_at__contains=datetime.now().date()).all()
     others = sales_transaction.objects.filter(payment_type="OTHERS", created_at__contains=datetime.now().date()).all()
     alltransaction = sales_transaction.objects.filter(created_at__contains=datetime.now().date()).all()
     employeeAll = userInfo.object.filter(role=2).all()
@@ -39,6 +40,7 @@ def posStart(request):
     cardsT = 0.00
     netsT = 0.00
     grabT = 0.00
+    paynowT = 0.00
     othersT = 0.00
 
     if cash:
@@ -56,6 +58,9 @@ def posStart(request):
     if grab:
         for c in grab:
             grabT += float(c.grand_total)
+    if paynow:
+        for pn in paynow:
+            paynowT += float(pn.grand_total)
     if others:
         for c in others:
             othersT += float(c.grand_total)
@@ -66,6 +71,7 @@ def posStart(request):
         "cards" : cardsT,
         "nets" : netsT,
         "grab" : grabT,
+        "paynow" : paynowT,
         "others" : othersT,
         "todaytotal" : todaytotal,
         "employeeAll" : employeeAll,
@@ -82,12 +88,12 @@ def posEarnings(request):
         try:
             if form.is_valid() and form.cleaned_data['start_date'] <= datetime.now().date():
                 endDate = form.cleaned_data['end_date']
-                if endDate:
+                if endDate:                    
                     if endDate <= datetime.now().date():
                         if form.cleaned_data['employees'] is not None:                      
-                            salesTransactions = sales_transaction.objects.filter(created_at__range=[form.cleaned_data['start_date'], endDate], employee=form.cleaned_data['employees'])
+                            salesTransactions = sales_transaction.objects.filter(created_at__range=[form.cleaned_data['start_date'], endDate], employee=form.cleaned_data['employees'])                            
                         else:
-                            salesTransactions = sales_transaction.objects.filter(created_at__range=[form.cleaned_data['start_date'], endDate])
+                            salesTransactions = sales_transaction.objects.filter(created_at__range=[form.cleaned_data['start_date'], endDate])                            
 
                         #paginator
                         paginator = Paginator(salesTransactions, 20)
@@ -100,6 +106,7 @@ def posEarnings(request):
                         service = float(0.00)
                         product = float(0.00)
                         beautyTotal = float(0.00)
+                        creditTopup = float(0.00)
                         TransactionT = 0
                         paymentBreakdown = {
                             "cash" : float(0.00),
@@ -107,8 +114,10 @@ def posEarnings(request):
                             "cards" : float(0.00),
                             "nets" : float(0.00),
                             "grab" : float(0.00),
+                            "paynow" : float(0.00),
                             "others" : float(0.00),
                         }
+
                         TransactionT = len(salesTransactions)
                         for st in salesTransactions:
                             grandTotal += float(st.grand_total)
@@ -122,6 +131,8 @@ def posEarnings(request):
                                 paymentBreakdown['nets'] += float(st.grand_total)
                             elif st.payment_type == "GRAB":
                                 paymentBreakdown['grab'] += float(st.grand_total)
+                            elif st.payment_type == "PAYNOW":
+                                paymentBreakdown["paynow"] += float(st.grand_total)
                             elif st.payment_type == "OTHERS":
                                 paymentBreakdown['others'] += float(st.grand_total)
                             for ss in st.sales_services_set.all():
@@ -137,6 +148,8 @@ def posEarnings(request):
                                 elif ss.service_department == "BEAUTY PRODUCT":
                                     product += float(ss.service_price)
                                     beautyTotal += float(ss.service_price)
+                                elif ss.service_department == "CREDIT TOP UP":
+                                    creditTopup += float(ss.service_price)
                         
 
                         context = {
@@ -144,14 +157,16 @@ def posEarnings(request):
                             "form" : form,
                             "start_date" : form.cleaned_data['start_date'],
                             "end_date" : endDate,
+                            "employees" : form.cleaned_data['employees'],
                             "csrfToken" : request.GET.get('csrfmiddlewaretoken'),  
-                            "grandTotal" : grandTotal,
-                            "hairTotal" : hairTotal,
-                            "beautyTotal" : beautyTotal,
+                            "grandTotal" : round(grandTotal, 2),
+                            "hairTotal" : round(hairTotal, 2),
+                            "beautyTotal" : round(beautyTotal, 2),
                             "TransactionT" : TransactionT,
-                            "paymentBreakdown" : paymentBreakdown,  
-                            "serviceT" : service,
-                            "productT" : product,                    
+                            "paymentBreakdown" : paymentBreakdown, 
+                            "creditTopupT" : creditTopup, 
+                            "serviceT" : round(service, 2),
+                            "productT" : round(product, 2),                    
                         }
 
                         messages.success(request, f'Sales records found.')
@@ -161,10 +176,12 @@ def posEarnings(request):
                         messages.warning(request, f'End date out of range. Please try again.')
                         return redirect('pos-earnings')
                 else:
+                    
                     if form.cleaned_data['employees'] is not None:
-                        salesTransactions = sales_transaction.objects.filter(created_at__icontains=form.cleaned_data['start_date'], employee=form.cleaned_data['employees'])
+                        salesTransactions = sales_transaction.objects.filter(created_at__icontains=form.cleaned_data['start_date'], employee=form.cleaned_data['employees'])                        
                     else:
                         salesTransactions = sales_transaction.objects.filter(created_at__icontains=form.cleaned_data['start_date'])
+                        
 
                     #paginator
                     paginator = Paginator(salesTransactions, 20)
@@ -177,13 +194,16 @@ def posEarnings(request):
                     beautyTotal = float(0.00)
                     service = float(0.00)
                     product = float(0.00)
+                    creditTopup = float(0.00)
                     TransactionT = 0
+
                     paymentBreakdown = {
                         "cash" : float(0.00),
                         "credit" : float(0.00),
                         "cards" : float(0.00),
                         "nets" : float(0.00),
                         "grab" : float(0.00),
+                        "paynow" : float(0.00),
                         "others" : float(0.00),
                     }
                     TransactionT = len(salesTransactions)
@@ -199,6 +219,8 @@ def posEarnings(request):
                             paymentBreakdown['nets'] += float(st.grand_total)
                         elif st.payment_type == "GRAB":
                             paymentBreakdown['grab'] += float(st.grand_total)
+                        elif st.payment_type == "PAYNOW":
+                            paymentBreakdown['paynow'] += float(st.grand_total)
                         elif st.payment_type == "OTHERS":
                             paymentBreakdown['others'] += float(st.grand_total)
                         for ss in st.sales_services_set.all():
@@ -214,30 +236,35 @@ def posEarnings(request):
                             elif ss.service_department == "BEAUTY PRODUCT":
                                 product += float(ss.service_price)
                                 beautyTotal += float(ss.service_price)
+                            elif ss.service_department == "CREDIT TOP UP":
+                                    creditTopup += float(ss.service_price)
                     
 
                     context = {
                         "salesT" : page_obj,
                         "form" : form,
                         "start_date" : form.cleaned_data['start_date'],
+                        "employees" : form.cleaned_data['employees'],
                         "csrfToken" : request.GET.get('csrfmiddlewaretoken'),
-                        "grandTotal" : grandTotal,
-                        "hairTotal" : hairTotal,
-                        "beautyTotal" : beautyTotal,
-                        "TransactionT" : TransactionT,
+                        "grandTotal" : round(grandTotal,2),
+                        "hairTotal" : round(hairTotal,2),
+                        "beautyTotal" : round(beautyTotal,2),
+                        "TransactionT" : round(TransactionT,2),
+                        "creditTopupT" : creditTopup,
                         "paymentBreakdown" : paymentBreakdown,
-                        "productT" : product,
-                        "serviceT" : service,
+                        "productT" : round(product,2),
+                        "serviceT" : round(service,2),
                     }
                     messages.success(request, f'Sales records found.')
                     return render(request, 'pos/posEarnings.html', context=context)
                 ###########
             else:
                 form = searchPosbyDate()
-                sd= ed= start_date= end_date = salesTransactions =""
+                sd= ed= start_date= end_date = salesTransactions = ""
 
                 sd = request.GET.get('start_date')
                 ed = request.GET.get('end_date')
+
                 if sd and ed:
                     start_date = datetime.strptime(request.GET.get('start_date'), "%b. %d, %Y").date()
                     end_date = datetime.strptime(request.GET.get('end_date'), "%b. %d, %Y").date()
@@ -268,13 +295,16 @@ def posEarnings(request):
                 beautyTotal = float(0.00)
                 service = float(0.00)
                 product = float(0.00)
+                creditTopup = float(0.00)
                 TransactionT = 0
+                                
                 paymentBreakdown = {
                     "cash" : float(0.00),
                     "credit" : float(0.00),
                     "cards" : float(0.00),
                     "nets" : float(0.00),
                     "grab" : float(0.00),
+                    "paynow" : float(0.00),
                     "others" : float(0.00),
                 }
                 TransactionT = len(salesTransactions)
@@ -290,6 +320,8 @@ def posEarnings(request):
                         paymentBreakdown['nets'] += float(st.grand_total)
                     elif st.payment_type == "GRAB":
                         paymentBreakdown['grab'] += float(st.grand_total)
+                    elif st.payment_type == "PAYNOW":
+                        paymentBreakdown['paynow'] += float(st.grand_total)
                     elif st.payment_type == "OTHERS":
                         paymentBreakdown['others'] += float(st.grand_total)
                     for ss in st.sales_services_set.all():
@@ -305,6 +337,8 @@ def posEarnings(request):
                         elif ss.service_department == "BEAUTY PRODUCT":
                             product += float(ss.service_price)
                             beautyTotal += float(ss.service_price)
+                        elif ss.service_department == "CREDIT TOP UP":
+                            creditTopup += float(ss.service_price)
             
 
                 context = {
@@ -313,13 +347,14 @@ def posEarnings(request):
                     "start_date" : start_date,
                     "end_date" : end_date,
                     "csrfToken" : request.GET.get('csrfmiddlewaretoken'),
-                    "grandTotal" : grandTotal,
-                    "hairTotal" : hairTotal,
-                    "beautyTotal" : beautyTotal,
+                    "grandTotal" : round(grandTotal,2),
+                    "hairTotal" : round(hairTotal,2),
+                    "beautyTotal" : round(beautyTotal,2),
+                    "creditTopupT" : creditTopup,
                     "TransactionT" : TransactionT,
                     "paymentBreakdown" : paymentBreakdown,
-                    "serviceT" : service,
-                    "productT" : product,
+                    "serviceT" : round(service,2),
+                    "productT" : round(product,2),
                 }
                 return render(request, 'pos/posEarnings.html', context=context)
         except:
@@ -396,7 +431,7 @@ def rservice(request):
             if ss:
                 success = ""
                 for s in ss:
-                    temp = "<p>Service: " + s.service_name + "</p><p>Price: " + str(s.service_price) + "</p><p>Department: " + s.service_department + "</p><hr>"
+                    temp = "<p>Service: " + s.service_name + "</p><p>Price: " + str(s.service_price) + "</p><p>Department: " + s.service_department + "</p><p>Payment type: " + s.sales_id.payment_type + "</p><p>Remarks: " + s.sales_id.remarks + "</p><hr>"
                     success += temp
                 return HttpResponse(success)
         else:
