@@ -346,6 +346,7 @@ def posEarnings(request):
                     "salesT" : page_obj,
                     "start_date" : start_date,
                     "end_date" : end_date,
+                    "employees" : request.GET.get('employees'),
                     "csrfToken" : request.GET.get('csrfmiddlewaretoken'),
                     "grandTotal" : round(grandTotal,2),
                     "hairTotal" : round(hairTotal,2),
@@ -404,6 +405,15 @@ def posTransact(request):
             if len(sn) != len(sp) != len(sd):
                 messages.warning(request, f'Error in services, please try again.')
                 return redirect('pos-start')
+            
+            #service price == grand total
+            tempPrice = 0.00
+            for ssp in sp:
+                tempPrice += round(float(ssp), 2)
+            if tempPrice != round(float(grandtotal), 2):
+                messages.warning(request, f'Service price do not match with Grand Total, please try again.')
+                return redirect('post-start')
+
             if cs:
                 st = sales_transaction.objects.create(payment_type=ttype, grand_total=grandtotal, employee=em, customer=cs, remarks=remarks)
             else:
