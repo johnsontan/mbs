@@ -64,7 +64,7 @@ def posStart(request):
     if others:
         for c in others:
             othersT += float(c.grand_total)
-    todaytotal = cashT + creditT + cardsT + netsT + grabT + othersT
+    todaytotal = cashT + creditT + cardsT + netsT + grabT + othersT + paynowT
     context = {
         "cash" : cashT,
         "credit" : creditT,
