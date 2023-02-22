@@ -108,6 +108,10 @@ def posEarnings(request):
                         beautyTotal = float(0.00)
                         creditTopup = float(0.00)
                         TransactionT = 0
+                        employeeID = ""
+                        if form.cleaned_data['employees']:
+                            employeeID = form.cleaned_data['employees']
+                            employeeID = employeeID.id
                         paymentBreakdown = {
                             "cash" : float(0.00),
                             "credit" : float(0.00),
@@ -157,7 +161,7 @@ def posEarnings(request):
                             "form" : form,
                             "start_date" : form.cleaned_data['start_date'],
                             "end_date" : endDate,
-                            "employees" : form.cleaned_data['employees'],
+                            "employees" : employeeID,
                             "csrfToken" : request.GET.get('csrfmiddlewaretoken'),  
                             "grandTotal" : round(grandTotal, 2),
                             "hairTotal" : round(hairTotal, 2),
@@ -196,6 +200,10 @@ def posEarnings(request):
                     product = float(0.00)
                     creditTopup = float(0.00)
                     TransactionT = 0
+                    employeeID = ""
+                    if form.cleaned_data['employees']:
+                        employeeID = form.cleaned_data['employees']
+                        employeeID = employeeID.id
 
                     paymentBreakdown = {
                         "cash" : float(0.00),
@@ -244,7 +252,7 @@ def posEarnings(request):
                         "salesT" : page_obj,
                         "form" : form,
                         "start_date" : form.cleaned_data['start_date'],
-                        "employees" : form.cleaned_data['employees'],
+                        "employees" : employeeID,
                         "csrfToken" : request.GET.get('csrfmiddlewaretoken'),
                         "grandTotal" : round(grandTotal,2),
                         "hairTotal" : round(hairTotal,2),
@@ -279,7 +287,7 @@ def posEarnings(request):
                     else:
                         salesTransactions = sales_transaction.objects.filter(created_at__range=[start_date, end_date])
                 elif start_date:
-                    if request.GET.get('employees') is not None:
+                    if request.GET.get('employees') is not None:                        
                         salesTransactions = sales_transaction.objects.filter(created_at__icontains=start_date, employee=request.GET.get('employees'))
                     else:
                         salesTransactions = sales_transaction.objects.filter(created_at__icontains=start_date)
