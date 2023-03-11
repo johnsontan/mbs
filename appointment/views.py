@@ -273,7 +273,7 @@ def get_employee_dates(request):
             resultAvailDates = appointment_available_dates.objects.filter(avail_date__range=[start_date, end_date], employee=e.pk).all()
 
             #String return 
-            success = ""      
+            success = "<option value='' onclick='etime()'></option>"      
             #loop through and concat the output "success"  
             tempDates = list()  
             if resultAvailDates:        
@@ -305,7 +305,7 @@ def get_employee_time(request):
             eid = request.POST['eid']            
             if eid and edate:
                 time_list = list()
-                success = ""
+                success = "<option value='' onclick='eservice()'></option>"
                 result = appointment.objects.filter(appt_date__date=edate, employee=eid).exclude(status=3).all()
                 #if result vaild then extract all the appt date HOURS                
                 if result:
@@ -314,6 +314,12 @@ def get_employee_time(request):
     
                 output_list = ["10", "11", "12", "13", "14", "15", "16", "17", "18", "19"]
                 #Remove the time slot that was taken
+                if str(datetime.date.today()) == edate:
+                    if str(datetime.datetime.now().hour) >= '19':
+                        output_list = []
+                    else:
+                        output_list = output_list[output_list.index(str(datetime.datetime.now().hour)) + 1:]
+
                 if time_list:
                     for tl in time_list:
                         if tl in output_list:
@@ -343,7 +349,7 @@ def get_employee_service(request):
                     service_list = services.objects.all()   
                 else: 
                     service_list = services.objects.filter(department=employee.inner_role).all()                
-                success = ""
+                success = "<option value='' onclick='econfirm()'></option>"
                 if service_list:
                     #construct the string output
                     for sl in service_list:

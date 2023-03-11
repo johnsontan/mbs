@@ -10,6 +10,7 @@ from decimal import Decimal
 #models 
 from .models import credits, credits_history
 from base.models import userInfo
+from pos.models import sales_transaction
 
 #user passes test for def not class
 
@@ -81,10 +82,20 @@ def debitCustomer(request):
             remarks = request.POST['remarks1']
             type = "DEBIT"
             if u and uc:
+                #check bal
+                if uc.balance < Decimal(amount):
+                    messages.warning(request, f'Error in debiting customer, insufficient credit.')
+                    return redirect("credit-overview")
                 if transactionid:
-                    credits_history.objects.create(user=u, amount=amount, type=type, transaction=transactionid, remarks=remarks)
+                    transObj = ""
+                    transObj = sales_transaction.objects.filter(pk=transactionid).get()
+                    if transObj:                        
+                        credits_history.objects.create(user=u, amount=amount, type=type, transaction=transObj, remarks=remarks)
+                    else:
+                        credits_history.objects.create(user=u, amount=amount, type=type, remarks=remarks)
                 else:
                     credits_history.objects.create(user=u, amount=amount, type=type, remarks=remarks)
+                
                 uc.balance -= Decimal(amount)
                 uc.save()
                 messages.success(request, f'Debited customer[{u.first_name} {u.last_name}] account successfully.')
@@ -112,7 +123,12 @@ def creditCustomer(request):
             type = "CREDIT"
             if u and uc:
                 if transactionid:
-                    credits_history.objects.create(user=u, amount=amount, type=type, transaction=transactionid, remarks=remarks)
+                    transObj = ""
+                    transObj = sales_transaction.objects.filter(pk=transactionid).get()
+                    if transObj:
+                        credits_history.objects.create(user=u, amount=amount, type=type, transaction=transObj, remarks=remarks)
+                    else:
+                        credits_history.objects.create(user=u, amount=amount, type=type, remarks=remarks)
                 else:
                     credits_history.objects.create(user=u, amount=amount, type=type, remarks=remarks)
                 uc.balance += Decimal(amount)
