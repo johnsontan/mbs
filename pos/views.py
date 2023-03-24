@@ -418,6 +418,8 @@ def posTransact(request):
             tempPrice = 0.00
             for ssp in sp:
                 tempPrice += round(float(ssp), 2)
+                tempPrice = round(tempPrice, 2)
+                
             if tempPrice != round(float(grandtotal), 2):
                 messages.warning(request, f'Service price do not match with Grand Total, please try again.')
                 return redirect('post-start')

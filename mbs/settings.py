@@ -186,3 +186,15 @@ MEDIA_URL = '/media/'
 JSIGNATURE_WIDTH = 900
 JSIGNATURE_HEIGHT = 400
 JSIGNATURE_JQUERY = 'admin'
+
+#CKEDITOR
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Full',
+        'height': 300,
+        'width': '100%',
+        'removePlugins': 'stylesheetparser',
+        'extraAllowedContent': 'iframe[*]',
+        
+    }
+}
