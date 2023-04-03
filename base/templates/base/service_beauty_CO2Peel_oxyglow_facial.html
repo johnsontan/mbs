@@ -1,48 +1,211 @@
-{% extends "base/base.html" %}
+{% extends "base/baseService.html" %}
 {% load crispy_forms_tags %}  
 {% load static %}
 
 {% block header %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    
 {% endblock%}
 
 {% block content %}
-<div class="container">
-    <div class="d-flex justify-content-center">
-        <img src="https://i.ibb.co/jVRXrPn/Co2-Peel-Oxyglow-Facial.jpg" class="img-thumbnail img-fluid" alt="Co2 Peel Oxyglow facial" width="500">
-    </div>
+<!--=================================
+= BACKGROUND HOLDER
+==================================-->
+<div class="bg-holder zindex-0">
     
-    <h2 class="text-center">Benefits</h2>
-    <div class="d-flex justify-content-center">
-        <ul class="list-unstyled text-center">
-            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Additional layer of skin protection</li>
-            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Reduce acne and acne marks</li>
-            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Diminish hyperpigmentation</li>
-            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Stimulates collagen production</li>
-            
-        </ul>
-    </div>
-    <hr class="my-5">
-    <h2 class="text-center">Description</h2>
-    <div class="d-flex justify-content-center text-center">
-        <p>Dual-action carbonic treatment includes antioxidants and salicylic acid to unclog pores and congested skin. Aside from rejuvenating the skin and reducing acne, the treatment helps to stimulates collagen production and adds an extra layer of skin protection. </p>
-    </div>
-    <hr class="my-5">
-    <h2 class="text-center">Processes</h2>
-    <div class="d-flex justify-content-center">
-        <ul class="list-unstyled text-center">
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Deep cleansing</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Apply soothing lotion & Co2 peel mask</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Steam</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Extrusion</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Soothing gel with cold roller</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Face lifting massage & guasha</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp EGF ampoule with ultrasound</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Apply  Co2 treatment mask</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Apply soothing lotion & SPF cream</li>
-            
-        </ul>
+    <!-- OVERLAY -->
+    <b data-bgholder="overlay" class="full-wh zindex-2" data-lgradient="y" data-radial-gradient="rgba(0,0,0, 0)|rgba(0,0,0, 0.7)"></b>
+    
+    <!-- SLIDESHOW IMAGE -->
+    <b data-bgholder="slideshow" class="full-wh bg-cover bg-cc zindex-1" data-slide-image="{% static 'base/images/services/sb_Co2-Peel-&-Oxyglow-facial_1.png' %}|{% static 'base/images/services/sb_Co2-Peel-&-Oxyglow-facial_2.png' %}"></b>
+    
+</div>
+<!-- ======= END : BACKGROUND HOLDER =======  -->
+{%endblock%}
+
+{% block sections %}
+<!--
+************************************************************
+* ABOUT SECTION
+*************************************************************
+-->
+<div id="about" class="popup-section about-section flex-cc">
+    <div class="inner-wrapper" data-ckav-smd="align-center">
+
+        <!-- CLOSE BUTTON -->
+        <div class="popup-close button button-icon color-button-dark color-hov-button-dark solid">
+            <i class="pe-7s-close"></i>
+        </div>
+
+        <!-- POPUP HEADER -->
+        <div class="header-area typo-light">
+            <h2 class="heading-section medium bold-600 margin-b-0">About</h2>
+        </div>
+
+        <!-- POPUP CONTENT -->
+        <div class="content-area">
+            <div class="row gt60 align-items-center">
+                <div class="col-lg-6" data-ckav-smd="margin-b-40">
+                    <img class="radius-10" src="{% static 'base/images/services/sb_Co2-Peel-&-Oxyglow-facial_about.png' %}" alt="about image">
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="heading-content small bold-600">
+                        {% if serviceTitle %}
+                            {{serviceTitle}}
+                        {%else%}
+                            Nil
+                        {%endif%}
+                    </h3>
+
+                    <p class="margin-b-30">Co2 peel oxyflow facial typically involves applying a special gel to the skin that contains a high concentration of CO2. The CO2 is then infused into the skin using a specialized machine that delivers a steady flow of oxygen to the skin's surface. The CO2 causes a natural reaction in the skin that stimulates blood flow and cell turnover, leading to a brighter, clearer, and more youthful complexion.
+                        
+                    </p>
+                    <p class="margin-b-30">
+                        The oxygen also helps to hydrate and nourish the skin, and it can improve the overall health of the skin by delivering essential nutrients and antioxidants.
+                    </p>
+
+                    <ul class="list-1 color-text-dark font-01" data-ckav-smd="align-left margin-b-30">
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i>Reduce fine lines and wrinkles</li>
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i>Reduce hyperpigmentation, acne, and uneven skin tone</li>
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i>Stimulates blood flow</li>
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i>Nourish and hydrate the skin</li>
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i>Little to no downtime</li>
+                                               
+                    </ul>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
+<!-- ************** END : ABOUT SECTION **************  -->
+
+<!--
+************************************************************
+* SERVICES SECTION
+*************************************************************
+-->
+<div id="services" class="popup-section services-section flex-cc">
+    <div class="inner-wrapper" data-ckav-smd="align-center">
+
+        <!-- CLOSE BUTTON -->
+        <div class="popup-close button button-icon color-button-dark solid color-hov-button-dark">
+            <i class="pe-7s-close"></i>
+        </div>
+
+        <!-- POPUP HEADER -->
+        <div class="header-area typo-light">
+            <h2 class="heading-section medium bold-600 margin-b-0">Process</h2>
+        </div>
+
+        <!-- POPUP CONTENT -->
+        <div class="content-area">
+
+            <div class="width-50 align-center margin-auto margin-b-40" data-ckav-smd="width-100">
+                <h3 class="heading-content small bold-600">
+                    {% if serviceTitle %}
+                        {{serviceTitle}}
+                    {%else%}
+                        Nil
+                    {%endif%}
+                </h3>
+                
+                <p class="heading-content-sub bold-400 tiny">_______</p>
+            </div>
+            <div class="row gt30 margin-b-30">
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-1 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Deep cleansing</h3>
+                            <p class="margin-b-0">Cleansing with oil-based and then followed by a water-based with exfoliation</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-2 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Facial mask</h3>
+                            <p class="margin-b-0">Application of soothing lotion with Co2 peel mask</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-3 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Steam</h3>
+                            <p class="margin-b-0">Steam opens up pores and helps for better product penetration.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row gt30">
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-4 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Extrusion</h3>
+                            <p class="margin-b-0">Remove any product buildup and clear stubborn debris</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-5 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Cold roller</h3>
+                            <p class="margin-b-0">Apply soothing gel with cold roller to get rid of puffiness, toxins, and reduce muscle tension</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-6 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Massage & Guasha</h3>
+                            <p class="margin-b-0">Promote blood circulation & lymphatic drainage </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row gt30 mt-4">
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-7 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">EGF & Ultrasound</h3>
+                            <p class="margin-b-0">Apply EGF ampoule with Ultrasound to stimulates collagen and elastin to improve skin texture and elasticity</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-8 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Facial mask</h3>
+                            <p class="margin-b-0">Apply Co2 treatment mask to oxygenate the skin for cell regeneration.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-9 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Protection</h3>
+                            <p class="margin-b-0">Apply soothing lotion with SPF cream</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+
+    </div>
+</div>
+<!-- ************** END : SERVICES SECTION **************  -->
 
 {% endblock %}

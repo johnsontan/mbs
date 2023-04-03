@@ -1,44 +1,179 @@
-{% extends "base/base.html" %}
+{% extends "base/baseService.html" %}
 {% load crispy_forms_tags %}  
 {% load static %}
 
 {% block header %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    
 {% endblock%}
 
 {% block content %}
-<div class="container">
-    <div class="d-flex justify-content-center">
-        <img src="https://i.ibb.co/N77JFd6/organic-Refreshing-Facial.jpg" class="img-thumbnail img-fluid" alt="Organic refreshing facial" width="500">
-    </div>
+<!--=================================
+= BACKGROUND HOLDER
+==================================-->
+<div class="bg-holder zindex-0">
     
-    <h2 class="text-center">Benefits</h2>
-    <div class="d-flex justify-content-center">
-        <ul class="list-unstyled text-center">
-            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Skin hydrating</li>
-            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Skin cleansing</li>
-            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Relaxation</li>
-            
-        </ul>
-    </div>
-    <hr class="my-5">
-    <h2 class="text-center">Description</h2>
-    <div class="d-flex justify-content-center text-center">
-        <p>The organic refreshing facial uses natural ingredients to cleanse and hydrate your skin.</p>
-    </div>
-    <hr class="my-5">
-    <h2 class="text-center">Processes</h2>
-    <div class="d-flex justify-content-center">
-        <ul class="list-unstyled text-center">
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Face cleansing</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Soft peeling</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Apply soothing lotion</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Refreshing massage</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Refreshing mask</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Apply soothing gel</li>
-            
-        </ul>
+    <!-- OVERLAY -->
+    <b data-bgholder="overlay" class="full-wh zindex-2" data-lgradient="y" data-radial-gradient="rgba(0,0,0, 0)|rgba(0,0,0, 0.7)"></b>
+    
+    <!-- SLIDESHOW IMAGE -->
+    <b data-bgholder="slideshow" class="full-wh bg-cover bg-cc zindex-1" data-slide-image="{% static 'base/images/services/sb_organicRefreshingFacial_1.png' %}|{% static 'base/images/services/sb_organicRefreshingFacial_2.png' %}"></b>
+    
+</div>
+<!-- ======= END : BACKGROUND HOLDER =======  -->
+{%endblock%}
+
+{% block sections %}
+<!--
+************************************************************
+* ABOUT SECTION
+*************************************************************
+-->
+<div id="about" class="popup-section about-section flex-cc">
+    <div class="inner-wrapper" data-ckav-smd="align-center">
+
+        <!-- CLOSE BUTTON -->
+        <div class="popup-close button button-icon color-button-dark color-hov-button-dark solid">
+            <i class="pe-7s-close"></i>
+        </div>
+
+        <!-- POPUP HEADER -->
+        <div class="header-area typo-light">
+            <h2 class="heading-section medium bold-600 margin-b-0">About</h2>
+        </div>
+
+        <!-- POPUP CONTENT -->
+        <div class="content-area">
+            <div class="row gt60 align-items-center">
+                <div class="col-lg-6" data-ckav-smd="margin-b-40">
+                    <img class="radius-10" src="{% static 'base/images/services/sb_organicRefreshingFacial_about.png' %}" alt="about image">
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="heading-content small bold-600">
+                        {% if serviceTitle %}
+                            {{serviceTitle}}
+                        {%else%}
+                            Nil
+                        {%endif%}
+                    </h3>
+
+                    <p class="margin-b-30">Organic facial, the skin is cleansed, exfoliated, and moisturized using organic products. The specific products used will depend on the individual's skin type and concerns. Some common ingredients in organic facials include natural oils, herbs, fruits, and vegetables, such as aloe vera, chamomile, lavender, green tea, and cucumber.
+                        
+                    </p>
+                    <p class="margin-b-30">These ingredients are free from synthetic chemicals, preservatives, and additives. Organic facials are often preferred by those who have sensitive skin or who are concerned about exposing their skin to harsh chemicals.
+                        
+                    </p>
+                    
+                    <ul class="list-1 color-text-dark font-01" data-ckav-smd="align-left margin-b-30">
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i>Skin hydrating </li>
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i>Skin cleansing</li>
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i>Natural ingredients</li>
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i>Relaxation</li>
+                                                                      
+                    </ul>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
+<!-- ************** END : ABOUT SECTION **************  -->
+
+<!--
+************************************************************
+* SERVICES SECTION
+*************************************************************
+-->
+<div id="services" class="popup-section services-section flex-cc">
+    <div class="inner-wrapper" data-ckav-smd="align-center">
+
+        <!-- CLOSE BUTTON -->
+        <div class="popup-close button button-icon color-button-dark solid color-hov-button-dark">
+            <i class="pe-7s-close"></i>
+        </div>
+
+        <!-- POPUP HEADER -->
+        <div class="header-area typo-light">
+            <h2 class="heading-section medium bold-600 margin-b-0">Process</h2>
+        </div>
+
+        <!-- POPUP CONTENT -->
+        <div class="content-area">
+
+            <div class="width-50 align-center margin-auto margin-b-40" data-ckav-smd="width-100">
+                <h3 class="heading-content small bold-600">
+                    {% if serviceTitle %}
+                        {{serviceTitle}}
+                    {%else%}
+                        Nil
+                    {%endif%}
+                </h3>
+                
+                <p class="heading-content-sub bold-400 tiny">_______</p>
+            </div>
+            <div class="row gt30 margin-b-30">
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-1 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Cleansing </h3>
+                            <p class="margin-b-0">Remove bacterial and dirt from the surface of the skin using natural ingredients</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-2 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Soft peeling</h3>
+                            <p class="margin-b-0">Elimination of dead skin cells with an expulsion of impurities from pores.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-3 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Soothing lotion</h3>
+                            <p class="margin-b-0">To boosts elasticity and stimulates collagen production</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row gt30">
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-4 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Refreshing massage</h3>
+                            <p class="margin-b-0">Promote blood circulation and relieves tension from muscles</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-5 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Refreshing facial mask</h3>
+                            <p class="margin-b-0">Traps the moisture or ingredient in the skin and creates film that helps to hydrate and moisturize</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-6 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Protection</h3>
+                            <p class="margin-b-0">Apply soothing gel and sunblock</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+</div>
+<!-- ************** END : SERVICES SECTION **************  -->
 
 {% endblock %}

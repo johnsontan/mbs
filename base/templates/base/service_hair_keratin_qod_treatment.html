@@ -1,33 +1,179 @@
-{% extends "base/base.html" %}
+{% extends "base/baseService.html" %}
 {% load crispy_forms_tags %}  
 {% load static %}
 
 {% block header %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    
 {% endblock%}
 
 {% block content %}
-<div class="container">
-    <div class="d-flex justify-content-center">
-        <img src="https://i.ibb.co/X3x1wvZ/keratin-QODTreatment.jpg" class="img-thumbnail img-fluid" alt="Keratin QOD(Gold) treamtent" width="500">
-    </div>
+<!--=================================
+= BACKGROUND HOLDER
+==================================-->
+<div class="bg-holder zindex-0">
     
-    <h2 class="text-center">Benefits</h2>
-    <div class="d-flex justify-content-center">
-        <ul class="list-unstyled text-center">
-            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Highest quality Brazilian keratin formula</li>
-            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Anti-frizz</li>
-            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Greater shine & smoothness</li>
-            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Long-lasting</li>
-            
-        </ul>
-    </div>
-    <hr class="my-5">
-    <h2 class="text-center">Description</h2>
-    <div class="d-flex justify-content-center text-center">
-        <p>QOD Gold Keratin treatment uses nano-particles of 24-karat gold to permeate the hair, working in tandem with keratin to bring about a robust yet elegant transformation.</p>
-    </div>
+    <!-- OVERLAY -->
+    <b data-bgholder="overlay" class="full-wh zindex-2" data-lgradient="y" data-radial-gradient="rgba(0,0,0, 0)|rgba(0,0,0, 0.7)"></b>
+    
+    <!-- SLIDESHOW IMAGE -->
+    <b data-bgholder="slideshow" class="full-wh bg-cover bg-cc zindex-1" data-slide-image="{% static 'base/images/services/sh_hairKeratin_QODgold_1.png' %}|{% static 'base/images/services/sh_hairKeratin_QODgold_2.png' %}"></b>
     
 </div>
+<!-- ======= END : BACKGROUND HOLDER =======  -->
+{%endblock%}
+
+{% block sections %}
+<!--
+************************************************************
+* ABOUT SECTION
+*************************************************************
+-->
+<div id="about" class="popup-section about-section flex-cc">
+    <div class="inner-wrapper" data-ckav-smd="align-center">
+
+        <!-- CLOSE BUTTON -->
+        <div class="popup-close button button-icon color-button-dark color-hov-button-dark solid">
+            <i class="pe-7s-close"></i>
+        </div>
+
+        <!-- POPUP HEADER -->
+        <div class="header-area typo-light">
+            <h2 class="heading-section medium bold-600 margin-b-0">About</h2>
+        </div>
+
+        <!-- POPUP CONTENT -->
+        <div class="content-area">
+            <div class="row gt60 align-items-center">
+                <div class="col-lg-6" data-ckav-smd="margin-b-40">
+                    <img class="radius-10" src="{% static 'base/images/services/sh_hairKeratin_QODgold_about.png' %}" alt="about image">
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="heading-content small bold-600">
+                        {% if serviceTitle %}
+                            {{serviceTitle}}
+                        {%else%}
+                            Nil
+                        {%endif%}
+                    </h3>
+
+                    <p class="margin-b-30">QOD Gold uses nano-particles of 24-karat gold to permate the hair, working in tandem with keratin to bring about a robust yet elegant transformation.
+                    </p>                  
+                    
+                    <ul class="list-1 color-text-dark font-01" data-ckav-smd="align-left margin-b-30">
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i>Highest quality Brazilian keratin formula</li>
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i>Anti-frizz</li>
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i>Greater shine & smoothness </li>
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i>No harmful chemicals </li>
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i>Relax curls  </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- ************** END : ABOUT SECTION **************  -->
+
+<!--
+************************************************************
+* SERVICES SECTION
+*************************************************************
+-->
+<div id="services" class="popup-section services-section flex-cc">
+    <div class="inner-wrapper" data-ckav-smd="align-center">
+
+        <!-- CLOSE BUTTON -->
+        <div class="popup-close button button-icon color-button-dark solid color-hov-button-dark">
+            <i class="pe-7s-close"></i>
+        </div>
+
+        <!-- POPUP HEADER -->
+        <div class="header-area typo-light">
+            <h2 class="heading-section medium bold-600 margin-b-0">Process</h2>
+        </div>
+
+        <!-- POPUP CONTENT -->
+        <div class="content-area">
+
+            <div class="width-50 align-center margin-auto margin-b-40" data-ckav-smd="width-100">
+                <h3 class="heading-content small bold-600">
+                    {% if serviceTitle %}
+                        {{serviceTitle}}
+                    {%else%}
+                        Nil
+                    {%endif%}
+                </h3>
+                
+                <p class="heading-content-sub bold-400 tiny">_______</p>
+            </div>
+            <div class="row gt30 margin-b-30">
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-1 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Hair wash</h3>
+                            <p class="margin-b-0">Wash with QOD gold cleaner to open up the hair cuticles</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-2 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Ultima Blue UV light heat</h3>
+                            <p class="margin-b-0">Dry the hair and kill off any leftover bacterial using blue UV light</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-3 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Apply QOD gold lotion</h3>
+                            <p class="margin-b-0">To repair the hair cuticles and breakdown disulphide bonds </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row gt30">
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-4 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Straightening process</h3>
+                            <p class="margin-b-0">Using flat iron to lock in all the benefits into your hair </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-5 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Hair wash</h3>
+                            <p class="margin-b-0">Remove the leftover QOD gold lotion with QOD after shampoo and conditioner</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-6 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Ultima red UV light heat</h3>
+                            <p class="margin-b-0">Dry the hair and promote blood circulation with red UV light heat</p>
+                        </div>
+                    </div>
+                </div>
+                                
+            </div>
+
+          
+            
+
+        </div>
+
+    </div>
+</div>
+<!-- ************** END : SERVICES SECTION **************  -->
 
 {% endblock %}

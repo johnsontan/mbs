@@ -1,47 +1,203 @@
-{% extends "base/base.html" %}
+{% extends "base/baseService.html" %}
 {% load crispy_forms_tags %}  
 {% load static %}
 
 {% block header %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    
 {% endblock%}
 
 {% block content %}
-<div class="container">
-    <div class="d-flex justify-content-center">
-        <img src="https://i.ibb.co/sbcjXLj/tcm-Scalp-Treatment.jpg" class="img-thumbnail img-fluid" alt="TCM scalp treatment" width="500">
-    </div>
+<!--=================================
+= BACKGROUND HOLDER
+==================================-->
+<div class="bg-holder zindex-0">
     
-    <h2 class="text-center">Benefits</h2>
-    <div class="d-flex justify-content-center">
-        <ul class="list-unstyled text-center">
-            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Stimulate hair follicles & blood vessels</li>
-            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Herbal extracts</li>
-            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Fight dandruff and oily scalp</li>
-            
-        </ul>
-    </div>
-    <hr class="my-5">
-    <h2 class="text-center">Description</h2>
-    <div class="d-flex justify-content-center text-center">
-        <p>TCM scalp treatment uses herbal extracts to fight hair loss by stimulating hair follicles, nerves and blood vessels to increase blood flow to the head and scalp region. </p>
-    </div>
-    <hr class="my-5">
-    <h2 class="text-center">Processes</h2>
-    <div class="d-flex justify-content-center">
-        <ul class="list-unstyled text-center">
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Sea-salt deep wash & rinse</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Apply soothing lotion</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Apply TCM herbal scalp mask</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Lymphatic massage</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Blue UV light with misty steam (eradicate bacterial)</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Wash & rinse</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Blue light steam</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Ultima heat with red UV light (Promote blood circulation)</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Guasha & apply ampoule</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Blowdry hair</li>
-        </ul>
+    <!-- OVERLAY -->
+    <b data-bgholder="overlay" class="full-wh zindex-2" data-lgradient="y" data-radial-gradient="rgba(0,0,0, 0)|rgba(0,0,0, 0.7)"></b>
+    
+    <!-- SLIDESHOW IMAGE -->
+    <b data-bgholder="slideshow" class="full-wh bg-cover bg-cc zindex-1" data-slide-image="{% static 'base/images/services/sh_TCMScalpTreatment_1.png' %}|{% static 'base/images/services/sh_TCMScalpTreatment_2.png' %}"></b>
+    
+</div>
+<!-- ======= END : BACKGROUND HOLDER =======  -->
+{%endblock%}
+
+{% block sections %}
+<!--
+************************************************************
+* ABOUT SECTION
+*************************************************************
+-->
+<div id="about" class="popup-section about-section flex-cc">
+    <div class="inner-wrapper" data-ckav-smd="align-center">
+
+        <!-- CLOSE BUTTON -->
+        <div class="popup-close button button-icon color-button-dark color-hov-button-dark solid">
+            <i class="pe-7s-close"></i>
+        </div>
+
+        <!-- POPUP HEADER -->
+        <div class="header-area typo-light">
+            <h2 class="heading-section medium bold-600 margin-b-0">About</h2>
+        </div>
+
+        <!-- POPUP CONTENT -->
+        <div class="content-area">
+            <div class="row gt60 align-items-center">
+                <div class="col-lg-6" data-ckav-smd="margin-b-40">
+                    <img class="radius-10" src="{% static 'base/images/services/sh_TCMScalpTreatment_about.png' %}" alt="about image">
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="heading-content small bold-600">
+                        {% if serviceTitle %}
+                            {{serviceTitle}}
+                        {%else%}
+                            Nil
+                        {%endif%}
+                    </h3>
+
+                    <p class="margin-b-30">The hair is considered to be an extension of the blood, and acupuncture is used to balance the flow of blood and energy to the scalp and hair follicles. TCM (Traditional Chinese Medicine) scalp treatment is a holistic approach to treating hair and scalp problems by addressing the underlying causes of the issues. It involves the use of natural herbs and massage to stimulate blood flow to the scalp, promote hair growth, and improve the overall health of the scalp and hair.
+                    </p>                  
+                    
+                    <ul class="list-1 color-text-dark font-01" data-ckav-smd="align-left margin-b-30">
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i>Stimulate hair follicles & blood vessels </li>
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i>Herbal extracts </li>
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i>Fight dandruff & oily scalp</li>
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i>Promote hair growth</li>
+                    
+                    </ul>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
+<!-- ************** END : ABOUT SECTION **************  -->
+
+<!--
+************************************************************
+* SERVICES SECTION
+*************************************************************
+-->
+<div id="services" class="popup-section services-section flex-cc">
+    <div class="inner-wrapper" data-ckav-smd="align-center">
+
+        <!-- CLOSE BUTTON -->
+        <div class="popup-close button button-icon color-button-dark solid color-hov-button-dark">
+            <i class="pe-7s-close"></i>
+        </div>
+
+        <!-- POPUP HEADER -->
+        <div class="header-area typo-light">
+            <h2 class="heading-section medium bold-600 margin-b-0">Process</h2>
+        </div>
+
+        <!-- POPUP CONTENT -->
+        <div class="content-area">
+
+            <div class="width-50 align-center margin-auto margin-b-40" data-ckav-smd="width-100">
+                <h3 class="heading-content small bold-600">
+                    {% if serviceTitle %}
+                        {{serviceTitle}}
+                    {%else%}
+                        Nil
+                    {%endif%}
+                </h3>
+                
+                <p class="heading-content-sub bold-400 tiny">_______</p>
+            </div>
+            <div class="row gt30 margin-b-30">
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-1 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Sea salt hair wash</h3>
+                            <p class="margin-b-0">Deep cleasing of the scalp using sea salt shampoo</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-2 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Apply soothing lotion</h3>
+                            <p class="margin-b-0">Relieves dryness/itchiness and replenishes moisture to scalp</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-3 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">TCM herbal scalp mask</h3>
+                            <p class="margin-b-0">Natural herbs to stimulate blood vessels</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row gt30 margin-b-30">
+                <div class="col-lg-4">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-4 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Lymphatic massage</h3>
+                            <p class="margin-b-0">Eases head tension and promote blood circulation </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-5 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Blue UV light misty steam</h3>
+                            <p class="margin-b-0">Open the pores for better herbal penetration with blue UV light to kill bacterial </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-6 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Hair wash</h3>
+                            <p class="margin-b-0">Wash off the TCM herbal mask with TCM shampoo</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row gt30 margin-b-30 mt-4">
+                <div class="col-lg-4">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-7 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Ultima blue/red UV light heat</h3>
+                            <p class="margin-b-0">Dry hair and to kill off leftovers bacterial and promote blood circulation with blue/red UV light </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-8 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Scalp ampoule</h3>
+                            <p class="margin-b-0">Target the damaged areas to give hair the flexibility and resilience</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+         
+            
+
+        </div>
+
+    </div>
+</div>
+<!-- ************** END : SERVICES SECTION **************  -->
 
 {% endblock %}

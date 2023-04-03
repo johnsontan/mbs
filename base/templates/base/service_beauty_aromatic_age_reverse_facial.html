@@ -1,47 +1,201 @@
-{% extends "base/base.html" %}
+{% extends "base/baseService.html" %}
 {% load crispy_forms_tags %}  
 {% load static %}
 
 {% block header %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    
 {% endblock%}
 
 {% block content %}
-<div class="container">
-    <div class="d-flex justify-content-center">
-        <img src="https://i.ibb.co/TgSCHk6/Aromatic-Age-Reverse-Facial.jpg" class="img-thumbnail img-fluid" alt="Aromatic age reverse facial" width="500">
-    </div>
+<!--=================================
+= BACKGROUND HOLDER
+==================================-->
+<div class="bg-holder zindex-0">
     
-    <h2 class="text-center">Benefits</h2>
-    <div class="d-flex justify-content-center">
-        <ul class="list-unstyled text-center">
-            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Skin detoxification</li>
-            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Replenish and retain skin moisture</li>
-            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Tighten the skin</li>
-            <li><i class="fa-sharp fa-solid fa-square-check"></i>&nbsp Stimulates collagen production</li>
-            
-        </ul>
-    </div>
-    <hr class="my-5">
-    <h2 class="text-center">Description</h2>
-    <div class="d-flex justify-content-center text-center">
-        <p>Botanical extracts tighten the skin tissue by promoting collagen growth in this facial treatment. Moreover, it replenishes and retains skin moisture.</p>
-    </div>
-    <hr class="my-5">
-    <h2 class="text-center">Processes</h2>
-    <div class="d-flex justify-content-center">
-        <ul class="list-unstyled text-center">
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Deep cleansing</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Diamond peeling</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Steam</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Detoxify the skin</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Face lifting massage & guasha</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Apply firming ampoule with ultrasound</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Firming treatment mask application</li>
-            <li><i class="fa-solid fa-arrow-right"></i>&nbsp Apply elixir lotion & sunblock</li>
-            
-        </ul>
+    <!-- OVERLAY -->
+    <b data-bgholder="overlay" class="full-wh zindex-2" data-lgradient="y" data-radial-gradient="rgba(0,0,0, 0)|rgba(0,0,0, 0.7)"></b>
+    
+    <!-- SLIDESHOW IMAGE -->
+    <b data-bgholder="slideshow" class="full-wh bg-cover bg-cc zindex-1" data-slide-image="{% static 'base/images/services/sb_aromaticAgeReversalFacial_1.png' %}|{% static 'base/images/services/sb_aromaticAgeReversalFacial_2.png' %}"></b>
+    
+</div>
+<!-- ======= END : BACKGROUND HOLDER =======  -->
+{%endblock%}
+
+{% block sections %}
+<!--
+************************************************************
+* ABOUT SECTION
+*************************************************************
+-->
+<div id="about" class="popup-section about-section flex-cc">
+    <div class="inner-wrapper" data-ckav-smd="align-center">
+
+        <!-- CLOSE BUTTON -->
+        <div class="popup-close button button-icon color-button-dark color-hov-button-dark solid">
+            <i class="pe-7s-close"></i>
+        </div>
+
+        <!-- POPUP HEADER -->
+        <div class="header-area typo-light">
+            <h2 class="heading-section medium bold-600 margin-b-0">About</h2>
+        </div>
+
+        <!-- POPUP CONTENT -->
+        <div class="content-area">
+            <div class="row gt60 align-items-center">
+                <div class="col-lg-6" data-ckav-smd="margin-b-40">
+                    <img class="radius-10" src="{% static 'base/images/services/sb_aromaticAgeReversalFacial_about.png' %}" alt="about image">
+                </div>
+                <div class="col-lg-6">
+                    <h3 class="heading-content small bold-600">
+                        {% if serviceTitle %}
+                            {{serviceTitle}}
+                        {%else%}
+                            Nil
+                        {%endif%}
+                    </h3>
+
+                    <p class="margin-b-30">Aromatic age reversal facial is a type of facial treatment that is designed to help reduce the visible signs of aging on the skin. This may include fine lines, wrinkles, age spots, and other common signs of aging. Age reversal facials can help to improve the texture and tone of the skin, leaving it looking smoother, more radiant, and more youthful.
+                        
+                    </p>
+                    <p class="margin-b-30">
+                        Overall, an age reversal facial can be a great way to rejuvenate the skin and restore a more youthful appearance. However, it's important to note that the results of any facial treatment may vary depending on factors like your skin type, age, and overall health.
+                    </p>
+
+                    <ul class="list-1 color-text-dark font-01" data-ckav-smd="align-left margin-b-30">
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i>Skin detoxification</li>
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i> Replenish and retain skin moisture</li>
+                        <li class="margin-b-5"><i class="list-bullet margin-r-10 color-text-default fa fa-check"></i>Skin firming</li>
+                       
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
+<!-- ************** END : ABOUT SECTION **************  -->
+
+<!--
+************************************************************
+* SERVICES SECTION
+*************************************************************
+-->
+<div id="services" class="popup-section services-section flex-cc">
+    <div class="inner-wrapper" data-ckav-smd="align-center">
+
+        <!-- CLOSE BUTTON -->
+        <div class="popup-close button button-icon color-button-dark solid color-hov-button-dark">
+            <i class="pe-7s-close"></i>
+        </div>
+
+        <!-- POPUP HEADER -->
+        <div class="header-area typo-light">
+            <h2 class="heading-section medium bold-600 margin-b-0">Process</h2>
+        </div>
+
+        <!-- POPUP CONTENT -->
+        <div class="content-area">
+
+            <div class="width-50 align-center margin-auto margin-b-40" data-ckav-smd="width-100">
+                <h3 class="heading-content small bold-600">
+                    {% if serviceTitle %}
+                        {{serviceTitle}}
+                    {%else%}
+                        Nil
+                    {%endif%}
+                </h3>
+                
+                <p class="heading-content-sub bold-400 tiny">_______</p>
+            </div>
+            <div class="row gt30 margin-b-30">
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-1 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Cleansing</h3>
+                            <p class="margin-b-0">Cleansing with oil-based and then followed by a water-based </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-2 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Peeling</h3>
+                            <p class="margin-b-0">Using diamond peel to remove the dead cells and debris. Apply elixir lotion.  </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-3 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Steam</h3>
+                            <p class="margin-b-0">Steam opens up pores and helps for better product penetration.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row gt30">
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-4 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Detoxification</h3>
+                            <p class="margin-b-0">Detoxify the skin cells</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-5 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Massage & Guasha</h3>
+                            <p class="margin-b-0">Improve circulation, reduce inflammation, and relieve pain.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-6 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Ultrasound</h3>
+                            <p class="margin-b-0">Application of firming ampoule with ultrasound to promotes cellular renewal and repair </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row gt30 mt-4">
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-7 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Facial mask</h3>
+                            <p class="margin-b-0">Application of firming treatment mask</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-ckav-smd="margin-b-30">
+                    <div class="info-obj radius-10 margin-b-0 center info-box-01 img-t padding-30 gap-20 mini" data-bg-color="rgba(0,0,0,0.03)">
+                        <div class="img"><span class="iconwrp"><i class="fa-8 fa-solid"></i></span></div>
+                        <div class="info">
+                            <h3 class="heading-content bold-600 tiny">Protection</h3>
+                            <p class="margin-b-0">Apply elixir lotion and sunblock</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+
+    </div>
+</div>
+<!-- ************** END : SERVICES SECTION **************  -->
 
 {% endblock %}

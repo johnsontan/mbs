@@ -51,6 +51,8 @@ urlpatterns = [
     path('service/beauty/rejuvenate-eye-treatment', views.serviceBeautyRejuvenateEyeTreatment, name='base-service-beauty-rejuvenate-eye-treatment'),
     path('service/beauty/intensive-eye-treatment', views.serviceBeautyIntensiveEyeTreatment, name='base-service-beauty-intensive-eye-treatment'),
 
+    #Test
+    path('testService/', views.testService, name="base-testService"),
 
     #about us
     path('aboutus/', views.aboutus, name="base-aboutus"),
